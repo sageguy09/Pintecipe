@@ -11,7 +11,12 @@ const userList = (users) => (
 )
 
 const recipeItems = (ingItems) => (
-  <li>{ingItems.qty} {ingItems.unit} {ingItems.name}, {ingItems.comment}</li>
+  // if (ingItems.unit != false){
+  //   unitType = ingItems.unit}
+  // else {
+  //   unitType = ingItems.other
+  // }
+  <li>{ingItems.qty} {ingItems.unit} {ingItems.other} {ingItems.name}, {ingItems.comment}</li>
 )
 
 const instructionSteps = (instructionSteps) => (
@@ -30,103 +35,106 @@ const recipePreview = (recipe) => (
     <ol>
       {recipe.instructions.map(instructionSteps)}
     </ol>
-    {/* <a href={recipe.img_url}>{recipe.name} Image</a>
+    <img src={recipe.imgUrl} alt={recipe.name} width="500" height="400"/>
     <h3>Recipe Summary</h3>
     <p>{recipe.summary}</p>
-    <h3>Cuisine Type: {recipe.cuisine_type}</h3>  */}
-
-
+    <h3>Cuisine Type: {recipe.cuisineType}</h3> 
+    <h3>Link to recipe:</h3>
+    <a href='https://damndelicious.net/2014/03/01/potstickers/'> {recipe.name}</a>
   </div>
 )
 
 //instructions
-//for each push to state:instructions[]
+//for each line push an item into to state:instructions[]
 
 
-
+//factor multiple ingredient listings/instrucions
+//ie Component Name, ingredient list, Component Name, ingredient list, etc
 
 const testRecipe = {
     name: 'Pot Stickers',
     ingredients: [
       {
-        "unit": "pound",
-        "input": "1 pound ground pork",
-        "name": "pork",
-        "qty": "1",
-        "comment": "ground"
+        "other": "Caramelized",
+        "input": "Caramelized onions",
+        "name": "onions"
+      },
+      {
+        "unit": "tablespoon",
+        "input": "1 tablespoon olive oil",
+        "name": "olive oil",
+        "qty": "1"
+      },
+      {
+        "other": ", large ,",
+        "input": "3 yellow onions, large, sliced",
+        "name": "yellow onions",
+        "qty": "3",
+        "comment": "sliced"
+      },
+      {
+        "unit": "teaspoon",
+        "input": "1/4 teaspoon salt",
+        "name": "salt",
+        "qty": "1/4"
+      },
+      {
+        "unit": "tablespoon",
+        "input": "1 tablespoon balsamic vinegar",
+        "name": "balsamic vinegar",
+        "qty": "1"
+      },
+      {
+        "input": "Creamy pasta sauce",
+        "name": "Creamy pasta sauce"
+      },
+      {
+        "unit": "tablespoon",
+        "input": "1 tablespoon olive oil",
+        "name": "olive oil",
+        "qty": "1"
+      },
+      {
+        "other": "oz ,",
+        "input": "10 oz mushrooms, sliced I used button mushrooms",
+        "name": "mushrooms mushrooms",
+        "qty": "10",
+        "comment": "sliced I used button"
+      },
+      {
+        "other": "oz",
+        "input": "6 oz spinach",
+        "name": "spinach",
+        "qty": "6"
       },
       {
         "unit": "cup",
-        "input": "1 cup shredded green cabbage",
-        "name": "green cabbage",
+        "input": "1 cup half-and-half",
+        "name": "half-and-half",
+        "qty": "1"
+      },
+      {
+        "unit": "cup",
+        "other": ",",
+        "input": "1 cup Parmesan cheese, shredded",
+        "name": "Parmesan cheese",
         "qty": "1",
         "comment": "shredded"
       },
       {
-        "unit": "ounce",
-        "other": ",",
-        "input": "3 ounces shiitake mushrooms, diced",
-        "name": "shiitake mushrooms",
-        "qty": "3",
-        "comment": "diced"
-      },
-      {
-        "unit": "clove",
-        "input": "2 cloves garlic, pressed",
-        "name": "garlic, pressed",
-        "qty": "2"
-      },
-      {
-        "other": ",",
-        "input": "2 green onions, thinly sliced",
-        "name": "green onions",
-        "qty": "2",
-        "comment": "thinly sliced"
-      },
-      {
-        "unit": "tablespoon",
-        "input": "1 tablespoon hoisin",
-        "name": "hoisin",
-        "qty": "1"
-      },
-      {
-        "unit": "tablespoon",
-        "input": "1 tablespoon freshly grated ginger",
-        "name": "ginger",
-        "qty": "1",
-        "comment": "freshly grated"
-      },
-      {
         "unit": "teaspoon",
-        "input": "2 teaspoons sesame oil",
-        "name": "sesame oil",
-        "qty": "2"
-      },
-      {
-        "unit": "teaspoon",
-        "other": ", or",
-        "input": "1 teaspoon Sriracha*, or more, to taste",
-        "name": "Sriracha*",
-        "qty": "1",
-        "comment": "more, to taste"
-      },
-      {
-        "unit": "teaspoon",
-        "input": "1/4 teaspoon white pepper",
-        "name": "white pepper",
+        "input": "1/4 teaspoon salt",
+        "name": "salt",
         "qty": "1/4"
       },
       {
-        "input": "36 won ton wrappers",
-        "name": "won ton wrappers",
-        "qty": "36"
+        "input": "Pasta",
+        "name": "Pasta"
       },
       {
-        "unit": "tablespoon",
-        "input": "2 tablespoons vegetable oil Soy sauce, for serving",
-        "name": "vegetable oil Soy sauce",
-        "qty": "2",
-        "comment": " for serving"
+        "input": "8 oz farfalle pasta",
+        "name": "oz farfalle pasta",
+        "qty": "8"
       }
     ],
     instructions: [
@@ -136,8 +144,9 @@ const testRecipe = {
       ('Serve immediately with soy sauce, if desired.')
     ], 
     summary: 'this is a summary of the recipe',
-    img_url: 'https://s23209.pcdn.co/wp-content/uploads/2014/03/IMG_7626edit-1.jpg',
-    cuisine_type: 'Japanese'
+    imgUrl: 'https://s23209.pcdn.co/wp-content/uploads/2014/03/IMG_7626edit-1.jpg',
+    cuisineType: 'Japanese',
+    recipeLink: 'https://damndelicious.net/2014/03/01/potstickers/'
   }
 
 
