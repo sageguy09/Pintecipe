@@ -27,9 +27,9 @@ const recipePreview = (recipe) => (
       {recipe.ingredients.map(recipeItems)}
     </ul> 
     <h3>Instructions</h3>
-    {/* <ul>
+    <ol>
       {recipe.instructions.map(instructionSteps)}
-    </ul> */}
+    </ol>
     {/* <a href={recipe.img_url}>{recipe.name} Image</a>
     <h3>Recipe Summary</h3>
     <p>{recipe.summary}</p>
@@ -39,7 +39,8 @@ const recipePreview = (recipe) => (
   </div>
 )
 
-
+//instructions
+//for each push to state:instructions[]
 
 
 
@@ -129,10 +130,10 @@ const testRecipe = {
       }
     ],
     instructions: [
-      {"step_1": 'In a large bowl, combine pork, cabbage, mushrooms, garlic, green onions, hoisin, ginger, sesame oil, Sriracha and white pepper.'},
-      {"step_2":'To assemble the dumplings, place wrappers on a work surface. Spoon 1 tablespoon of the pork mixture into the center of each wrapper. Using your finger, rub the edges of the wrappers with water. Fold the dough over the filling to create a half-moon shape, pinching the edges to seal.'},
-      {"step_3": 'Heat vegetable oil in a large skillet over medium heat. Add potstickers in a single layer and cook until golden and crisp, about 2-3 minutes per side.'}, 
-      {"step_4": 'Serve immediately with soy sauce, if desired.'}
+      ( 'In a large bowl, combine pork, cabbage, mushrooms, garlic, green onions, hoisin, ginger, sesame oil, Sriracha and white pepper.'),
+      ('To assemble the dumplings, place wrappers on a work surface. Spoon 1 tablespoon of the pork mixture into the center of each wrapper. Using your finger, rub the edges of the wrappers with water. Fold the dough over the filling to create a half-moon shape, pinching the edges to seal.'),
+      ('Heat vegetable oil in a large skillet over medium heat. Add potstickers in a single layer and cook until golden and crisp, about 2-3 minutes per side.'), 
+      ('Serve immediately with soy sauce, if desired.')
     ], 
     summary: 'this is a summary of the recipe',
     img_url: 'https://s23209.pcdn.co/wp-content/uploads/2014/03/IMG_7626edit-1.jpg',
