@@ -102,10 +102,15 @@ const editRecipeItems = (ingItems) => (
   // else {
   //   unitType = ingItems.other
   // }
-  <li><button>-</button>{ingItems.qty}<button>+</button>  <input value={ingItems.unit}/> <input value={ingItems.other}/> <input value={ingItems.name}/>, <input value={ingItems.comment}/> <button>Delete Ingredient</button></li>
+  <li><button>-</button>{ingItems.qty}<button>+</button>  
+  <input value={ingItems.unit}/> <input value={ingItems.other}/> 
+  <input value={ingItems.name}/> <input value={ingItems.comment}/> 
+  <button>Delete Ingredient</button></li>
 )
 
-
+const editInstructionSteps = (instructionSteps) => (
+  <li><input  value={instructionSteps} /></li>
+)
 
 const reviewRecipe = (recipe) => (
   
@@ -125,10 +130,11 @@ const reviewRecipe = (recipe) => (
       <button>Add additonal ingredient</button>
     </div>
     <br />
-    <label for="instructions">Instructions: </label>
-    <textarea name="instructions" form="newRecipe" rows="10" cols="40" 
-    placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
-    &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value=""></textarea>
+    <div>
+      <ol>
+        {recipe.instructions.map(editInstructionSteps)}
+      </ol>
+    </div>
     <br />
     <label for="notes">Recipe Notes: </label>
     <textarea name="notes" form="newRecipe" rows="4" cols="40" 
