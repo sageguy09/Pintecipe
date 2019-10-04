@@ -13,10 +13,10 @@ const userList = (users) => (
 const userRecipes = (recipe) => (
   <li>{recipe.recipeName}</li>
 )
-const userRecipeListing = (recipes) => (
+const userRecipeListing = (user) => (
   <div>
-  <h2>Available Recipes</h2>
-  <ul>{recipes.map(userRecipes)}</ul>
+  <h2>{user.username} Available Recipes</h2>
+  <ul>{user.recipes.map(userRecipes)}</ul>
   </div>
 )
 
@@ -270,7 +270,7 @@ const userRecipeList = (user) => (
 
 
 const testUsers = [
-  { username: "SageGuy", email: "ryansage09@gmail.com", recipes: ''},
+  { username: "SageGuy", email: "ryansage09@gmail.com", recipes: []},
   { username: "Muffin", email: "afreeman_2010@yahoo.com", recipes: [testRecipe]}
 ]
 
@@ -325,7 +325,7 @@ class NewUserForm extends React.Component {
 
 class App extends React.Component {
   state = {
-    currentUser: 1,
+    currentUser: 2,
     users: testUserModel
   }
 
@@ -351,9 +351,15 @@ class App extends React.Component {
 
   render = () => (
   <div>
-    <article>
+    <aside>
+      <h1>New User Form and List of All Users</h1>
       <NewUserForm addNewUser={this.addNewUser}/>
       {userList(this.getAllUsers())}
+      ____________________________________________________________________________________
+    </aside>
+    <article>
+    {userRecipeListing(this.getCurrentUser())}
+    {recipeDetails(this.getCurrentUser().recipes[0])}
     </article>
   </div>
   )
