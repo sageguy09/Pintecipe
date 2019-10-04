@@ -10,6 +10,15 @@ const userList = (users) => (
   </ul>
 )
 
+const userRecipes = (recipe) => (
+  <li>{recipe.name}</li>
+)
+const userRecipeListing = (recipes) => (
+  <div>
+  <h2>Available Recipes</h2>
+  <ul>{recipes.map(userRecipes)}</ul>
+  </div>
+)
 const recipeItems = (ingItems) => (
   // if (ingItems.unit != false){
   //   unitType = ingItems.unit}
@@ -144,12 +153,13 @@ const testRecipe = {
     summary: 'this is a summary of the recipe',
     notes: 'To freeze, place uncooked potstickers in a single layer on a baking sheet overnight. Transfer to freezer bags.',
     imgUrl: 'https://s23209.pcdn.co/wp-content/uploads/2014/03/IMG_7626edit-1.jpg',
-    cuisineType: 'Japanese',
+    cuisineType: 'Korean',
     recipeLink: 'https://damndelicious.net/2014/03/01/potstickers/'
   }
 
 const userRecipeList = (user) => (
   <div>
+    <h2>User and recipes details</h2>
     <h2>{user.username}</h2>
     {recipeDetails(testRecipe)}
   </div>
@@ -158,7 +168,7 @@ const userRecipeList = (user) => (
 
 const testUsers = [
   { username: "SageGuy", email: "ryansage09@gmail.com", recipes: ''},
-  { username: "Muffin", email: "afreeman_2010@yahoo.com", recipes: testRecipe}
+  { username: "Muffin", email: "afreeman_2010@yahoo.com", recipes: [testRecipe]}
 ]
 const App = () => (
   <div>
@@ -166,6 +176,12 @@ const App = () => (
     {/* {userList(testUsers)} */}
     {/* {recipeDetails(testRecipe)} */}
     {userRecipeList(testUsers[1])}
+    <br />
+    <br />
+    <br />
+    <br />
+
+    {userRecipeListing(testUsers[1].recipes)}
   </div>
 )
 
