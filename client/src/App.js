@@ -24,7 +24,7 @@ const instructionSteps = (instructionSteps) => (
 )
 
 
-const recipePreview = (recipe) => (
+const recipeDetails = (recipe) => (
   <div> 
     <h3>{recipe.name}</h3>
     <h3>Ingredients</h3>
@@ -148,18 +148,24 @@ const testRecipe = {
     recipeLink: 'https://damndelicious.net/2014/03/01/potstickers/'
   }
 
-
+const userRecipeList = (user) => (
+  <div>
+    <h2>{user.username}</h2>
+    {recipeDetails(testRecipe)}
+  </div>
+)
 
 
 const testUsers = [
-  { username: "SageGuy", email: "ryansage09@gmail.com"},
-  { username: "Muffin", email: "afreeman_2010@yahoo.com"}
+  { username: "SageGuy", email: "ryansage09@gmail.com", recipes: ''},
+  { username: "Muffin", email: "afreeman_2010@yahoo.com", recipes: testRecipe}
 ]
 const App = () => (
   <div>
-    <h1>Hello World.</h1>
-    {userList(testUsers)}
-    {recipePreview(testRecipe)}
+    <h1>Pintecipe</h1>
+    {/* {userList(testUsers)} */}
+    {/* {recipeDetails(testRecipe)} */}
+    {userRecipeList(testUsers[1])}
   </div>
 )
 
