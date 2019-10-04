@@ -54,89 +54,87 @@ const recipePreview = (recipe) => (
 const testRecipe = {
     name: 'Pot Stickers',
     ingredients: [
-      {
-        "other": "Caramelized",
-        "input": "Caramelized onions",
-        "name": "onions"
-      },
-      {
-        "unit": "tablespoon",
-        "input": "1 tablespoon olive oil",
-        "name": "olive oil",
-        "qty": "1"
-      },
-      {
-        "other": ", large ,",
-        "input": "3 yellow onions, large, sliced",
-        "name": "yellow onions",
-        "qty": "3",
-        "comment": "sliced"
-      },
-      {
-        "unit": "teaspoon",
-        "input": "1/4 teaspoon salt",
-        "name": "salt",
-        "qty": "1/4"
-      },
-      {
-        "unit": "tablespoon",
-        "input": "1 tablespoon balsamic vinegar",
-        "name": "balsamic vinegar",
-        "qty": "1"
-      },
-      {
-        "input": "Creamy pasta sauce",
-        "name": "Creamy pasta sauce"
-      },
-      {
-        "unit": "tablespoon",
-        "input": "1 tablespoon olive oil",
-        "name": "olive oil",
-        "qty": "1"
-      },
-      {
-        "other": "oz ,",
-        "input": "10 oz mushrooms, sliced I used button mushrooms",
-        "name": "mushrooms mushrooms",
-        "qty": "10",
-        "comment": "sliced I used button"
-      },
-      {
-        "other": "oz",
-        "input": "6 oz spinach",
-        "name": "spinach",
-        "qty": "6"
-      },
-      {
-        "unit": "cup",
-        "input": "1 cup half-and-half",
-        "name": "half-and-half",
-        "qty": "1"
-      },
-      {
-        "unit": "cup",
-        "other": ",",
-        "input": "1 cup Parmesan cheese, shredded",
-        "name": "Parmesan cheese",
-        "qty": "1",
-        "comment": "shredded"
-      },
-      {
-        "unit": "teaspoon",
-        "input": "1/4 teaspoon salt",
-        "name": "salt",
-        "qty": "1/4"
-      },
-      {
-        "input": "Pasta",
-        "name": "Pasta"
-      },
-      {
-        "input": "8 oz farfalle pasta",
-        "name": "oz farfalle pasta",
-        "qty": "8"
-      }
-    ],
+  {
+    "unit": "pound",
+    "input": "1 pound ground pork",
+    "name": "pork",
+    "qty": "1",
+    "comment": "ground"
+  },
+  {
+    "unit": "cup",
+    "input": "1 cup shredded green cabbage",
+    "name": "green cabbage",
+    "qty": "1",
+    "comment": "shredded"
+  },
+  {
+    "unit": "ounce",
+    "other": ",",
+    "input": "3 ounces shiitake mushrooms, diced",
+    "name": "shiitake mushrooms",
+    "qty": "3",
+    "comment": "diced"
+  },
+  {
+    "unit": "clove",
+    "input": "2 cloves garlic, pressed",
+    "name": "garlic, pressed",
+    "qty": "2"
+  },
+  {
+    "other": ",",
+    "input": "2 green onions, thinly sliced",
+    "name": "green onions",
+    "qty": "2",
+    "comment": "thinly sliced"
+  },
+  {
+    "unit": "tablespoon",
+    "input": "1 tablespoon hoisin",
+    "name": "hoisin",
+    "qty": "1"
+  },
+  {
+    "unit": "tablespoon",
+    "input": "1 tablespoon freshly grated ginger",
+    "name": "ginger",
+    "qty": "1",
+    "comment": "freshly grated"
+  },
+  {
+    "unit": "teaspoon",
+    "input": "2 teaspoons sesame oil",
+    "name": "sesame oil",
+    "qty": "2"
+  },
+  {
+    "unit": "teaspoon",
+    "other": ", or",
+    "input": "1 teaspoon Sriracha*, or more, to taste",
+    "name": "Sriracha*",
+    "qty": "1",
+    "comment": "more, to taste"
+  },
+  {
+    "unit": "teaspoon",
+    "input": "1/4 teaspoon white pepper",
+    "name": "white pepper",
+    "qty": "1/4"
+  },
+  {
+    "input": "36 won ton wrappers",
+    "name": "won ton wrappers",
+    "qty": "36"
+  },
+  {
+    "unit": "tablespoon",
+    "input": "2 tablespoons vegetable oil Soy sauce, for serving",
+    "name": "vegetable oil Soy sauce",
+    "qty": "2",
+    "comment": "for serving"
+  }
+],
     instructions: [
       ( 'In a large bowl, combine pork, cabbage, mushrooms, garlic, green onions, hoisin, ginger, sesame oil, Sriracha and white pepper.'),
       ('To assemble the dumplings, place wrappers on a work surface. Spoon 1 tablespoon of the pork mixture into the center of each wrapper. Using your finger, rub the edges of the wrappers with water. Fold the dough over the filling to create a half-moon shape, pinching the edges to seal.'),
@@ -144,6 +142,7 @@ const testRecipe = {
       ('Serve immediately with soy sauce, if desired.')
     ], 
     summary: 'this is a summary of the recipe',
+    notes: 'To freeze, place uncooked potstickers in a single layer on a baking sheet overnight. Transfer to freezer bags.',
     imgUrl: 'https://s23209.pcdn.co/wp-content/uploads/2014/03/IMG_7626edit-1.jpg',
     cuisineType: 'Japanese',
     recipeLink: 'https://damndelicious.net/2014/03/01/potstickers/'
