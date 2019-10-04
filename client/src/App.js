@@ -11,7 +11,7 @@ const userList = (users) => (
 )
 
 const userRecipes = (recipe) => (
-  <li>{recipe.name}</li>
+  <li>{recipe.recipeName}</li>
 )
 const userRecipeListing = (recipes) => (
   <div>
@@ -35,7 +35,7 @@ const instructionSteps = (instructionSteps) => (
 
 const recipeDetails = (recipe) => (
   <div> 
-    <h3>{recipe.name}</h3>
+    <h3>{recipe.recipeName}</h3>
     <h3>Ingredients</h3>
     <ul>
       {recipe.ingredients.map(recipeItems)}
@@ -44,7 +44,7 @@ const recipeDetails = (recipe) => (
     <ol>
       {recipe.instructions.map(instructionSteps)}
     </ol>
-    <img src={recipe.imgUrl} alt={recipe.name} width="500" height="400"/>
+    <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
     <h3>Recipe Summary</h3>
     <p>{recipe.summary}</p>
     <h3>Cuisine Type: {recipe.cuisineType}</h3> 
@@ -56,12 +56,50 @@ const recipeDetails = (recipe) => (
 //instructions
 //for each line push an item into to state:instructions[]
 
+const newRecipeForm = () => (
+  
+  <div>
+  <h2> Add a recipe </h2>
+  <form id="newRecipe"> 
+    <label for="recipeName">Recipe Name: </label>
+    <input type="text" name="recipeName" value="" placeholder="Name of Recipe" />
+    <br />
+    <label for="summary">Recipe Summary: </label>
+    <textarea name="summary" form="newRecipe" rows="4" cols="40" 
+    placeholder="Enter a brief summary of the recipe" value=""></textarea>
+    <br />
+    <label for="ingredients">Ingredients:  </label>
+    <textarea name="ingredients" form="newRecipe" rows="10" cols="40" 
+    placeholder="Example of the preffered recipe format: &#10;'1 cup cheddar cheese, shredded'" value=""></textarea>
+    <br />
+    <label for="instructions">Instructions: </label>
+    <textarea name="instructions" form="newRecipe" rows="10" cols="40" 
+    placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
+    &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value=""></textarea>
+    <br />
+    <label for="notes">Recipe Notes: </label>
+    <textarea name="notes" form="newRecipe" rows="4" cols="40" 
+    placeholder="Enter side notes about the recipe" value=""></textarea>
+    <br />
+    <label for="cuisineType">Type of Cuisine: </label>
+    <input type="text" name="cuisineType" value="" placeholder="ie: 'Japanese', 'Amercian' " />
+    <br />
+    <label for="recipeImg">Submit a link to the an image of the recipe: </label>
+    <input type="url" name="recipeImg" value="" placeholder="" />
+    <br />
+    <label for="recipeLink">Link to Recipe: </label>
+    <input type="url" name="recipeLink" value="" placeholder="" />
+    <br />
+    <input type="submit" value="Submit Recipe" />
+  </form>
+  </div>
+)
 
 //factor multiple ingredient listings/instrucions
 //ie Component Name, ingredient list, Component Name, ingredient list, etc
 
 const testRecipe = {
-    name: 'Pot Stickers',
+    recipeName: 'Pot Stickers',
     ingredients: [
   {
     "unit": "pound",
@@ -152,7 +190,7 @@ const testRecipe = {
     ], 
     summary: 'this is a summary of the recipe',
     notes: 'To freeze, place uncooked potstickers in a single layer on a baking sheet overnight. Transfer to freezer bags.',
-    imgUrl: 'https://s23209.pcdn.co/wp-content/uploads/2014/03/IMG_7626edit-1.jpg',
+    recipeImg: 'https://s23209.pcdn.co/wp-content/uploads/2014/03/IMG_7626edit-1.jpg',
     cuisineType: 'Korean',
     recipeLink: 'https://damndelicious.net/2014/03/01/potstickers/'
   }
@@ -182,6 +220,13 @@ const App = () => (
     <br />
 
     {userRecipeListing(testUsers[1].recipes)}
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    {newRecipeForm()}
   </div>
 )
 
