@@ -95,6 +95,47 @@ const newRecipeForm = () => (
   </div>
 )
 
+
+const reviewRecipe = (recipe) => (
+  
+  <div>
+  <h2> Review and Edit Recipe </h2>
+  <form id="newRecipe"> 
+    <label for="recipeName">Recipe Name: </label>
+    <input type="text" name="recipeName" value={recipe.recipeName} placeholder="Name of Recipe" />
+    <br />
+    <label for="summary">Recipe Summary: </label>
+    <textarea name="summary" form="newRecipe" rows="4" cols="40" 
+    placeholder="Enter a brief summary of the recipe" value={recipe.summary}></textarea>
+    <br />
+    <label for="ingredients">Ingredients:  </label>
+    <textarea name="ingredients" form="newRecipe" rows="10" cols="40" 
+    placeholder="Example of the preffered recipe format: &#10;'1 cup cheddar cheese, shredded'" value=""></textarea>
+    <br />
+    <label for="instructions">Instructions: </label>
+    <textarea name="instructions" form="newRecipe" rows="10" cols="40" 
+    placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
+    &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value=""></textarea>
+    <br />
+    <label for="notes">Recipe Notes: </label>
+    <textarea name="notes" form="newRecipe" rows="4" cols="40" 
+    placeholder="Enter side notes about the recipe" value={recipe.notes}></textarea>
+    <br />
+    <label for="cuisineType">Type of Cuisine: </label>
+    <input type="text" name="cuisineType" value={recipe.notes} placeholder="ie: 'Japanese', 'Amercian' " />
+    <br />
+    <label for="recipeImg">Submit a link to the an image of the recipe: </label>
+    <input type="url" name="recipeImg" value={recipe.recipeImg} placeholder="" />
+    <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
+    <br />
+    <label for="recipeLink">Link to Recipe: </label>
+    <input type="url" name="recipeLink" value={recipe.recipeLink} placeholder="" />
+    <br />
+    <input type="submit" value="Submit Recipe" />
+  </form>
+  </div>
+)
+
 //factor multiple ingredient listings/instrucions
 //ie Component Name, ingredient list, Component Name, ingredient list, etc
 
@@ -227,6 +268,7 @@ const App = () => (
     <br />
 
     {newRecipeForm()}
+    {reviewRecipe(testRecipe)}
   </div>
 )
 
