@@ -273,27 +273,36 @@ const testUsers = [
   { username: "SageGuy", email: "ryansage09@gmail.com", recipes: ''},
   { username: "Muffin", email: "afreeman_2010@yahoo.com", recipes: [testRecipe]}
 ]
-const App = () => (
+// const App = () => (
+//   <div>
+//     <h1>Pintecipe</h1>
+//     {/* {userList(testUsers)} */}
+//     {/* {recipeDetails(testRecipe)} */}
+//     {userRecipeList(testUsers[1])}
+//     <br />
+//     <br />
+//     <br />
+//     <br />
+
+//     {userRecipeListing(testUsers[1].recipes)}
+
+//     <br />
+//     <br />
+//     <br />
+//     <br />
+
+//     {newRecipeForm()}
+//     {reviewRecipe(testRecipe)}
+//   </div>
+// )
+
+class App extends React.Component {
+  render = () => (
   <div>
-    <h1>Pintecipe</h1>
-    {/* {userList(testUsers)} */}
-    {/* {recipeDetails(testRecipe)} */}
-    {userRecipeList(testUsers[1])}
-    <br />
-    <br />
-    <br />
-    <br />
-
-    {userRecipeListing(testUsers[1].recipes)}
-
-    <br />
-    <br />
-    <br />
-    <br />
-
-    {newRecipeForm()}
-    {reviewRecipe(testRecipe)}
+    <article>
+    </article>
   </div>
-)
+  )
+}
 
 export default App;
