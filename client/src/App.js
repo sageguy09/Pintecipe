@@ -19,6 +19,7 @@ const userRecipeListing = (recipes) => (
   <ul>{recipes.map(userRecipes)}</ul>
   </div>
 )
+
 const recipeItems = (ingItems) => (
   // if (ingItems.unit != false){
   //   unitType = ingItems.unit}
@@ -31,7 +32,6 @@ const recipeItems = (ingItems) => (
 const instructionSteps = (instructionSteps) => (
   <li>{instructionSteps}</li>
 )
-
 
 const recipeDetails = (recipe) => (
   <div> 
@@ -96,6 +96,17 @@ const newRecipeForm = () => (
 )
 
 
+const editRecipeItems = (ingItems) => (
+  // if (ingItems.unit != false){
+  //   unitType = ingItems.unit}
+  // else {
+  //   unitType = ingItems.other
+  // }
+  <li><button>-</button>{ingItems.qty}<button>+</button>  <input value={ingItems.unit}/> <input value={ingItems.other}/> <input value={ingItems.name}/>, <input value={ingItems.comment}/> <button>Delete Ingredient</button></li>
+)
+
+
+
 const reviewRecipe = (recipe) => (
   
   <div>
@@ -108,9 +119,11 @@ const reviewRecipe = (recipe) => (
     <textarea name="summary" form="newRecipe" rows="4" cols="40" 
     placeholder="Enter a brief summary of the recipe" value={recipe.summary}></textarea>
     <br />
-    <label for="ingredients">Ingredients:  </label>
-    <textarea name="ingredients" form="newRecipe" rows="10" cols="40" 
-    placeholder="Example of the preffered recipe format: &#10;'1 cup cheddar cheese, shredded'" value=""></textarea>
+    <div>
+      <h3>Ingredients</h3>
+      {recipe.ingredients.map(editRecipeItems)}
+      <button>Add additonal ingredient</button>
+    </div>
     <br />
     <label for="instructions">Instructions: </label>
     <textarea name="instructions" form="newRecipe" rows="10" cols="40" 
@@ -131,7 +144,12 @@ const reviewRecipe = (recipe) => (
     <label for="recipeLink">Link to Recipe: </label>
     <input type="url" name="recipeLink" value={recipe.recipeLink} placeholder="" />
     <br />
-    <input type="submit" value="Submit Recipe" />
+    {/* deletes recipe from database */}
+    <button>Delete Recipe</button>
+    {/* reset's recipe data to match what is in the database from intial add/last saved edit*/}
+    <button>Start Over</button>
+    {/* saves entered data above to database */}
+    <input type="submit" value="Save Recipe" />
   </form>
   </div>
 )
