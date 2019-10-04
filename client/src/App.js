@@ -273,36 +273,158 @@ const testUsers = [
   { username: "SageGuy", email: "ryansage09@gmail.com", recipes: ''},
   { username: "Muffin", email: "afreeman_2010@yahoo.com", recipes: [testRecipe]}
 ]
-// const App = () => (
-//   <div>
-//     <h1>Pintecipe</h1>
-//     {/* {userList(testUsers)} */}
-//     {/* {recipeDetails(testRecipe)} */}
-//     {userRecipeList(testUsers[1])}
-//     <br />
-//     <br />
-//     <br />
-//     <br />
 
-//     {userRecipeListing(testUsers[1].recipes)}
 
-//     <br />
-//     <br />
-//     <br />
-//     <br />
 
-//     {newRecipeForm()}
-//     {reviewRecipe(testRecipe)}
-//   </div>
-// )
+class NewUserForm extends React.Component {
+  state = 
+    { username: ""
+    , email   : ""
+    }
+
+  handleInput = (evnt) => {
+    let newUser = {...this.state};
+
+    newUser[evnt.target.name] = evnt.target.value;
+
+    this.setState(newUser)
+  }
+
+  handleSubmit = (evnt) => {
+    evnt.preventDefault();
+
+    this.props.addNewUser(this.state)
+  }
+  render = () => (
+    <form onSubmit={this.handleSubmit}>
+      <label for="username" >Username</label>
+      <input type="text"   name="username" onChange={this.handleInput} value={this.state.username} placeholder="User Name"/>
+      <br />
+      <label for="email" >Email</label>
+      <input type="email"  name="email"    onChange={this.handleInput} value={this.state.email}    placeholder="Email"/>
+      <br />
+      <input type="submit"                 value="New User" />
+    </form>
+  )
+}
+
+  const testUserModel = 
+    {1: 
+      { id:1, 
+        username: "SageGuy", 
+        email: "ryansage09@gmail.com", 
+        recipes: []
+      },
+    2: 
+    { id:2, 
+      username: "Muffin", 
+      email: "afreeman_2010@yahoo.com", 
+      recipes: [testRecipe]
+    }
+  }
 
 class App extends React.Component {
+  state = {
+    currentUser: 1,
+    users: testUserModel
+  }
+
+  getNextUserId = () => 
+    Math.max(...this.getAllUsers().map(user => user.id)) +1
+
+  addNewUser = (newUser) => {
+    newUser.recipes = [];
+    newUser.id = this.getNextUserId()
+
+    let users = {...this.state.users};
+
+    users[newUser.id] = newUser;
+
+    this.setState({ users })
+  }
+
+  getCurrentUser = () =>
+    this.state.users[this.state.currentUser]
+
+  getAllUsers = () =>
+    Object.values(this.state.users)
+
   render = () => (
   <div>
     <article>
+      <NewUserForm addNewUser={this.addNewUser}/>
+      {userList(this.getAllUsers())}
     </article>
   </div>
   )
 }
 
 export default App;
+
+
+/*
+class NewRecipeForm extends React.Component {
+  state = {
+    recipeName = "",
+    //ingredients = [],
+    //instructrions = [],
+    summary = "",
+    notes: "",
+    recipeImg: "",
+    cuisineType: "",
+    recipeLink: ""
+  }
+
+  handleInput = (evnt) => {
+    let newRecipe = {...this.state};
+    
+    newRecipe[evnt.target.name] = evnt.target.value;
+
+    this.setState(newRecipe)
+  }
+
+  handleSubmit = (evnt) => {
+    evnt.preventDefault();
+    
+    this.props.addNewRecipe(this.state)
+  }
+  render = () => (
+    <div>
+      <h2> Add a recipe </h2>
+  <form id="newRecipe"> 
+    <label for="recipeName">Recipe Name: </label>
+    <input type="text" name="recipeName" value="" placeholder="Name of Recipe" />
+    <br />
+    <label for="summary">Recipe Summary: </label>
+    <textarea name="summary" form="newRecipe" rows="4" cols="40" 
+    placeholder="Enter a brief summary of the recipe" value=""></textarea>
+    <br />
+    <label for="ingredients">Ingredients:  </label>
+    <textarea name="ingredients" form="newRecipe" rows="10" cols="40" 
+    placeholder="Example of the preffered recipe format: &#10;'1 cup cheddar cheese, shredded'" value=""></textarea>
+    <br />
+    <label for="instructions">Instructions: </label>
+    <textarea name="instructions" form="newRecipe" rows="10" cols="40" 
+    placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
+    &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value=""></textarea>
+    <br />
+    <label for="notes">Recipe Notes: </label>
+    <textarea name="notes" form="newRecipe" rows="4" cols="40" 
+    placeholder="Enter side notes about the recipe" value=""></textarea>
+    <br />
+    <label for="cuisineType">Type of Cuisine: </label>
+    <input type="text" name="cuisineType" value="" placeholder="ie: 'Japanese', 'Amercian' " />
+    <br />
+    <label for="recipeImg">Submit a link to the an image of the recipe: </label>
+    <input type="url" name="recipeImg" value="" placeholder="" />
+    <br />
+    <label for="recipeLink">Link to Recipe: </label>
+    <input type="url" name="recipeLink" value="" placeholder="" />
+    <br />
+    <input type="submit" value="Submit Recipe" />
+  </form>
+    </div>
+  )
+}
+
+*/
