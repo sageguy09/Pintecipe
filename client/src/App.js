@@ -248,16 +248,31 @@ const testRecipe = {
   }
 
  class ReviewRecipeForm extends React.Component {
-  // state = {
-  //   recipeName: {this.props.recipeName},
-  //   // ingredients = [opp],
-  //   // instructrions = [],
-  //   // summary: "",
-  //   // notes: "",
-  //   // recipeImg: "",
-  //   // cuisineType: "",
-  //   // recipeLink: ""
-  // }
+  state = {
+    recipe: {...this.props.recipe}
+    // ingredients = [opp],
+    // instructrions = [],
+    // summary: "",
+    // notes: "",
+    // recipeImg: "",
+    // cuisineType: "",
+    // recipeLink: ""
+  }
+
+
+  handleInput = (evnt) => {
+    let currentRecipe = {...this.state.recipe};
+
+    currentRecipe[evnt.target.name] = evnt.target.value;
+
+    this.setState({recipe: currentRecipe})
+  }
+
+  handleSubmit = (evnt) => {
+    evnt.preventDefault();
+    
+    this.props.addNewRecipe(this.state)
+  }
   editRecipeItems = (ingItems) => (
     // if (ingItems.unit != false){
     //   unitType = ingItems.unit}
@@ -265,51 +280,51 @@ const testRecipe = {
     //   unitType = ingItems.other
     // }
     <li><button>-</button>{ingItems.qty}<button>+</button>  
-    <input value={ingItems.unit}/> <input value={ingItems.other}/> 
-    <input value={ingItems.name}/> <input value={ingItems.comment}/> 
+    <input name="unit"onChange={this.handleInput} value={ingItems.unit}/> <input name="other" onChange={this.handleInput} value={ingItems.other}/> 
+    <input name="name"onChange={this.handleInput} value={ingItems.name}/> <input name="comment" onChange={this.handleInput} value={ingItems.comment}/> 
     <button>Delete Ingredient</button></li>
   )
   
   editInstructionSteps = (instructionSteps) => (
-    <li><input  value={instructionSteps} /></li>
+    <li><input  name="" onChange={this.handleInput} value={instructionSteps} /></li>
   )
   
    render = () => (
    <div>
      <h2>Review and Edit Recipe</h2>
-     <form id="newRecipe"> 
+     <form id="editRecipe"> 
     <label for="recipeName">Recipe Name: </label>
-    <input type="text" name="recipeName" value={this.props.recipe.recipeName} placeholder="Name of Recipe" />
+    <input type="text" name="recipeName" onChange={this.handleInput} value={this.state.recipe.recipeName} placeholder="Name of Recipe" />
     <br />
     <label for="summary">Recipe Summary: </label>
-    <textarea name="summary" form="newRecipe" rows="4" cols="40" 
-    placeholder="Enter a brief summary of the recipe" value={this.props.recipe.summary}></textarea>
+    <textarea name="summary" onChange={this.handleInput} form="editRecipe" rows="4" cols="40" 
+    placeholder="Enter a brief summary of the recipe" value={this.state.recipe.summary}></textarea>
     <br />
-     {/* <div>
+     <div>
       <h3>Ingredients</h3>
-      {this.ingredients.map(this.editRecipeItems)}
+      {this.state.recipe.ingredients.map(this.editRecipeItems)}
       <button>Add additonal ingredient</button>
     </div>
     <br />
     <div>
-      <ol>
-        {this.instructions.map(this.editInstructionSteps)}
+      <ol >
+        {this.state.recipe.instructions.map(this.editInstructionSteps)}
       </ol>
     </div>
-    <br /> */}
+    <br />
     <label for="notes">Recipe Notes: </label>
-    <textarea name="notes" form="newRecipe" rows="4" cols="40" 
-    placeholder="Enter side notes about the recipe" value={this.props.recipe.notes}></textarea>
+    <textarea name="notes" onChange={this.handleInput} form="editRecipe" rows="4" cols="40" 
+    placeholder="Enter side notes about the recipe" value={this.state.recipe.notes}></textarea>
     <br />
     <label for="cuisineType">Type of Cuisine: </label>
-    <input type="text" name="cuisineType" value={this.props.recipe.cuisineType} placeholder="ie: 'Japanese', 'Amercian' " />
+    <input type="text" name="cuisineType" onChange={this.handleInput} value={this.state.recipe.cuisineType} placeholder="ie: 'Japanese', 'Amercian' " />
     <br />
     <label for="recipeImg">Submit a link to the an image of the recipe: </label>
-    <input type="url" name="recipeImg" value={this.props.recipe.recipeImg} placeholder="" />
-    <img src={this.props.recipe.recipeImg} alt={this.props.name} width="500" height="400"/>
+    <input type="url" onChange={this.handleInput} name="recipeImg" value={this.state.recipe.recipeImg} placeholder="" />
+    <img src={this.state.recipe.recipeImg} onChange={this.handleInput} alt={this.state.recipe.name} width="500" height="400"/>
     <br />
     <label for="recipeLink">Link to Recipe: </label>
-    <input type="url" name="recipeLink" value={this.props.recipe.recipeLink} placeholder="" />
+    <input type="url" name="recipeLink" onChange={this.handleInput} value={this.state.recipe.recipeLink} placeholder="" />
     <br /> 
     {/* deletes recipe from database
     <button>Delete Recipe</button>
