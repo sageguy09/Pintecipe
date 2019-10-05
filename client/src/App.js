@@ -10,15 +10,15 @@ const userList = (users) => (
   </ul>
 )
 
-const userRecipes = (recipe) => (
-  <li>{recipe.recipeName}</li>
-)
-const userRecipeListing = (user) => (
-  <div>
-  <h2>{user.username} Available Recipes</h2>
-  <ul>{user.recipes.map(userRecipes)}</ul>
-  </div>
-)
+// const userRecipes = (recipe) => (
+//   <li>{recipe.recipeName}</li>
+// )
+// const userRecipeListing = (user) => (
+//   <div>
+//   <h2>{user.username} Available Recipes</h2>
+//   <ul>{user.recipes.map(userRecipes)}</ul>
+//   </div>
+// )
 
 const recipeItems = (ingItems) => (
   // if (ingItems.unit != false){
@@ -53,101 +53,8 @@ const recipeDetails = (recipe) => (
   </div>
 )
 
-//instructions
-//for each line push an item into to state:instructions[]
-
-const newRecipeForm = () => (
-  
-  <div>
-  <h2> Add a recipe </h2>
-  <form id="newRecipe"> 
-    <label for="recipeName">Recipe Name: </label>
-    <input type="text" name="recipeName" value="" placeholder="Name of Recipe" />
-    <br />
-    <label for="summary">Recipe Summary: </label>
-    <textarea name="summary" form="newRecipe" rows="4" cols="40" 
-    placeholder="Enter a brief summary of the recipe" value=""></textarea>
-    <br />
-    <label for="ingredients">Ingredients:  </label>
-    <textarea name="ingredients" form="newRecipe" rows="10" cols="40" 
-    placeholder="Example of the preffered recipe format: &#10;'1 cup cheddar cheese, shredded'" value=""></textarea>
-    <br />
-    <label for="instructions">Instructions: </label>
-    <textarea name="instructions" form="newRecipe" rows="10" cols="40" 
-    placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
-    &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value=""></textarea>
-    <br />
-    <label for="notes">Recipe Notes: </label>
-    <textarea name="notes" form="newRecipe" rows="4" cols="40" 
-    placeholder="Enter side notes about the recipe" value=""></textarea>
-    <br />
-    <label for="cuisineType">Type of Cuisine: </label>
-    <input type="text" name="cuisineType" value="" placeholder="ie: 'Japanese', 'Amercian' " />
-    <br />
-    <label for="recipeImg">Submit a link to the an image of the recipe: </label>
-    <input type="url" name="recipeImg" value="" placeholder="" />
-    <br />
-    <label for="recipeLink">Link to Recipe: </label>
-    <input type="url" name="recipeLink" value="" placeholder="" />
-    <br />
-    <input type="submit" value="Submit Recipe" />
-  </form>
-  </div>
-)
 
 
-
-// const reviewRecipe = (recipe) => (
-  
-//   <div>
-//   <h2> Review and Edit Recipe </h2>
-//   <form id="newRecipe"> 
-//     <label for="recipeName">Recipe Name: </label>
-//     <input type="text" name="recipeName" value={recipe.recipeName} placeholder="Name of Recipe" />
-//     <br />
-//     <label for="summary">Recipe Summary: </label>
-//     <textarea name="summary" form="newRecipe" rows="4" cols="40" 
-//     placeholder="Enter a brief summary of the recipe" value={recipe.summary}></textarea>
-//     <br />
-//     <div>
-//       <h3>Ingredients</h3>
-//       {recipe.ingredients.map(editRecipeItems)}
-//       <button>Add additonal ingredient</button>
-//     </div>
-//     <br />
-//     <div>
-//       <ol>
-//         {recipe.instructions.map(editInstructionSteps)}
-//       </ol>
-//     </div>
-//     <br />
-//     <label for="notes">Recipe Notes: </label>
-//     <textarea name="notes" form="newRecipe" rows="4" cols="40" 
-//     placeholder="Enter side notes about the recipe" value={recipe.notes}></textarea>
-//     <br />
-//     <label for="cuisineType">Type of Cuisine: </label>
-//     <input type="text" name="cuisineType" value={recipe.notes} placeholder="ie: 'Japanese', 'Amercian' " />
-//     <br />
-//     <label for="recipeImg">Submit a link to the an image of the recipe: </label>
-//     <input type="url" name="recipeImg" value={recipe.recipeImg} placeholder="" />
-//     <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
-//     <br />
-//     <label for="recipeLink">Link to Recipe: </label>
-//     <input type="url" name="recipeLink" value={recipe.recipeLink} placeholder="" />
-//     <br />
-//     {/* deletes recipe from database */}
-//     <button>Delete Recipe</button>
-//     {/* reset's recipe data to match what is in the database from intial add/last saved edit*/}
-//     <button>Start Over</button>
-//     {/* saves entered data above to database */}
-//     <input type="submit" value="Save Recipe" />
-//   </form>
-//   </div>
-// )
-
-
-//factor multiple ingredient listings/instrucions
-//ie Component Name, ingredient list, Component Name, ingredient list, etc
 
 const testRecipe = {
     id: 1,
@@ -258,6 +165,9 @@ const testRecipe = {
     // cuisineType: "",
     // recipeLink: ""
   }
+  //factor multiple ingredient listings/instrucions
+  //ie Component Name, ingredient list, Component Name, ingredient list, etc
+
 
 
   handleInput = (evnt) => {
@@ -358,7 +268,8 @@ class NewRecipeForm extends React.Component {
     cuisineType: "",
     recipeLink: ""
   }
-
+  //instructions
+//for each line push an item into to state:instructions[]
   handleInput = (evnt) => {
     let newRecipe = {...this.state};
 
@@ -411,6 +322,31 @@ class NewRecipeForm extends React.Component {
   )
 }
 
+class RecipeDetails extends React.Component {
+  state = {
+    recipe: {...this.props.currentRecipe}
+  } 
+
+  render = () => (
+    <div> 
+    <h3>{this.state.recipe.recipeName}</h3>
+    <h3>Ingredients</h3>
+    <ul>
+      {this.state.recipe.ingredients.map(recipeItems)}
+    </ul> 
+    <h3>Instructions</h3>
+    <ol>
+      {this.state.recipe.instructions.map(instructionSteps)}
+    </ol>
+    <img src={this.state.recipe.recipeImg} alt={this.state.recipe.name} width="500" height="400"/>
+    <h3>Recipe Summary</h3>
+    <p>{this.state.recipe.summary}</p>
+    <h3>Cuisine Type: {this.state.recipe.cuisineType}</h3> 
+    <h3>Link to recipe:</h3>
+    <a href={this.state.recipe.recipeLink}>{this.state.recipe.recipeLink}</a>
+  </div>
+  )
+}
 
 
 const testUsers = [
@@ -418,7 +354,30 @@ const testUsers = [
   { username: "Muffin", email: "afreeman_2010@yahoo.com", recipes: [testRecipe]}
 ]
 
+class UserHomePage extends React.Component {
+  state = {
+    user: {...this.props.currentUser},
+    //recipes: {...this.props.userRecipes}
+  }
+  userRecipes = (recipe) => (
+    <li>{recipe.recipeName}</li>
+  )
+  userRecipeListing = (user) => (
+    <div>
+    <h2>{user.username} Available Recipes</h2>
+    <ul>{user.recipes.map(this.userRecipes)}</ul>
+    </div>
+  )
+  
 
+  render = () => (
+    <div>
+    <h2>{this.state.user.username} Home Page</h2>
+    <h3>Saved Recipes</h3>
+    <ul>{this.state.user.recipes.map(this.userRecipes)}</ul>
+    </div>
+  )
+}
 
 class NewUserForm extends React.Component {
   state = 
@@ -526,9 +485,11 @@ class App extends React.Component {
       ____________________________________________________________________________________
     </aside>
     <article>
-    <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} />
-    <ReviewRecipeForm recipe={this.getCurrentUser().recipes[0]}/>
-    {userRecipeListing(this.getCurrentUser())}
+    {/* <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} />
+    <ReviewRecipeForm recipe={this.getCurrentUser().recipes[0]}/> */}
+    <UserHomePage currentUser={this.getCurrentUser()}/>
+    <RecipeDetails currentRecipe={this.getCurrentUser().recipes[0]} />
+    {/* {userRecipeListing(this.getCurrentUser())} */}
     {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
     </article>
   </div>
