@@ -96,69 +96,55 @@ const newRecipeForm = () => (
 )
 
 
-const editRecipeItems = (ingItems) => (
-  // if (ingItems.unit != false){
-  //   unitType = ingItems.unit}
-  // else {
-  //   unitType = ingItems.other
-  // }
-  <li><button>-</button>{ingItems.qty}<button>+</button>  
-  <input value={ingItems.unit}/> <input value={ingItems.other}/> 
-  <input value={ingItems.name}/> <input value={ingItems.comment}/> 
-  <button>Delete Ingredient</button></li>
-)
 
-const editInstructionSteps = (instructionSteps) => (
-  <li><input  value={instructionSteps} /></li>
-)
-
-const reviewRecipe = (recipe) => (
+// const reviewRecipe = (recipe) => (
   
-  <div>
-  <h2> Review and Edit Recipe </h2>
-  <form id="newRecipe"> 
-    <label for="recipeName">Recipe Name: </label>
-    <input type="text" name="recipeName" value={recipe.recipeName} placeholder="Name of Recipe" />
-    <br />
-    <label for="summary">Recipe Summary: </label>
-    <textarea name="summary" form="newRecipe" rows="4" cols="40" 
-    placeholder="Enter a brief summary of the recipe" value={recipe.summary}></textarea>
-    <br />
-    <div>
-      <h3>Ingredients</h3>
-      {recipe.ingredients.map(editRecipeItems)}
-      <button>Add additonal ingredient</button>
-    </div>
-    <br />
-    <div>
-      <ol>
-        {recipe.instructions.map(editInstructionSteps)}
-      </ol>
-    </div>
-    <br />
-    <label for="notes">Recipe Notes: </label>
-    <textarea name="notes" form="newRecipe" rows="4" cols="40" 
-    placeholder="Enter side notes about the recipe" value={recipe.notes}></textarea>
-    <br />
-    <label for="cuisineType">Type of Cuisine: </label>
-    <input type="text" name="cuisineType" value={recipe.notes} placeholder="ie: 'Japanese', 'Amercian' " />
-    <br />
-    <label for="recipeImg">Submit a link to the an image of the recipe: </label>
-    <input type="url" name="recipeImg" value={recipe.recipeImg} placeholder="" />
-    <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
-    <br />
-    <label for="recipeLink">Link to Recipe: </label>
-    <input type="url" name="recipeLink" value={recipe.recipeLink} placeholder="" />
-    <br />
-    {/* deletes recipe from database */}
-    <button>Delete Recipe</button>
-    {/* reset's recipe data to match what is in the database from intial add/last saved edit*/}
-    <button>Start Over</button>
-    {/* saves entered data above to database */}
-    <input type="submit" value="Save Recipe" />
-  </form>
-  </div>
-)
+//   <div>
+//   <h2> Review and Edit Recipe </h2>
+//   <form id="newRecipe"> 
+//     <label for="recipeName">Recipe Name: </label>
+//     <input type="text" name="recipeName" value={recipe.recipeName} placeholder="Name of Recipe" />
+//     <br />
+//     <label for="summary">Recipe Summary: </label>
+//     <textarea name="summary" form="newRecipe" rows="4" cols="40" 
+//     placeholder="Enter a brief summary of the recipe" value={recipe.summary}></textarea>
+//     <br />
+//     <div>
+//       <h3>Ingredients</h3>
+//       {recipe.ingredients.map(editRecipeItems)}
+//       <button>Add additonal ingredient</button>
+//     </div>
+//     <br />
+//     <div>
+//       <ol>
+//         {recipe.instructions.map(editInstructionSteps)}
+//       </ol>
+//     </div>
+//     <br />
+//     <label for="notes">Recipe Notes: </label>
+//     <textarea name="notes" form="newRecipe" rows="4" cols="40" 
+//     placeholder="Enter side notes about the recipe" value={recipe.notes}></textarea>
+//     <br />
+//     <label for="cuisineType">Type of Cuisine: </label>
+//     <input type="text" name="cuisineType" value={recipe.notes} placeholder="ie: 'Japanese', 'Amercian' " />
+//     <br />
+//     <label for="recipeImg">Submit a link to the an image of the recipe: </label>
+//     <input type="url" name="recipeImg" value={recipe.recipeImg} placeholder="" />
+//     <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
+//     <br />
+//     <label for="recipeLink">Link to Recipe: </label>
+//     <input type="url" name="recipeLink" value={recipe.recipeLink} placeholder="" />
+//     <br />
+//     {/* deletes recipe from database */}
+//     <button>Delete Recipe</button>
+//     {/* reset's recipe data to match what is in the database from intial add/last saved edit*/}
+//     <button>Start Over</button>
+//     {/* saves entered data above to database */}
+//     <input type="submit" value="Save Recipe" />
+//   </form>
+//   </div>
+// )
+
 
 //factor multiple ingredient listings/instrucions
 //ie Component Name, ingredient list, Component Name, ingredient list, etc
@@ -260,6 +246,84 @@ const testRecipe = {
     cuisineType: 'Korean',
     recipeLink: 'https://damndelicious.net/2014/03/01/potstickers/'
   }
+
+ class ReviewRecipeForm extends React.Component {
+  // state = {
+  //   recipeName: {this.props.recipeName},
+  //   // ingredients = [opp],
+  //   // instructrions = [],
+  //   // summary: "",
+  //   // notes: "",
+  //   // recipeImg: "",
+  //   // cuisineType: "",
+  //   // recipeLink: ""
+  // }
+  editRecipeItems = (ingItems) => (
+    // if (ingItems.unit != false){
+    //   unitType = ingItems.unit}
+    // else {
+    //   unitType = ingItems.other
+    // }
+    <li><button>-</button>{ingItems.qty}<button>+</button>  
+    <input value={ingItems.unit}/> <input value={ingItems.other}/> 
+    <input value={ingItems.name}/> <input value={ingItems.comment}/> 
+    <button>Delete Ingredient</button></li>
+  )
+  
+  editInstructionSteps = (instructionSteps) => (
+    <li><input  value={instructionSteps} /></li>
+  )
+  
+   render = () => (
+   <div>
+     <h2>Review and Edit Recipe</h2>
+     <form id="newRecipe"> 
+    <label for="recipeName">Recipe Name: </label>
+    <input type="text" name="recipeName" value={this.props.recipe.recipeName} placeholder="Name of Recipe" />
+    <br />
+    <label for="summary">Recipe Summary: </label>
+    <textarea name="summary" form="newRecipe" rows="4" cols="40" 
+    placeholder="Enter a brief summary of the recipe" value={this.props.recipe.summary}></textarea>
+    <br />
+     {/* <div>
+      <h3>Ingredients</h3>
+      {this.ingredients.map(this.editRecipeItems)}
+      <button>Add additonal ingredient</button>
+    </div>
+    <br />
+    <div>
+      <ol>
+        {this.instructions.map(this.editInstructionSteps)}
+      </ol>
+    </div>
+    <br /> */}
+    <label for="notes">Recipe Notes: </label>
+    <textarea name="notes" form="newRecipe" rows="4" cols="40" 
+    placeholder="Enter side notes about the recipe" value={this.props.recipe.notes}></textarea>
+    <br />
+    <label for="cuisineType">Type of Cuisine: </label>
+    <input type="text" name="cuisineType" value={this.props.recipe.cuisineType} placeholder="ie: 'Japanese', 'Amercian' " />
+    <br />
+    <label for="recipeImg">Submit a link to the an image of the recipe: </label>
+    <input type="url" name="recipeImg" value={this.props.recipe.recipeImg} placeholder="" />
+    <img src={this.props.recipe.recipeImg} alt={this.props.name} width="500" height="400"/>
+    <br />
+    <label for="recipeLink">Link to Recipe: </label>
+    <input type="url" name="recipeLink" value={this.props.recipe.recipeLink} placeholder="" />
+    <br /> 
+    {/* deletes recipe from database
+    <button>Delete Recipe</button>
+    {/* reset's recipe data to match what is in the database from intial add/last saved edit*/}
+    <button>Start Over</button>
+    {/* saves entered data above to database */}
+    <input type="submit" value="Save Recipe" />
+  </form>
+   </div>
+   )
+ }
+
+
+
 
 const userRecipeList = (user) => (
   <div>
@@ -448,8 +512,9 @@ class App extends React.Component {
     </aside>
     <article>
     <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} />
+    <ReviewRecipeForm recipe={this.getCurrentUser().recipes[0]}/>
     {userRecipeListing(this.getCurrentUser())}
-    {recipeDetails(this.getCurrentUser().recipes[0])}
+    {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
     </article>
   </div>
   )
