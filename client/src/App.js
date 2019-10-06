@@ -24,18 +24,18 @@ const userList = (users) => (
 //   </div>
 // )
 
-const recipeItems = (ingItems) => (
-  // if (ingItems.unit != false){
-  //   unitType = ingItems.unit}
-  // else {
-  //   unitType = ingItems.other
-  // }
-  <li>{ingItems.qty} {ingItems.unit} {ingItems.other} {ingItems.name}, {ingItems.comment}</li>
-)
+// const recipeItems = (ingItems) => (
+//   // if (ingItems.unit != false){
+//   //   unitType = ingItems.unit}
+//   // else {
+//   //   unitType = ingItems.other
+//   // }
+//   <li>{ingItems.qty} {ingItems.unit} {ingItems.other} {ingItems.name}, {ingItems.comment}</li>
+// )
 
-const instructionSteps = (instructionSteps) => (
-  <li>{instructionSteps}</li>
-)
+// const instructionSteps = (instructionSteps) => (
+//   <li>{instructionSteps}</li>
+// )
 
 const recipeDetails = (recipe) => (
   <div> 
