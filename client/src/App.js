@@ -191,7 +191,13 @@ const testUsers = [
     }
     ]
 
-
+  const saveUserToServer = (newUser) => 
+    fetch('/api/user/',
+      { method  : "POST"
+      , headers : { "Content-Type": "application/json" }
+      , body    : JSON.stringify(newUser)
+      }
+    ).then(res => res.json())
   const getUsersFromServer = () =>
     fetch('/api/user/')
       .then(res => res.json())
@@ -211,16 +217,16 @@ class App extends React.Component {
   getNextUserId = () => 
     Math.max(...this.getAllUsers().map(user => user.id)) +1
 
-  addNewUser = (newUser) => {
-    newUser.recipes = [];
-    newUser.id = this.getNextUserId()
-
-    let users = {...this.state.users};
-
-    users[newUser.id] = newUser;
-
-    this.setState({ users })
-  }
+    addNewUser = (newUserInfo) => {
+      saveUserToServer(newUserInfo)
+        .then(newUser => {
+          console.log(newUser);
+          let users = {...this.state.users};
+  
+          users[newUser.id] = newUser;
+          this.setState({ users })
+        })
+    }
 
   getCurrentUser = () =>
     this.state.users[this.state.currentUser]

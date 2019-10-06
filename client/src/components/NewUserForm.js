@@ -8,6 +8,7 @@ class NewUserForm extends React.Component {
       firstName: "",
       location: ""
       }
+
   
     handleInput = (evnt) => {
       let newUser = {...this.state};
@@ -21,7 +22,26 @@ class NewUserForm extends React.Component {
       evnt.preventDefault();
   
       this.props.addNewUser(this.state)
+      this.setState({ username: "",
+      email   : "",
+      firstName: "",
+      location: ""})
     }
+
+ 
+    // addNewUser = (newUserInfo) => {
+    //   saveUserToServer(newUserInfo)
+    //     .then(newUser => {
+    //       console.log(newUser);
+    //       newUser.issues = [];
+  
+    //       let users = {...this.state.users};
+  
+    //       users[newUser.id] = newUser;
+  
+    //       this.setState({ users, currentUser: newUser.id });
+    //   })
+    // }
     render = () => (
       <form onSubmit={this.handleSubmit}>
         <label for="username" >Username</label>
