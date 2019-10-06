@@ -359,17 +359,6 @@ class UserHomePage extends React.Component {
     user: {...this.props.currentUser},
     //recipes: {...this.props.userRecipes}
   }
-
-  componentDidMount = () => {
-    fetch('/api/user/1')
-      .then(res => res.json())
-      .then(user => {
-        console.log("logging of users: ", user)
-        this.setState({ user })
-      })
-  }
-
-
   userRecipes = (recipe) => (
     <li>{recipe.recipeName}</li>
   )
@@ -423,37 +412,26 @@ class NewUserForm extends React.Component {
 }
 
   const testUserModel = 
-    [
+    {1: 
       { id:1, 
         username: "SageGuy", 
         email: "ryansage09@gmail.com", 
         recipes: []
       },
-
+    2: 
     { id:2, 
-      username: "ali", 
+      username: "Muffin", 
       email: "afreeman_2010@yahoo.com", 
       recipes: [testRecipe]
     }
-    ]
-
-
-  const getUsersFromServer = () =>
-    fetch('/api/user/')
-      .then(res => res.json())
+  }
 
 class App extends React.Component {
   state = {
-    currentUser: 1,
+    currentUser: 2,
     users: testUserModel
   }
-  componentDidMount = () => {
-    getUsersFromServer()
-      .then(users => {
-        console.log("logging of users: ", users)
-        this.setState({ users })
-      })
-  }
+
   getNextUserId = () => 
     Math.max(...this.getAllUsers().map(user => user.id)) +1
 
@@ -498,10 +476,6 @@ class App extends React.Component {
       this.setState({ users })
   }
 
-  setCurrentUser = (currentUser) => {
-    this.setState({ currentUser })
-  }
-
   render = () => (
   <div>
     <aside>
@@ -514,7 +488,7 @@ class App extends React.Component {
     {/* <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} />
     <ReviewRecipeForm recipe={this.getCurrentUser().recipes[0]}/> */}
     <UserHomePage currentUser={this.getCurrentUser()}/>
-    {/* <RecipeDetails currentRecipe={this.getCurrentUser().recipes[0]} /> */}
+    <RecipeDetails currentRecipe={this.getCurrentUser().recipes[0]} />
     {/* {userRecipeListing(this.getCurrentUser())} */}
     {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
     </article>

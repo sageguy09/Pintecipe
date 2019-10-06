@@ -20,5 +20,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('pintecipeApp.urls')),
-    re_path(r'^.*$', views.FrontendAppView.as_view())
+    re_path('client/', views.FrontendAppView.as_view())
 ]
