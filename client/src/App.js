@@ -2,6 +2,7 @@ import React from 'react';
 import UserHomePage from './components/UserHomepage'
 import RecipeDetails from './components/RecipeDetails'
 import ReviewRecipeForm from './components/ReviewRecipeForm'
+import NewUserForm from './components/NewUserForm'
 
 const usersListItems = (user) => (
   <li>{user.id} - {user.username} - {user.email}</li>
@@ -55,9 +56,6 @@ const recipeDetails = (recipe) => (
     <a href='https://damndelicious.net/2014/03/01/potstickers/'> {recipe.name}</a>
   </div>
 )
-
-
-
 
 const testRecipe = {
     id: 1,
@@ -241,37 +239,6 @@ const testUsers = [
 ]
 
 
-class NewUserForm extends React.Component {
-  state = 
-    { username: ""
-    , email   : ""
-    }
-
-  handleInput = (evnt) => {
-    let newUser = {...this.state};
-
-    newUser[evnt.target.name] = evnt.target.value;
-
-    this.setState(newUser)
-  }
-
-  handleSubmit = (evnt) => {
-    evnt.preventDefault();
-
-    this.props.addNewUser(this.state)
-  }
-  render = () => (
-    <form onSubmit={this.handleSubmit}>
-      <label for="username" >Username</label>
-      <input type="text"   name="username" onChange={this.handleInput} value={this.state.username} placeholder="User Name"/>
-      <br />
-      <label for="email" >Email</label>
-      <input type="email"  name="email"    onChange={this.handleInput} value={this.state.email}    placeholder="Email"/>
-      <br />
-      <input type="submit"                 value="New User" />
-    </form>
-  )
-}
 
   const testUserModel = 
     [
