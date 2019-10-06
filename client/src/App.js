@@ -178,13 +178,13 @@ const testUsers = [
 
   const testUserModel = 
     [
-      { id:1, 
+      { id:0, 
         username: "SageGuy", 
         email: "ryansage09@gmail.com", 
-        recipes: []
+        recipes: [testRecipe]
       },
 
-    { id:2, 
+    { id:1, 
       username: "ali", 
       email: "afreeman_2010@yahoo.com", 
       recipes: [testRecipe]
@@ -267,8 +267,8 @@ class App extends React.Component {
     <article>
     <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} />
     {/* <ReviewRecipeForm recipe={this.getCurrentUser().recipes[0]}/> */}
-    <UserHomePage currentUser={this.getCurrentUser()}/>
-    {/* <RecipeDetails currentRecipe={this.getCurrentUser().recipes[0]} /> */}
+    {/* <UserHomePage currentUser={this.getCurrentUser()}/> */}
+    <RecipeDetails />
     {/* {userRecipeListing(this.getCurrentUser())} */}
     {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
     </article>
