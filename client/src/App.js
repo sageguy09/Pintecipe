@@ -1,4 +1,5 @@
 import React from 'react';
+import UserHomePage from './components/UserHomepage'
 
 const usersListItems = (user) => (
   <li>{user.id} - {user.username} - {user.email}</li>
@@ -354,41 +355,6 @@ const testUsers = [
   { username: "Muffin", email: "afreeman_2010@yahoo.com", recipes: [testRecipe]}
 ]
 
-class UserHomePage extends React.Component {
-  state = {
-    user: {...this.props.currentUser},
-    //recipes: {...this.props.userRecipes}
-  }
-
-  componentDidMount = () => {
-    fetch('/api/user/1')
-      .then(res => res.json())
-      .then(user => {
-        console.log("logging of users: ", user)
-        this.setState({ user })
-      })
-  }
-
-
-  userRecipes = (recipe) => (
-    <li>{recipe.recipeName}</li>
-  )
-  userRecipeListing = (user) => (
-    <div>
-    <h2>{user.username} Available Recipes</h2>
-    <ul>{user.recipes.map(this.userRecipes)}</ul>
-    </div>
-  )
-  
-
-  render = () => (
-    <div>
-    <h2>{this.state.user.username} Home Page</h2>
-    <h3>Saved Recipes</h3>
-    <ul>{this.state.user.recipes.map(this.userRecipes)}</ul>
-    </div>
-  )
-}
 
 class NewUserForm extends React.Component {
   state = 
@@ -514,7 +480,7 @@ class App extends React.Component {
     {/* <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} />
     <ReviewRecipeForm recipe={this.getCurrentUser().recipes[0]}/> */}
     <UserHomePage currentUser={this.getCurrentUser()}/>
-    {/* <RecipeDetails currentRecipe={this.getCurrentUser().recipes[0]} /> */}
+    <RecipeDetails currentRecipe={this.getCurrentUser().recipes[0]} />
     {/* {userRecipeListing(this.getCurrentUser())} */}
     {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
     </article>
