@@ -1,74 +1,97 @@
 
 import React from 'react';
 const saveRecipeToServer = (newRecipe) =>
-fetch('/api/recipe/',
-    {method: "POST",
-    headers : { "Content-Type": "application/json" },
-    body : JSON.stringify(newRecipe)
-    }
-).then(res => res.json())
+    fetch('/api/recipe/',
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newRecipe)
+        }
+    ).then(res => res.json())
+const saveInstructionsToServer = (newInstructions) => 
+    fetch('/api/instructions/',
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newInstructions)
+        }
+    ).then(res => res.json())
 
-class NewRecipeForm extends React.Component {
-    state = {
-      recipeName: "",
-      // ingredients = [],
-      // instructrions = [],
-      summary: "",
-      notes: "",
-      recipeImg: "",
-      cuisineType: "",
-      recipeLink: "",
-      user: 2
-    }
-    //instructions
-  //for each line push an item into to state:instructions[]
-    handleInput = (evnt) => {
-      let newRecipe = {...this.state};
-  
-      newRecipe[evnt.target.name] = evnt.target.value;
-  
-      this.setState(newRecipe)
-    }
-  
-    handleSubmit = (evnt) => {
-      evnt.preventDefault();
-      
-      this.props.addNewRecipe(this.state)
-    }
-    handleSubmit = (evnt) => {
-        evnt.preventDefault();
-    
-        this.addNewRecipe(this.state)
-        this.setState({ 
-            summary: "",
-            notes: "",
-            recipeImg: "",
-            cuisineType: "",
-            recipeLink: "",
-            user: 2
-        })
-      }
+    class NewRecipeForm extends React.Component {
+        state = {
+            // recipe: {
+                recipeName: "",
+                // ingredients = [],
+                //instructrions = [],
+                summary: "",
+                notes: "",
+                recipeImg: "",
+                cuisineType: "",
+                recipeLink: "",
+                user: 2
+            // }
+        }
+        //instructions
+        //for each line push an item into to state:instructions[]
+        handleInput = (evnt) => {
+            let newRecipe = { ...this.state};
 
-      addNewRecipe = (newRecipeInfo) => {
-          saveRecipeToServer(newRecipeInfo)
-            .then(newRecipe => {
-                console.log(newRecipe)
+            newRecipe[evnt.target.name] = evnt.target.value;
+
+            this.setState(newRecipe)
+        }
+
+        // handleSubmit = (evnt) => {
+        //     evnt.preventDefault();
+
+        //     this.props.addNewRecipe(this.state.recipe)
+        // }
+        handleSubmit = (evnt) => {
+            evnt.preventDefault();
+
+            this.addNewRecipe(this.state)
+            // this.addNewInstructions(this.state.instructions)
+            this.setState({
+                recipe: {
+                    recipeName: "",
+                    summary: "",
+                    notes: "",
+                    recipeImg: "",
+                    cuisineType: "",
+                    recipeLink: "",
+                    user: 2
+                },
+                // instructions: []
             })
-      }
-      
+        }
 
-    render = () => (
-      <div>
-        <h2> Add a recipe </h2>
-    <form id="newRecipe" onSubmit={this.handleSubmit}> 
-      <label for="recipeName">Recipe Name: </label>
-      <input type="text" onChange={this.handleInput} name="recipeName" value={this.recipeName} placeholder="Name of Recipe" />
-      <br />
-      <label for="summary">Recipe Summary: </label>
-      <textarea name="summary" onChange={this.handleInput} form="newRecipe" rows="4" cols="40" 
-      placeholder="Enter a brief summary of the recipe" value={this.summary}></textarea>
-      <br />
-      {/* <label for="ingredients">Ingredients:  </label>
+        addNewRecipe = (newRecipeInfo) => {
+            saveRecipeToServer(newRecipeInfo)
+                .then(newRecipe => {
+                    console.log(newRecipe)
+                })
+        }
+
+        // addNewInstructions = (newInstructionsInfo) => {
+        //     saveInstructionsToServer(newInstructionsInfo)
+        //         .then(newInstructions => {
+        //             console.log(newInstructions)
+        //         })
+        // }
+
+
+        render = () => (
+            <div>
+                <h2> Add a recipe </h2>
+                <form id="newRecipe" onSubmit={this.handleSubmit}>
+                    <label for="recipeName">Recipe Name: </label>
+                    <input type="text" onChange={this.handleInput} name="recipeName" value={this.recipeName} placeholder="Name of Recipe" />
+                    <br />
+                    <label for="summary">Recipe Summary: </label>
+                    <textarea name="summary" onChange={this.handleInput} form="newRecipe" rows="4" cols="40"
+                        placeholder="Enter a brief summary of the recipe" value={this.summary}></textarea>
+                    <br />
+                    {/* <label for="ingredients">Ingredients:  </label>
       <textarea name="ingredients" onChange={this.handleInput} form="newRecipe" rows="10" cols="40" 
       placeholder="Example of the preffered recipe format: &#10;'1 cup cheddar cheese, shredded'" value=""></textarea>
       <br />
@@ -77,27 +100,27 @@ class NewRecipeForm extends React.Component {
       placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
       &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value=""></textarea>
       <br /> */}
-      <label for="notes">Recipe Notes: </label>
-      <textarea name="notes" onChange={this.handleInput} form="newRecipe" rows="4" cols="40" 
-      placeholder="Enter side notes about the recipe" value={this.notes}></textarea>
-      <br />
-      <label for="cuisineType">Type of Cuisine: </label>
-      <input type="text" name="cuisineType" onChange={this.handleInput} value={this.cuisineType} placeholder="ie: 'Japanese', 'Amercian' " />
-      <br />
-      <label for="recipeImg">Submit a link to the an image of the recipe: </label>
-      <input type="url" name="recipeImg"  onChange={this.handleInput} value={this.recipeImg} placeholder="" />
-      <br />
-      <label for="recipeLink">Link to Recipe: </label>
-      <input type="url" name="recipeLink" onChange={this.handleInput} value={this.recipeLink} placeholder="" />
-      <br />
-      <input type="submit" value="Submit Recipe" />
-    </form>
-      </div>
-    )
-  }
+                    <label for="notes">Recipe Notes: </label>
+                    <textarea name="notes" onChange={this.handleInput} form="newRecipe" rows="4" cols="40"
+                        placeholder="Enter side notes about the recipe" value={this.notes}></textarea>
+                    <br />
+                    <label for="cuisineType">Type of Cuisine: </label>
+                    <input type="text" name="cuisineType" onChange={this.handleInput} value={this.cuisineType} placeholder="ie: 'Japanese', 'Amercian' " />
+                    <br />
+                    <label for="recipeImg">Submit a link to the an image of the recipe: </label>
+                    <input type="url" name="recipeImg" onChange={this.handleInput} value={this.recipeImg} placeholder="" />
+                    <br />
+                    <label for="recipeLink">Link to Recipe: </label>
+                    <input type="url" name="recipeLink" onChange={this.handleInput} value={this.recipeLink} placeholder="" />
+                    <br />
+                    <input type="submit" value="Submit Recipe" />
+                </form>
+            </div>
+        )
+    }
 
-  export default NewRecipeForm
-  
+    export default NewRecipeForm
+
 
 //   {
 //     "id": 1,
