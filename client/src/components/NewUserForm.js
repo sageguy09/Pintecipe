@@ -3,8 +3,10 @@ import React from 'react';
 
 class NewUserForm extends React.Component {
     state = 
-      { username: ""
-      , email   : ""
+      { username: "",
+      email   : "",
+      firstName: "",
+      location: ""
       }
   
     handleInput = (evnt) => {
@@ -27,6 +29,12 @@ class NewUserForm extends React.Component {
         <br />
         <label for="email" >Email</label>
         <input type="email"  name="email"    onChange={this.handleInput} value={this.state.email}    placeholder="Email"/>
+        <br />
+        <label for="firstName" >Email</label>
+        <input type="text"  name="firstName"    onChange={this.handleInput} value={this.state.firstName}    placeholder="Enter your first name"/>
+        <br />
+        <label for="location" >Email</label>
+        <input type="text"  name="location"    onChange={this.handleInput} value={this.state.location}    placeholder="ie: Atlanta, GA"/>
         <br />
         <input type="submit"                 value="New User" />
       </form>
