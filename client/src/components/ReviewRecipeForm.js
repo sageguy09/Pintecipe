@@ -2,19 +2,20 @@ import React from 'react';
 
 class ReviewRecipeForm extends React.Component {
     state = {
-      recipe: {...this.props.recipe}
-      // ingredients = [opp],
-      // instructrions = [],
-      // summary: "",
-      // notes: "",
-      // recipeImg: "",
-      // cuisineType: "",
-      // recipeLink: ""
+      recipe: {},
+
     }
     //factor multiple ingredient listings/instrucions
     //ie Component Name, ingredient list, Component Name, ingredient list, etc
   
-  
+    componentDidMount = () => {
+      fetch('/api/recipe/1/')
+      .then(res => res.json())
+      .then(currentRecipe => {
+        console.log('logging of user from RecipeDetails', currentRecipe)
+        this.setState({ recipe: currentRecipe })
+      })
+    }
   
     handleInput = (evnt) => {
       let currentRecipe = {...this.state.recipe};
@@ -42,7 +43,7 @@ class ReviewRecipeForm extends React.Component {
     )
     
     editInstructionSteps = (instructionSteps) => (
-      <li><input  name="" onChange={this.handleInput} value={instructionSteps} /></li>
+      <li><input name="" onChange={this.handleInput} value={instructionSteps.stepDesc} /></li>
     )
     
      render = () => (
@@ -58,13 +59,13 @@ class ReviewRecipeForm extends React.Component {
       <br />
        <div>
         <h3>Ingredients</h3>
-        {this.state.recipe.ingredients.map(this.editRecipeItems)}
+        {this.state.recipe.ingredients !== undefined ? this.state.recipe.ingredients.map(this.editRecipeItems) : null}
         <button>Add additonal ingredient</button>
       </div>
       <br />
       <div>
         <ol >
-          {this.state.recipe.instructions.map(this.editInstructionSteps)}
+          {this.state.recipe.ingredients !== undefined ? this.state.recipe.instructions.map(this.editInstructionSteps) : null}
         </ol>
       </div>
       <br />

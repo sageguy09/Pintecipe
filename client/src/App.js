@@ -37,25 +37,25 @@ const userList = (users) => (
 //   <li>{instructionSteps}</li>
 // )
 
-const recipeDetails = (recipe) => (
-  <div> 
-    <h3>{recipe.recipeName}</h3>
-    <h3>Ingredients</h3>
-    <ul>
-      {recipe.ingredients.map(recipeItems)}
-    </ul> 
-    <h3>Instructions</h3>
-    <ol>
-      {recipe.instructions.map(instructionSteps)}
-    </ol>
-    <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
-    <h3>Recipe Summary</h3>
-    <p>{recipe.summary}</p>
-    <h3>Cuisine Type: {recipe.cuisineType}</h3> 
-    <h3>Link to recipe:</h3>
-    <a href='https://damndelicious.net/2014/03/01/potstickers/'> {recipe.name}</a>
-  </div>
-)
+// const recipeDetails = (recipe) => (
+//   <div> 
+//     <h3>{recipe.recipeName}</h3>
+//     <h3>Ingredients</h3>
+//     <ul>
+//       {recipe.ingredients.map(recipeItems)}
+//     </ul> 
+//     <h3>Instructions</h3>
+//     <ol>
+//       {recipe.instructions.map(instructionSteps)}
+//     </ol>
+//     <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
+//     <h3>Recipe Summary</h3>
+//     <p>{recipe.summary}</p>
+//     <h3>Cuisine Type: {recipe.cuisineType}</h3> 
+//     <h3>Link to recipe:</h3>
+//     <a href='https://damndelicious.net/2014/03/01/potstickers/'> {recipe.name}</a>
+//   </div>
+// )
 
 const testRecipe = {
     id: 1,
@@ -159,13 +159,13 @@ const testRecipe = {
 
 
 
-const userRecipeList = (user) => (
-  <div>
-    <h2>User and recipes details</h2>
-    <h2>{user.username}</h2>
-    {recipeDetails(user.recipes)}
-  </div>
-)
+// const userRecipeList = (user) => (
+//   <div>
+//     <h2>User and recipes details</h2>
+//     <h2>{user.username}</h2>
+//     {recipeDetails(user.recipes)}
+//   </div>
+// )
 
 
 
@@ -266,9 +266,9 @@ class App extends React.Component {
     </aside>
     <article>
     <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} />
-    {/* <ReviewRecipeForm recipe={this.getCurrentUser().recipes[0]}/> */}
+    <ReviewRecipeForm /> 
     {/* <UserHomePage currentUser={this.getCurrentUser()}/> */}
-    <RecipeDetails />
+    {/* <RecipeDetails /> */}
     {/* {userRecipeListing(this.getCurrentUser())} */}
     {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
     </article>
