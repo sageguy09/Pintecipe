@@ -8,7 +8,7 @@ const saveRecipeToServer = (newRecipe) =>
         }
     ).then(res => res.json())
 const saveInstructionsToServer = (newInstructions) => 
-    fetch('/api/instructions/',
+    fetch('/api/instruction/',
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -59,45 +59,52 @@ const saveInstructionsToServer = (newInstructions) =>
 
             this.addNewRecipe(this.state)
             // this.addNewInstructions(this.state.instructions)
-            this.setState({
-                recipe: {
-                    recipeName: "",
-                    summary: "",
-                    notes: "",
-                    recipeImg: "",
-                    cuisineType: "",
-                    recipeLink: "",
+            // this.setState({
+            //     recipe: {
+            //         recipeName: "",
+            //         summary: "",
+            //         notes: "",
+            //         recipeImg: "",
+            //         cuisineType: "",
+            //         recipeLink: "",
                     
-                    user: 2
-                },
-                instructions: 
-                    {
-                        stepNum: "",
-                        stepDesc: "",
-                        recipe: ""
-                    }
-                ,
+            //         user: 2
+            //     },
+            //     instructions: 
+            //         {
+            //             stepNum: "",
+            //             stepDesc: "",
+            //             recipe: ""
+            //         }
+            //     ,
                 
-            })
+            // })
         }
 
         addNewRecipe = (newRecipeInfo) => {
             saveRecipeToServer(newRecipeInfo.recipe)
                 .then(newRecipe => {
-                    // newRecipe.id 
+                    this.addNewInstructions(newRecipe.id)
                     console.log(newRecipe.id, newRecipeInfo.instructions)
-                    //console.log(newRecipe)
                 })
         }
 
-        instructionRecipeMapping = (recipeId) => {
+        addNewInstructions = (recipeId) => {
             let currentInstructions = {...this.state.instructions}
-
             currentInstructions.recipe = recipeId
-
-            this.setState(currentInstructions)
-            console.log(currentInstructions)
+            this.setState({instructions: currentInstructions})
+            saveInstructionsToServer(currentInstructions)
         }
+
+
+        // instructionRecipeMapping = (recipeId) => {
+        //     let currentInstructions = {...this.state.instructions}
+
+        //     currentInstructions.recipe = recipeId
+
+        //     this.setState(currentInstructions)
+        //     console.log(currentInstructions)
+        // }
         //pass down the recipe.id after the post. 
         //call a function that sets the state of instructions to include the recipe's id
         //return instructions to be posted to the db.
