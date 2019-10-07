@@ -19,7 +19,7 @@ const saveInstructionsToServer = (newInstructions) =>
 
     class NewRecipeForm extends React.Component {
         state = {
-            // recipe: {
+            recipe: {
                 recipeName: "",
                 // ingredients = [],
                 //instructrions = [],
@@ -29,15 +29,16 @@ const saveInstructionsToServer = (newInstructions) =>
                 cuisineType: "",
                 recipeLink: "",
                 user: 2
-            // }
+             },
+             instructions : []
         }
-        //instructions
+        
         //for each line push an item into to state:instructions[]
         handleInput = (evnt) => {
-            let newRecipe = { ...this.state};
-
-            newRecipe[evnt.target.name] = evnt.target.value;
-
+            let newRecipe = {...this.state};
+            
+            newRecipe.recipe[evnt.target.name] = evnt.target.value;
+            newRecipe.instructions[evnt.target.name] = evnt.target.value;
             this.setState(newRecipe)
         }
 
@@ -59,19 +60,43 @@ const saveInstructionsToServer = (newInstructions) =>
                     recipeImg: "",
                     cuisineType: "",
                     recipeLink: "",
+                    
                     user: 2
                 },
-                // instructions: []
+                instructions: 
+                    {
+                        stepNum: "",
+                        stepDesc: "",
+                        recipe: ""
+                    }
+                ,
+                
             })
         }
 
         addNewRecipe = (newRecipeInfo) => {
-            saveRecipeToServer(newRecipeInfo)
+            saveRecipeToServer(newRecipeInfo.recipe)
                 .then(newRecipe => {
+                    // newRecipe.id 
+                    this.instructionRecipeMapping(newRecipe.id)
                     console.log(newRecipe)
                 })
         }
 
+        instructionRecipeMapping = (recipeId) => {
+            let currentInstructions = {...this.state.instructions}
+
+            currentInstructions.recipe = recipeId
+
+            this.setState(currentInstructions)
+            console.log(currentInstructions)
+        }
+        //pass down the recipe.id after the post. 
+        //call a function that sets the state of instructions to include the recipe's id
+        //return instructions to be posted to the db.
+
+
+        // 
         // addNewInstructions = (newInstructionsInfo) => {
         //     saveInstructionsToServer(newInstructionsInfo)
         //         .then(newInstructions => {
@@ -85,34 +110,39 @@ const saveInstructionsToServer = (newInstructions) =>
                 <h2> Add a recipe </h2>
                 <form id="newRecipe" onSubmit={this.handleSubmit}>
                     <label for="recipeName">Recipe Name: </label>
-                    <input type="text" onChange={this.handleInput} name="recipeName" value={this.recipeName} placeholder="Name of Recipe" />
+                    <input type="text" onChange={this.handleInput} name="recipeName" value={this.state.recipe.recipeName} placeholder="Name of Recipe" />
                     <br />
                     <label for="summary">Recipe Summary: </label>
                     <textarea name="summary" onChange={this.handleInput} form="newRecipe" rows="4" cols="40"
-                        placeholder="Enter a brief summary of the recipe" value={this.summary}></textarea>
+                        placeholder="Enter a brief summary of the recipe" value={this.state.recipe.summary}></textarea>
                     <br />
                     {/* <label for="ingredients">Ingredients:  </label>
       <textarea name="ingredients" onChange={this.handleInput} form="newRecipe" rows="10" cols="40" 
       placeholder="Example of the preffered recipe format: &#10;'1 cup cheddar cheese, shredded'" value=""></textarea>
+      <br />*/}
       <br />
-      <label for="instructions">Instructions: </label>
-      <textarea name="instructions" onChange={this.handleInput} form="newRecipe" rows="10" cols="40" 
+      <br />
+      <h4>instructions</h4>
+      <label for="stepNum">step number: </label>
+      <input type='number'name="stepNum" onChange={this.handleInput} value={this.state.instructions.stepNum} placeholder="step number" />
+      <label for="stepDesc">step description: </label>
+      <textarea name="stepDesc" onChange={this.handleInput} form="newRecipe" rows="10" cols="40" 
       placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
-      &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value=""></textarea>
-      <br /> */}
+      &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value={this.state.instructions.stepDesc}></textarea>
+        <br />
                     <label for="notes">Recipe Notes: </label>
                     <textarea name="notes" onChange={this.handleInput} form="newRecipe" rows="4" cols="40"
-                        placeholder="Enter side notes about the recipe" value={this.notes}></textarea>
+                        placeholder="Enter side notes about the recipe" value={this.state.recipe.notes}></textarea>
                     <br />
                     <label for="cuisineType">Type of Cuisine: </label>
-                    <input type="text" name="cuisineType" onChange={this.handleInput} value={this.cuisineType} placeholder="ie: 'Japanese', 'Amercian' " />
+                    <input type="text" name="cuisineType" onChange={this.handleInput} value={this.state.recipe.cuisineType} placeholder="ie: 'Japanese', 'Amercian' " />
                     <br />
                     <label for="recipeImg">Submit a link to the an image of the recipe: </label>
-                    <input type="url" name="recipeImg" onChange={this.handleInput} value={this.recipeImg} placeholder="" />
+                    <input type="url" name="recipeImg" onChange={this.handleInput} value={this.state.recipe.recipeImg} placeholder="" />
                     <br />
                     <label for="recipeLink">Link to Recipe: </label>
-                    <input type="url" name="recipeLink" onChange={this.handleInput} value={this.recipeLink} placeholder="" />
-                    <br />
+                    <input type="url" name="recipeLink" onChange={this.handleInput} value={this.state.recipe.recipeLink} placeholder="" />
+                    <br /> 
                     <input type="submit" value="Submit Recipe" />
                 </form>
             </div>
