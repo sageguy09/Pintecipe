@@ -15,6 +15,14 @@ const saveInstructionsToServer = (newInstructions) =>
             body: JSON.stringify(newInstructions)
         }
     ).then(res => res.json())
+const saveIngredientsToServer = (newIngredients) => 
+fetch('/api/ingredient/',
+    {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newIngredients)
+    }
+).then(res => res.json())
 
     class NewRecipeForm extends React.Component {
         state = {
@@ -33,6 +41,14 @@ const saveInstructionsToServer = (newInstructions) =>
                 stepNum: "",
                 stepDesc: "",
                 recipe: ""
+            },
+            ingredients : {
+                unit: "",
+                name: "",
+                qty: "",
+                comment: "",
+                input: "",
+                recipe:""
             }
         }
         
@@ -46,6 +62,11 @@ const saveInstructionsToServer = (newInstructions) =>
             let newInstructions = {...this.state.instructions}
             newInstructions[evnt.target.name] = evnt.target.value;
             this.setState({instructions: newInstructions})
+        }
+        handleIngredientInput = (evnt) => {
+            let newIngredients = {...this.state.ingredients}
+            newIngredients[evnt.target.name] = evnt.target.value;
+            this.setState({ingredients: newIngredients})
         }
 
 
@@ -85,6 +106,7 @@ const saveInstructionsToServer = (newInstructions) =>
             saveRecipeToServer(newRecipeInfo.recipe)
                 .then(newRecipe => {
                     this.addNewInstructions(newRecipe.id)
+                    this.addNewIngredients(newRecipe.id)
                     console.log(newRecipe.id, newRecipeInfo.instructions)
                 })
         }
@@ -94,8 +116,13 @@ const saveInstructionsToServer = (newInstructions) =>
             currentInstructions.recipe = recipeId
             this.setState({instructions: currentInstructions})
             saveInstructionsToServer(currentInstructions)
+        } 
+        addNewIngredients = (recipeId) => {
+            let currentIngredient = {...this.state.ingredients}
+            currentIngredient.recipe = recipeId
+            this.setState({ingredients: currentIngredient})
+            saveIngredientsToServer(currentIngredient)
         }
-
 
         // instructionRecipeMapping = (recipeId) => {
         //     let currentInstructions = {...this.state.instructions}
@@ -130,20 +157,28 @@ const saveInstructionsToServer = (newInstructions) =>
                     <textarea name="summary" onChange={this.handleInput} form="newRecipe" rows="4" cols="40"
                         placeholder="Enter a brief summary of the recipe" value={this.state.recipe.summary}></textarea>
                     <br />
-                    {/* <label for="ingredients">Ingredients:  </label>
-      <textarea name="ingredients" onChange={this.handleInput} form="newRecipe" rows="10" cols="40" 
-      placeholder="Example of the preffered recipe format: &#10;'1 cup cheddar cheese, shredded'" value=""></textarea>
-      <br />*/}
-      <br />
-      <br />
-      <h4>instructions</h4>
-      <label for="stepNum">step number: </label>
-      <input type='number'name="stepNum" onChange={this.handleInstructionInput} value={this.state.instructions.stepNum} placeholder="step number" />
-      <label for="stepDesc">step description: </label>
-      <textarea name="stepDesc" onChange={this.handleInstructionInput} form="newRecipe" rows="10" cols="40" 
-      placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
-      &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value={this.state.instructions.stepDesc}></textarea>
-        <br />
+                    <h4>Ingredients</h4>
+                    <label for="qty">Qty </label>
+                    <input name="qty" onChange={this.handleIngredientInput} value={this.state.ingredients.qty}/> 
+                    <label for="unit">Unit </label>
+                    <input name="unit"onChange={this.handleIngredientInput} value={this.state.ingredients.unit}/> 
+                    <label for="name">Name </label>
+                    <input name="name"onChange={this.handleIngredientInput} value={this.state.ingredients.name}/> 
+                    <label for="comment">Comment </label>
+                    <input name="comment" onChange={this.handleIngredientInput} value={this.state.ingredients.comment}/> 
+                    <label for="input">Input </label>
+                    <input name="input" onChange={this.handleIngredientInput} value={this.state.ingredients.input}/> 
+                    <br />
+                    <br />
+                    <br />
+                    <h4>Instructions</h4>
+                    <label for="stepNum">step number: </label>
+                    <input type='number'name="stepNum" onChange={this.handleInstructionInput} value={this.state.instructions.stepNum} placeholder="step number" />
+                    <label for="stepDesc">step description: </label>
+                    <textarea name="stepDesc" onChange={this.handleInstructionInput} form="newRecipe" rows="10" cols="40" 
+                    placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
+                    &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value={this.state.instructions.stepDesc}></textarea>
+                    <br />
                     <label for="notes">Recipe Notes: </label>
                     <textarea name="notes" onChange={this.handleInput} form="newRecipe" rows="4" cols="40"
                         placeholder="Enter side notes about the recipe" value={this.state.recipe.notes}></textarea>
