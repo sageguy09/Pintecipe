@@ -1,4 +1,3 @@
-
 import React from 'react';
 const saveRecipeToServer = (newRecipe) =>
     fetch('/api/recipe/',
@@ -30,17 +29,25 @@ const saveInstructionsToServer = (newInstructions) =>
                 recipeLink: "",
                 user: 2
              },
-             instructions : []
+             instructions : {
+                stepNum: "",
+                stepDesc: "",
+                recipe: ""
+            }
         }
         
         //for each line push an item into to state:instructions[]
         handleInput = (evnt) => {
-            let newRecipe = {...this.state};
-            
-            newRecipe.recipe[evnt.target.name] = evnt.target.value;
-            newRecipe.instructions[evnt.target.name] = evnt.target.value;
-            this.setState(newRecipe)
+            let newRecipe = {...this.state.recipe};
+            newRecipe[evnt.target.name] = evnt.target.value;
+            this.setState({recipe: newRecipe})
         }
+        handleInstructionInput = (evnt) => {
+            let newInstructions = {...this.state.instructions}
+            newInstructions[evnt.target.name] = evnt.target.value;
+            this.setState({instructions: newInstructions})
+        }
+
 
         // handleSubmit = (evnt) => {
         //     evnt.preventDefault();
@@ -78,8 +85,8 @@ const saveInstructionsToServer = (newInstructions) =>
             saveRecipeToServer(newRecipeInfo.recipe)
                 .then(newRecipe => {
                     // newRecipe.id 
-                    this.instructionRecipeMapping(newRecipe.id)
-                    console.log(newRecipe)
+                    console.log(newRecipe.id, newRecipeInfo.instructions)
+                    //console.log(newRecipe)
                 })
         }
 
@@ -124,9 +131,9 @@ const saveInstructionsToServer = (newInstructions) =>
       <br />
       <h4>instructions</h4>
       <label for="stepNum">step number: </label>
-      <input type='number'name="stepNum" onChange={this.handleInput} value={this.state.instructions.stepNum} placeholder="step number" />
+      <input type='number'name="stepNum" onChange={this.handleInstructionInput} value={this.state.instructions.stepNum} placeholder="step number" />
       <label for="stepDesc">step description: </label>
-      <textarea name="stepDesc" onChange={this.handleInput} form="newRecipe" rows="10" cols="40" 
+      <textarea name="stepDesc" onChange={this.handleInstructionInput} form="newRecipe" rows="10" cols="40" 
       placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
       &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value={this.state.instructions.stepDesc}></textarea>
         <br />
