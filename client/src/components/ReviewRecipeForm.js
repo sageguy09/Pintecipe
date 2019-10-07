@@ -24,6 +24,10 @@ class ReviewRecipeForm extends React.Component {
   
       this.setState({recipe: currentRecipe})
     }
+
+    increaseValue = (value) => {
+      
+    }
   
     handleSubmit = (evnt) => {
       evnt.preventDefault();
