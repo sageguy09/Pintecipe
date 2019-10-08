@@ -1,20 +1,20 @@
 from rest_framework import serializers
-from .models import User, Recipe, Ingredient, Instruction
+from .models import User, Recipe, Instruction, IngredientList
 
 
 
-class IngredientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Ingredient
-        fields = [
-            'id', 
-            'unit', 
-            'name',
-            'qty',
-            'comment',
-            'input',
-            'recipe'
-            ]
+# class IngredientSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Ingredient
+#         fields = [
+#             'id', 
+#             'unit', 
+#             'name',
+#             'qty',
+#             'comment',
+#             'input',
+#             'recipe'
+#             ]
 
 class InstructionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,10 +25,20 @@ class InstructionSerializer(serializers.ModelSerializer):
             'stepDesc',
             'recipe'
             ]
+class IngListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IngredientList
+        fields = [
+            'id', 
+            'ingNum', 
+            'ingDesc',
+            'recipe'
+            ]
 
 class RecipeSerializer(serializers.ModelSerializer):
-    ingredients = IngredientSerializer(many=True, read_only=True)
+    # ingredients = IngredientSerializer(many=True, read_only=True)
     instructions = InstructionSerializer(many=True, read_only=True)
+    ingredientList = IngListSerializer(many=True, read_only=True)
     class Meta:
         model = Recipe
         fields = [
@@ -39,7 +49,8 @@ class RecipeSerializer(serializers.ModelSerializer):
             'recipeImg',
             'recipeLink',
             'cuisineType',
-            'ingredients',
+            # 'ingredients',
+            'ingredientList',
             'instructions',
             'user'
             ]

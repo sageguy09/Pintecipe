@@ -30,3 +30,8 @@ class Instruction(models.Model):
     stepDesc = models.TextField()
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='instructions')
 
+class IngredientList(models.Model):
+    ingNum = models.FloatField(default=0)
+    ingDesc = models.TextField()
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingList')
+
