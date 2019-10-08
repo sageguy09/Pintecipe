@@ -40,8 +40,9 @@ fetch('/api/ingredient/',
                 user: 2
              },
              instructions : {
-                stepNum: "",
+                //stepNum: "",
                 stepDesc: "",
+                steps: [],
                 recipe: ""
             },
             ingredients : {
@@ -110,26 +111,46 @@ fetch('/api/ingredient/',
             // })
         }
 
+        
+
+
+
         addNewRecipe = (newRecipeInfo) => {
             saveRecipeToServer(newRecipeInfo.recipe)
                 .then(newRecipe => {
-                    this.addNewInstructions(newRecipe.id)
+                    this.addNewInstructions(newRecipe.id, newRecipeInfo.instructions)
                     this.addNewIngredients(newRecipe.id)
                     console.log(newRecipe.id, newRecipeInfo.instructions)
                 })
         }
 
-        addNewInstructions = (recipeId) => {
-            let currentInstructions = {...this.state.instructions}
-            currentInstructions.recipe = recipeId
-            this.setState({instructions: currentInstructions})
-            saveInstructionsToServer(currentInstructions)
+        addNewInstructions = (recipeId, instructions) => {
+            //let currentInstructions = {...this.state.instructions}
+            let { stepDesc, steps } = instructions
+            //recipe = recipeId
+            let lines = stepDesc.split(/\r?\n/);
+
+
+            
+
+            for (let i = 0; i < lines.length; i++) {
+                const obj = {stepNum: i+1, stepDesc: lines[i].trim(), recipe: recipeId}
+                const trimmedLine = lines[i].trim()
+                if (trimmedLine !== "") {
+                    steps.push(obj);
+                }
+                //output.push(obj)
+            }
+            this.setState({instructions: {stepDesc, steps}})
+            //saveInstructionsToServer(currentInstructions)
         } 
+
+
         addNewIngredients = (recipeId) => {
             let currentIngredient = {...this.state.ingredients}
             currentIngredient.recipe = recipeId
             this.setState({ingredients: currentIngredient})
-            saveIngredientsToServer(currentIngredient)
+            //saveIngredientsToServer(currentIngredient)
         }
 
         // instructionRecipeMapping = (recipeId) => {
@@ -154,47 +175,10 @@ fetch('/api/ingredient/',
         // }
 
 
-        conversionInput = (evnt) => {
-            let newOutput = {...this.state};
-            newOutput[evnt.target.name] = evnt.target.value;
-            this.setState({convert: newOutput})
-        }
-
-        handleConvertSubmit = (evnt) => {
-            evnt.preventDefault();
-            this.convertLines(this.state.convert)
-        }
-        convertLines = (convert) => {
-            var lines = convert.input.split(/\n/);
-            //let test;
-            var output = []
-            // for (var i = 0; i < lines.length; i++) {
-            //   // only push this line if it contains a non whitespace character.
-            //   if (/\S/.test(lines[i])) {
-            //     convert.outputText.push('{' + test.trim(lines[i]) + '}');
-            //     convert.output.push(test.trim(lines[i]));
-            //   }
-            // }
-            for (let i = 0; i < lines.length; i++) {
-                output.push('{'+ lines.trim(lines[i]) +'}')
-            }
-            console.log(output)
-            // this.setState({convert: convert})
-            //console.log(output);
-            //input.val('[' + outputText + ']');
-           
-          }
           
 
         render = () => (
             <div>
-                {/* <textarea id="input" class="u-full-width" placeholder=""></textarea>
-                <input id="go" class="button-primary" type="submit" value="Go!"></input> */}
-
-                <form id="conversion" onSubmit={this.handleConvertSubmit}>
-                    <textarea name="input" onChange={this.conversionInput} value={this.state.output} />
-                    <input type="submit" value="submit"/>
-                </form>
                 <h2> Add a recipe </h2>
                 <form id="newRecipe" onSubmit={this.handleSubmit}>
                     <label for="recipeName">Recipe Name: </label>
@@ -219,8 +203,8 @@ fetch('/api/ingredient/',
                     <br />
                     <br />
                     <h4>Instructions</h4>
-                    <label for="stepNum">step number: </label>
-                    <input type='number'name="stepNum" onChange={this.handleInstructionInput} value={this.state.instructions.stepNum} placeholder="step number" />
+                    {/* <label for="stepNum">step number: </label>
+                    <input type='number'name="stepNum" onChange={this.handleInstructionInput} value={this.state.instructions.stepNum} placeholder="step number" /> */}
                     <label for="stepDesc">step description: </label>
                     <textarea name="stepDesc" onChange={this.handleInstructionInput} form="newRecipe" rows="10" cols="40" 
                     placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 

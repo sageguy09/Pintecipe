@@ -273,7 +273,7 @@ class App extends React.Component {
     </aside>
     <article>
     <Convert />
-    {/* <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} /> */}
+    <NewRecipeForm addNewRecipe={this.addNewRecipeCurrentUser} />
     {/* <ReviewRecipeForm />  */}
     {/* <UserHomePage currentUser={this.getCurrentUser()}/> */}
     {/* <RecipeDetails /> */}
