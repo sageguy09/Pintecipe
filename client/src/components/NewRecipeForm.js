@@ -24,6 +24,8 @@ fetch('/api/ingredient/',
     }
 ).then(res => res.json())
 
+
+
     class NewRecipeForm extends React.Component {
         state = {
             recipe: {
@@ -49,7 +51,13 @@ fetch('/api/ingredient/',
                 comment: "",
                 input: "",
                 recipe:""
+            },
+            convert: {
+                input: "",
+                output: [],
+                outputTest: []
             }
+
         }
         
         //for each line push an item into to state:instructions[]
@@ -146,8 +154,47 @@ fetch('/api/ingredient/',
         // }
 
 
+        conversionInput = (evnt) => {
+            let newOutput = {...this.state};
+            newOutput[evnt.target.name] = evnt.target.value;
+            this.setState({convert: newOutput})
+        }
+
+        handleConvertSubmit = (evnt) => {
+            evnt.preventDefault();
+            this.convertLines(this.state.convert)
+        }
+        convertLines = (convert) => {
+            var lines = convert.input.split(/\n/);
+            //let test;
+            var output = []
+            // for (var i = 0; i < lines.length; i++) {
+            //   // only push this line if it contains a non whitespace character.
+            //   if (/\S/.test(lines[i])) {
+            //     convert.outputText.push('{' + test.trim(lines[i]) + '}');
+            //     convert.output.push(test.trim(lines[i]));
+            //   }
+            // }
+            for (let i = 0; i < lines.length; i++) {
+                output.push('{'+ lines.trim(lines[i]) +'}')
+            }
+            console.log(output)
+            // this.setState({convert: convert})
+            //console.log(output);
+            //input.val('[' + outputText + ']');
+           
+          }
+          
+
         render = () => (
             <div>
+                {/* <textarea id="input" class="u-full-width" placeholder=""></textarea>
+                <input id="go" class="button-primary" type="submit" value="Go!"></input> */}
+
+                <form id="conversion" onSubmit={this.handleConvertSubmit}>
+                    <textarea name="input" onChange={this.conversionInput} value={this.state.output} />
+                    <input type="submit" value="submit"/>
+                </form>
                 <h2> Add a recipe </h2>
                 <form id="newRecipe" onSubmit={this.handleSubmit}>
                     <label for="recipeName">Recipe Name: </label>

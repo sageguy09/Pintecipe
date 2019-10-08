@@ -24,7 +24,7 @@ class UserHomePage extends React.Component {
       <ul>{user.recipes.map(this.userRecipes)}</ul>
       </div>
     )
-    
+
   
     render = () => (
       <div>
