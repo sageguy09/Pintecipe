@@ -142,6 +142,10 @@ fetch('/api/ingredient/',
                 //output.push(obj)
             }
             this.setState({instructions: {stepDesc, steps}})
+            this.state.instructions.steps.forEach(function (instruction){
+                let x = instruction
+                saveInstructionsToServer(x)
+            })
             //saveInstructionsToServer(currentInstructions)
         } 
 
@@ -150,7 +154,7 @@ fetch('/api/ingredient/',
             let currentIngredient = {...this.state.ingredients}
             currentIngredient.recipe = recipeId
             this.setState({ingredients: currentIngredient})
-            //saveIngredientsToServer(currentIngredient)
+            saveIngredientsToServer(currentIngredient)
         }
 
         // instructionRecipeMapping = (recipeId) => {

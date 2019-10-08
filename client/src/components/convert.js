@@ -43,6 +43,11 @@ class Convert extends Component {
     console.log(output)
     //console.log(lines)
     this.setState({convert: {names, output}})
+    this.state.convert.output.forEach(function (instruction){
+        var x = instruction
+        console.log(x)
+    })
+
   }
 
   render() {
