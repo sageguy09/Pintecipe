@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 class Convert extends Component {
    state = {
       names: '',
-      namesSplit: []
+      namesSplit: [],
+      output: []
     }
 
 
@@ -20,11 +21,19 @@ class Convert extends Component {
     //let names = "test\ntest"
     const { names } = this.state
     console.log(names)
-    console.log('names type ', typeof names)
+    //console.log('names type ', typeof names)
     let lines = names.split(/\r?\n/);
-    
-    console.log(lines)
-    this.setState({namesSplit: lines})
+    let output = []
+    let obj = {}
+    for (let i = 0; i < lines.length; i++) {
+        obj["step"] = lines[i].trim()
+            //output.push(lines[i].trim());
+            output.push(obj)
+        }
+    //console.log('output object type ', typeof output[0])
+    console.log(output)
+    //console.log(lines)
+    //this.setState({namesSplit: lines})
   }
  /* handleChange = e => {
     this.setState({
