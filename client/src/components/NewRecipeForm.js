@@ -30,8 +30,6 @@ fetch('/api/inglist/',
         state = {
             recipe: {
                 recipeName: "",
-                // ingredients = [],
-                //instructrions = [],
                 summary: "",
                 notes: "",
                 recipeImg: "",
@@ -40,7 +38,6 @@ fetch('/api/inglist/',
                 user: 1
              },
              instructions : {
-                //stepNum: "",
                 stepDesc: "",
                 steps: [],
                 recipe: ""
@@ -49,16 +46,9 @@ fetch('/api/inglist/',
                 ingDesc: "",
                 ings: [],
                 recipe:""
-            },
-            convert: {
-                input: "",
-                output: [],
-                outputTest: []
             }
-
         }
         
-        //for each line push an item into to state:instructions[]
         handleInput = (evnt) => {
             let newRecipe = {...this.state.recipe};
             newRecipe[evnt.target.name] = evnt.target.value;
@@ -76,40 +66,32 @@ fetch('/api/inglist/',
         }
 
 
-        // handleSubmit = (evnt) => {
-        //     evnt.preventDefault();
-
-        //     this.props.addNewRecipe(this.state.recipe)
-        // }
         handleSubmit = (evnt) => {
             evnt.preventDefault();
-
             this.addNewRecipe(this.state)
-            // this.addNewInstructions(this.state.instructions)
-            // this.setState({
-            //     recipe: {
-            //         recipeName: "",
-            //         summary: "",
-            //         notes: "",
-            //         recipeImg: "",
-            //         cuisineType: "",
-            //         recipeLink: "",
-                    
-            //         user: 2
-            //     },
-            //     instructions: 
-            //         {
-            //             stepNum: "",
-            //             stepDesc: "",
-            //             recipe: ""
-            //         }
-            //     ,
-                
-            // })
+            this.addNewInstructions(this.state.instructions)
+            this.setState({
+                recipe: {
+                    recipeName: "",
+                    summary: "",
+                    notes: "",
+                    recipeImg: "",
+                    cuisineType: "",
+                    recipeLink: "",
+                    user: 1
+                 },
+                 instructions : {
+                    stepDesc: "",
+                    steps: [],
+                    recipe: ""
+                },
+                ingredients : {
+                    ingDesc: "",
+                    ings: [],
+                    recipe:""
+                }
+            })
         }
-
-        
-
 
 
         addNewRecipe = (newRecipeInfo) => {
@@ -122,13 +104,8 @@ fetch('/api/inglist/',
         }
 
         addNewInstructions = (recipeId, instructions) => {
-            //let currentInstructions = {...this.state.instructions}
             let { stepDesc, steps } = instructions
-            //recipe = recipeId
             let lines = stepDesc.split(/\r?\n/);
-
-
-            
 
             for (let i = 0; i < lines.length; i++) {
                 const obj = {stepNum: i+1, stepDesc: lines[i].trim(), recipe: recipeId}
@@ -136,25 +113,18 @@ fetch('/api/inglist/',
                 if (trimmedLine !== "") {
                     steps.push(obj);
                 }
-                //output.push(obj)
             }
             this.setState({instructions: {stepDesc, steps}})
             this.state.instructions.steps.forEach(function (instruction){
                 let currentInstruction = instruction
                 saveInstructionsToServer(currentInstruction)
             })
-            //saveInstructionsToServer(currentInstructions)
         } 
 
 
         addNewIngredients = (recipeId, ingredients) => {
-            //let currentInstructions = {...this.state.instructions}
             let { ingDesc, ings } = ingredients
-            //recipe = recipeId
             let lines = ingDesc.split(/\r?\n/);
-
-
-            
 
             for (let i = 0; i < lines.length; i++) {
                 const obj = {ingNum: i+1, ingDesc: lines[i].trim(), recipe: recipeId}
@@ -162,39 +132,13 @@ fetch('/api/inglist/',
                 if (trimmedLine !== "") {
                     ings.push(obj);
                 }
-                //output.push(obj)
             }
             this.setState({ingredients: {ingDesc, ings}})
             this.state.ingredients.ings.forEach(function (ingredient){
                 let currentIngredient = ingredient
                 saveIngredientsToServer(currentIngredient)
             })
-            
         }
-
-        // instructionRecipeMapping = (recipeId) => {
-        //     let currentInstructions = {...this.state.instructions}
-
-        //     currentInstructions.recipe = recipeId
-
-        //     this.setState(currentInstructions)
-        //     console.log(currentInstructions)
-        // }
-        //pass down the recipe.id after the post. 
-        //call a function that sets the state of instructions to include the recipe's id
-        //return instructions to be posted to the db.
-
-
-        // 
-        // addNewInstructions = (newInstructionsInfo) => {
-        //     saveInstructionsToServer(newInstructionsInfo)
-        //         .then(newInstructions => {
-        //             console.log(newInstructions)
-        //         })
-        // }
-
-
-          
 
         render = () => (
             <div>
@@ -208,7 +152,7 @@ fetch('/api/inglist/',
                         placeholder="Enter a brief summary of the recipe" value={this.state.recipe.summary}></textarea>
                     <br />
                     <h4>Ingredients</h4>
-                    <label for="ingDesc">List of Ingredients </label>
+                    <label for="ingDesc">Recipe Ingredients </label>
                     <textarea name="ingDesc" onChange={this.handleIngredientInput} form="newRecipe" rows="10" cols="40" 
                     placeholder="Enter/Paste recipe ingredients here. Please list one ingredient per line. Example: 
                     &#10;4 Quarts water&#10;1 lb. angel hair pasta" value={this.state.ingredients.ingDesc}></textarea>
@@ -216,9 +160,7 @@ fetch('/api/inglist/',
                     <br />
                     <br />
                     <h4>Instructions</h4>
-                    {/* <label for="stepNum">step number: </label>
-                    <input type='number'name="stepNum" onChange={this.handleInstructionInput} value={this.state.instructions.stepNum} placeholder="step number" /> */}
-                    <label for="stepDesc">step description: </label>
+                    <label for="stepDesc">Recipe Instrucions: </label>
                     <textarea name="stepDesc" onChange={this.handleInstructionInput} form="newRecipe" rows="10" cols="40" 
                     placeholder="Enter/Paste recipe instructions here. Preffered format is one step per line. Example: 
                     &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value={this.state.instructions.stepDesc}></textarea>
@@ -243,15 +185,3 @@ fetch('/api/inglist/',
     }
 
     export default NewRecipeForm
-
-
-//   {
-//     "id": 1,
-//     "recipeName": "CRISPY SOUTHWEST CHICKEN WRAPS",
-//     "summary": "These southwest crispy chicken wraps are delicious, easy to make, and so versatile! It’s no surprise they’ve been on our steady meal rotation for many years!",
-//     "notes": "This is one of the most adaptable recipes on here (reading through the comments will prove that – your variations sound amazing!). Feel free to up the cilantro, add in a different meat of your choice, eliminate the pepper, add green chilies – seriously, the options are endless. You can easily use smaller tortillas to maximize the number of wraps you make. \r\n\r\nOften, I add salsa verde, and I also love subbing in chopped roasted red peppers for the diced bell pepper. \r\n\r\nI almost always double this recipe when making so I can freeze the cooled crispy wraps and freeze individually wrapped in plastic wrap (and tossed in a freezer ziploc bag with the other wraps) for quick, easily reheatable lunches!",
-//     "recipeImg": "https://www.melskitchencafe.com/wp-content/uploads/crispy-sw-wraps2.jpg",
-//     "recipeLink": "https://www.melskitchencafe.com/crispy-southwest-chicken-wraps/",
-//     "cuisineType": "Mexican",
-//     "user": 1
-// }
