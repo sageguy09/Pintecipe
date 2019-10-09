@@ -5,9 +5,6 @@ class ReviewRecipeForm extends React.Component {
       recipe: {},
 
     }
-    //factor multiple ingredient listings/instrucions
-    //ie Component Name, ingredient list, Component Name, ingredient list, etc
-  
     componentDidMount = () => {
       fetch('/api/recipe/4/')
       .then(res => res.json())
@@ -26,7 +23,6 @@ class ReviewRecipeForm extends React.Component {
     }
 
     increaseValue = (value) => {
-      
     }
   
     handleSubmit = (evnt) => {
@@ -34,12 +30,24 @@ class ReviewRecipeForm extends React.Component {
       
       this.props.addNewRecipe(this.state)
     }
+
+    handleInstructionInput = (evnt) => {
+      let newInstructions = {...this.state.recipe.instructions}
+      newInstructions[evnt.target.id] = evnt.target.value;
+      this.setState({instructions: newInstructions})
+  }
+  handleIngredientInput = (evnt) => {
+      let newIngredients = {...this.state.recipe.ingredients}
+      newIngredients[evnt.target.id] = evnt.target.value;
+      this.setState({ingredients: newIngredients})
+  }
+
     editRecipeItems = (ingItems) => (
-      <li><input name="" onChange={this.handleInput} value={ingItems.ingDesc}></input><button>Delete Ingredient</button></li>
+      <li><input name="ingDesc" id={ingItems.id} onChange={this.handleIngredientInput} value={ingItems.ingDesc}></input><button>Delete Ingredient</button></li>
     )
     
     editInstructionSteps = (instructionSteps) => (
-      <li><input name="" onChange={this.handleInput} value={instructionSteps.stepDesc} /></li>
+      <li><input name="" id={instructionSteps.id} onChange={this.handleInstructionInput} value={instructionSteps.stepDesc} /></li>
     )
     
      render = () => (
