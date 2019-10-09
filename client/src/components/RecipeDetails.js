@@ -5,7 +5,7 @@ class RecipeDetails extends React.Component {
       recipe: {},
     } 
     componentDidMount = () => {
-      fetch('/api/recipe/1/')
+      fetch('/api/recipe/4/')
       .then(res => res.json())
       .then(currentRecipe => {
         console.log('logging of user from RecipeDetails', currentRecipe)
@@ -13,7 +13,7 @@ class RecipeDetails extends React.Component {
       })
     }
     recipeItems = (ingItems) => (
-        <li>{ingItems.qty} {ingItems.unit} {ingItems.name}, {ingItems.comment}</li>
+        <li>{ingItems.ingDesc}</li>
       )
     instructionSteps = (instructionSteps) => (
       <li>{instructionSteps.stepDesc}</li>
@@ -23,7 +23,7 @@ class RecipeDetails extends React.Component {
       <h3>{this.state.recipe.recipeName}</h3>
        <h3>Ingredients</h3>
        <ul> 
-       {this.state.recipe.ingredients !== undefined ? this.state.recipe.ingredients.map(this.recipeItems) : null }
+       {this.state.recipe.ingList !== undefined ? this.state.recipe.ingList.map(this.recipeItems) : null }
       </ul> 
       <h3>Instructions</h3>
       <ol>
