@@ -42,15 +42,3 @@ class RecipeDetails extends React.Component {
   
 export default RecipeDetails
 
-
-      // {ingItems.unit}  {ingItems.name}, {ingItems.comment}
-      // {ingItems.other}
-      // instructionSteps = (instructionSteps) => (
-      //   <li>{instructionSteps}</li>
-      // )
-         {/*<h3>Instructions</h3>
-      <ol>
-        {this.state.recipe.instructions.map(this.instructionSteps)}
-      </ol>*/}    // state = {
-    //   recipe: {...this.props.currentRecipe}
-    // } 
