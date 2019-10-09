@@ -38,7 +38,7 @@ class IngListSerializer(serializers.ModelSerializer):
 class RecipeSerializer(serializers.ModelSerializer):
     # ingredients = IngredientSerializer(many=True, read_only=True)
     instructions = InstructionSerializer(many=True, read_only=True)
-    ingredientList = IngListSerializer(many=True, read_only=True)
+    ingList = IngListSerializer(many=True, read_only=True)
     class Meta:
         model = Recipe
         fields = [
@@ -50,7 +50,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             'recipeLink',
             'cuisineType',
             # 'ingredients',
-            'ingredientList',
+            'ingList',
             'instructions',
             'user'
             ]

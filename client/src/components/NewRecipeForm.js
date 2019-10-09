@@ -16,7 +16,7 @@ const saveInstructionsToServer = (newInstructions) =>
         }
     ).then(res => res.json())
 const saveIngredientsToServer = (newIngredients) => 
-fetch('/api/ingredient/',
+fetch('/api/inglist/',
     {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,7 +37,7 @@ fetch('/api/ingredient/',
                 recipeImg: "",
                 cuisineType: "",
                 recipeLink: "",
-                user: 2
+                user: 1
              },
              instructions : {
                 //stepNum: "",
@@ -46,11 +46,8 @@ fetch('/api/ingredient/',
                 recipe: ""
             },
             ingredients : {
-                unit: "",
-                name: "",
-                qty: "",
-                comment: "",
-                input: "",
+                ingDesc: "",
+                ings: [],
                 recipe:""
             },
             convert: {
@@ -119,7 +116,7 @@ fetch('/api/ingredient/',
             saveRecipeToServer(newRecipeInfo.recipe)
                 .then(newRecipe => {
                     this.addNewInstructions(newRecipe.id, newRecipeInfo.instructions)
-                    this.addNewIngredients(newRecipe.id)
+                    this.addNewIngredients(newRecipe.id, newRecipeInfo.ingredients)
                     console.log(newRecipe.id, newRecipeInfo.instructions)
                 })
         }
@@ -143,18 +140,36 @@ fetch('/api/ingredient/',
             }
             this.setState({instructions: {stepDesc, steps}})
             this.state.instructions.steps.forEach(function (instruction){
-                let x = instruction
-                saveInstructionsToServer(x)
+                let currentInstruction = instruction
+                saveInstructionsToServer(currentInstruction)
             })
             //saveInstructionsToServer(currentInstructions)
         } 
 
 
-        addNewIngredients = (recipeId) => {
-            let currentIngredient = {...this.state.ingredients}
-            currentIngredient.recipe = recipeId
-            this.setState({ingredients: currentIngredient})
-            saveIngredientsToServer(currentIngredient)
+        addNewIngredients = (recipeId, ingredients) => {
+            //let currentInstructions = {...this.state.instructions}
+            let { ingDesc, ings } = ingredients
+            //recipe = recipeId
+            let lines = ingDesc.split(/\r?\n/);
+
+
+            
+
+            for (let i = 0; i < lines.length; i++) {
+                const obj = {ingNum: i+1, ingDesc: lines[i].trim(), recipe: recipeId}
+                const trimmedLine = lines[i].trim()
+                if (trimmedLine !== "") {
+                    ings.push(obj);
+                }
+                //output.push(obj)
+            }
+            this.setState({ingredients: {ingDesc, ings}})
+            this.state.ingredients.ings.forEach(function (ingredient){
+                let currentIngredient = ingredient
+                saveIngredientsToServer(currentIngredient)
+            })
+            
         }
 
         // instructionRecipeMapping = (recipeId) => {
@@ -193,16 +208,10 @@ fetch('/api/ingredient/',
                         placeholder="Enter a brief summary of the recipe" value={this.state.recipe.summary}></textarea>
                     <br />
                     <h4>Ingredients</h4>
-                    <label for="qty">Qty </label>
-                    <input name="qty" onChange={this.handleIngredientInput} value={this.state.ingredients.qty}/> 
-                    <label for="unit">Unit </label>
-                    <input name="unit"onChange={this.handleIngredientInput} value={this.state.ingredients.unit}/> 
-                    <label for="name">Name </label>
-                    <input name="name"onChange={this.handleIngredientInput} value={this.state.ingredients.name}/> 
-                    <label for="comment">Comment </label>
-                    <input name="comment" onChange={this.handleIngredientInput} value={this.state.ingredients.comment}/> 
-                    <label for="input">Input </label>
-                    <input name="input" onChange={this.handleIngredientInput} value={this.state.ingredients.input}/> 
+                    <label for="ingDesc">List of Ingredients </label>
+                    <textarea name="ingDesc" onChange={this.handleIngredientInput} form="newRecipe" rows="10" cols="40" 
+                    placeholder="Enter/Paste recipe ingredients here. Please list one ingredient per line. Example: 
+                    &#10;4 Quarts water&#10;1 lb. angel hair pasta" value={this.state.ingredients.ingDesc}></textarea>
                     <br />
                     <br />
                     <br />
@@ -211,7 +220,7 @@ fetch('/api/ingredient/',
                     <input type='number'name="stepNum" onChange={this.handleInstructionInput} value={this.state.instructions.stepNum} placeholder="step number" /> */}
                     <label for="stepDesc">step description: </label>
                     <textarea name="stepDesc" onChange={this.handleInstructionInput} form="newRecipe" rows="10" cols="40" 
-                    placeholder="Enter steps to making your recipe here. Preffered format is one step per line. Example: 
+                    placeholder="Enter/Paste recipe instructions here. Preffered format is one step per line. Example: 
                     &#10;Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value={this.state.instructions.stepDesc}></textarea>
                     <br />
                     <label for="notes">Recipe Notes: </label>

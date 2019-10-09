@@ -17,13 +17,13 @@ class Recipe(models.Model):
     cuisineType = models.CharField(max_length=20)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
 
-class Ingredient(models.Model):
-    unit = models.CharField(max_length=20)
-    name = models.CharField(max_length=40)
-    qty = models.CharField(max_length=10)
-    comment = models.TextField(max_length=100, blank=True)
-    input = models.TextField(max_length=200)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
+# class Ingredient(models.Model):
+#     unit = models.CharField(max_length=20)
+#     name = models.CharField(max_length=40)
+#     qty = models.CharField(max_length=10)
+#     comment = models.TextField(max_length=100, blank=True)
+#     input = models.TextField(max_length=200)
+#     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
 
 class Instruction(models.Model):
     stepNum = models.FloatField(default=0)
