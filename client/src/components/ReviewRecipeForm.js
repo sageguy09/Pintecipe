@@ -9,7 +9,7 @@ class ReviewRecipeForm extends React.Component {
     //ie Component Name, ingredient list, Component Name, ingredient list, etc
   
     componentDidMount = () => {
-      fetch('/api/recipe/1/')
+      fetch('/api/recipe/4/')
       .then(res => res.json())
       .then(currentRecipe => {
         console.log('logging of user from RecipeDetails', currentRecipe)
@@ -35,15 +35,7 @@ class ReviewRecipeForm extends React.Component {
       this.props.addNewRecipe(this.state)
     }
     editRecipeItems = (ingItems) => (
-      // if (ingItems.unit != false){
-      //   unitType = ingItems.unit}
-      // else {
-      //   unitType = ingItems.other
-      // }
-      <li><button>-</button>{ingItems.qty}<button>+</button>  
-      <input name="unit"onChange={this.handleInput} value={ingItems.unit}/> <input name="other" onChange={this.handleInput} value={ingItems.other}/> 
-      <input name="name"onChange={this.handleInput} value={ingItems.name}/> <input name="comment" onChange={this.handleInput} value={ingItems.comment}/> 
-      <button>Delete Ingredient</button></li>
+      <li><input name="" onChange={this.handleInput} value={ingItems.ingDesc}></input><button>Delete Ingredient</button></li>
     )
     
     editInstructionSteps = (instructionSteps) => (
@@ -63,13 +55,14 @@ class ReviewRecipeForm extends React.Component {
       <br />
        <div>
         <h3>Ingredients</h3>
-        {this.state.recipe.ingredients !== undefined ? this.state.recipe.ingredients.map(this.editRecipeItems) : null}
+        {this.state.recipe.ingList !== undefined ? this.state.recipe.ingList.map(this.editRecipeItems) : null}
         <button>Add additonal ingredient</button>
       </div>
       <br />
       <div>
+        <h3>Instructions</h3>
         <ol >
-          {this.state.recipe.ingredients !== undefined ? this.state.recipe.instructions.map(this.editInstructionSteps) : null}
+          {this.state.recipe.instructions !== undefined ? this.state.recipe.instructions.map(this.editInstructionSteps) : null}
         </ol>
       </div>
       <br />
