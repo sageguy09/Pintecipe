@@ -1,4 +1,5 @@
 import React from 'react';
+import "bulma/css/bulma.css"
 class UserHomePage extends React.Component {
     state = {
       user: {...this.props.currentUser},
