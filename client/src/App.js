@@ -1,4 +1,6 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Home from './components/Home'
 import UserHomePage from './components/UserHomepage'
 import RecipeDetails from './components/RecipeDetails'
 import ReviewRecipeForm from './components/ReviewRecipeForm'
@@ -266,68 +268,11 @@ class App extends React.Component {
 
   render = () => (
   <div>
-
-<section class="hero is-dark is-small">
-  <div class="hero-head">
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item">
-            <h1 class="title"> Pintecipe</h1>
-          </a>
-          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroA" class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item is-active">
-              Home
-            </a>
-            <a class="navbar-item">
-              Add User
-            </a>
-            <a class="navbar-item">
-              Add Recipe
-            </a>
-            <span class="navbar-item">
-              <a class="button is-info is-inverted">
-                <span class="icon">
-                  <i class="fas fa-user"></i>
-                </span>
-                <span>Current User</span>
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
-
-  <div class="hero-body">
-    <div class="container has-text-centered">
-    </div>
-  </div>
-</section>
-
-    <aside>
-      {/* <h1>New User Form and List of All Users</h1> */}
-       {/* <NewUserForm addNewUser={this.addNewUser}/> */}
-      {/*{userList(this.getAllUsers())} */}
-      ____________________________________________________________________________________
-    </aside>
-    <article>
-    {/* <Convert /> */}
-    {/* <NewRecipeForm  /> */}
-    {/* <ReviewRecipeForm />  */}
-    <UserHomePage currentUser={this.getCurrentUser()}/>
-    {/* <RecipeDetails />  */}
-    {/* {userRecipeListing(this.getCurrentUser())} */}
-    {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
-    {/* <TestBulmaForm /> */}
-    </article>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+      </Switch>
+    </Router>
   </div>
   )
 }
@@ -335,4 +280,19 @@ class App extends React.Component {
 export default App;
 
 
-
+// <aside>
+// {/* <h1>New User Form and List of All Users</h1> */}
+//  {/* <NewUserForm addNewUser={this.addNewUser}/> */}
+// {/*{userList(this.getAllUsers())} */}
+// ____________________________________________________________________________________
+// </aside>
+// <article>
+// {/* <Convert /> */}
+// {/* <NewRecipeForm  /> */}
+// {/* <ReviewRecipeForm />  */}
+// <UserHomePage currentUser={this.getCurrentUser()}/>
+// {/* <RecipeDetails />  */}
+// {/* {userRecipeListing(this.getCurrentUser())} */}
+// {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
+// {/* <TestBulmaForm /> */}
+// </article>
