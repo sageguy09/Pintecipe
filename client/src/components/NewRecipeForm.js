@@ -37,8 +37,8 @@ class NewRecipeForm extends React.Component {
             recipeLink: "",
             user: 2
             },
-            instructions : {
-            stepDesc: "",
+        instructions : {
+            stepsDesc: "",
             steps: [],
             recipe: ""
             },
@@ -74,7 +74,7 @@ class NewRecipeForm extends React.Component {
     handleSubmit = (evnt) => {
         evnt.preventDefault();
         this.addNewRecipe(this.state)
-        this.addNewInstructions(this.state.instructions)
+        //this.addNewInstructions(this.state.instructions)
         this.setState({
             recipe: {
                 recipeName: "",
@@ -85,11 +85,12 @@ class NewRecipeForm extends React.Component {
                 recipeLink: "",
                 user: 1
                 },
-                instructions : {
-                stepDesc: "",
+
+            instructions : {
+                stepsDesc: "",
                 steps: [],
                 recipe: ""
-            },
+                },
             ingList : {
                 ingDesc: "",
                 ings: [],
@@ -109,8 +110,8 @@ class NewRecipeForm extends React.Component {
     }
 
     addNewInstructions = (recipeId, instructions) => {
-        let { stepDesc, steps } = instructions
-        let lines = stepDesc.split(/\r?\n/);
+        let { stepsDesc, steps } = instructions
+        let lines = stepsDesc.split(/\r?\n/);
 
         for (let i = 0; i < lines.length; i++) {
             const obj = {stepNum: i+1, stepDesc: lines[i].trim(), recipe: recipeId}
@@ -119,7 +120,7 @@ class NewRecipeForm extends React.Component {
                 steps.push(obj);
             }
         }
-        this.setState({instructions: {stepDesc, steps}})
+        this.setState({instructions: {stepsDesc, steps}})
         this.state.instructions.steps.forEach(function (instruction){
             let currentInstruction = instruction
             saveInstructionsToServer(currentInstruction)
@@ -173,9 +174,9 @@ class NewRecipeForm extends React.Component {
                 <div class="field">
                     <label class="label">Recipe Instructions </label>
                     <div class="control">
-                        <textarea name="stepDesc" class="textarea" onChange={this.handleInstructionInput} form="newRecipe" rows="10" cols="40" 
+                        <textarea name="stepsDesc" class="textarea" onChange={this.handleInstructionInput} form="newRecipe" rows="10" cols="40" 
                         placeholder="Enter/Paste recipe instructions here. Preffered format is one step per line. Example: 
-                       Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value={this.state.instructions.stepDesc}></textarea>
+                       Bring 4 quarts water to boil&#10;Add pasta and boil for 10 minutes" value={this.state.instructions.stepsDesc}></textarea>
                     </div>
                 </div>
                 <div class="field">
