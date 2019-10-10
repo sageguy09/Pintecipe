@@ -31,10 +31,10 @@ class ReviewRecipeForm extends React.Component {
     this.setState({instructions: newInstructions})
   }
 
-  handleIngredientInput = (i) => (evnt) => {
-    let newIngredients = {...this.state.recipe.ingList}
-    newIngredients[i].ingDesc = evnt.target.value;
-    this.setState({ingList: newIngredients})
+  handleIngredientInput = (recipieKey, objKey) => (i) => (evnt) => {
+    let recipe = {...this.state.recipe}
+    recipe[recipieKey][i][objKey] = evnt.target.value;
+    this.setState({ recipe })
   }
 
   editRecipeItems = (ingItem, i) => (
@@ -45,7 +45,7 @@ class ReviewRecipeForm extends React.Component {
           class="input" 
           name="ingDesc" 
           //onChange={(evnt) => this.handleIngredientInput(i, evnt)} 
-          onChange={this.handleIngredientInput(i)}
+          onChange={this.handleIngredientInput("ingList", "ingDesc")(i)}
           value={ingItem.ingDesc}
         />
       </div>
@@ -53,12 +53,16 @@ class ReviewRecipeForm extends React.Component {
     </li>
   )
   
-  editInstructionSteps = (instructionSteps) => (
+  editInstructionSteps = (instructionSteps, i) => (
     <li>
       <div class="control">
       <input 
-      type="text" class="input" name="stepDesc" id={instructionSteps.id} 
-      onChange={this.handleInstructionInput} value={instructionSteps.stepDesc} />
+        type="text" 
+        class="input" 
+        name="stepDesc"
+        onChange={this.handleIngredientInput("instructions", "stepDesc")(i)}
+        value={instructionSteps.stepDesc} 
+      />
       </div>
       {/* <button>Delete Step</button> */}
     </li>
