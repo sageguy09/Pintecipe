@@ -267,14 +267,14 @@ class App extends React.Component {
   render = () => (
   <div>
     <aside>
-      <h1>New User Form and List of All Users</h1>
-       <NewUserForm addNewUser={this.addNewUser}/>
+      {/* <h1>New User Form and List of All Users</h1> */}
+       {/* <NewUserForm addNewUser={this.addNewUser}/> */}
       {/*{userList(this.getAllUsers())} */}
       ____________________________________________________________________________________
     </aside>
     <article>
     {/* <Convert /> */}
-    {/* <NewRecipeForm  /> */}
+    <NewRecipeForm  />
     {/* <ReviewRecipeForm />  */}
     {/* <UserHomePage currentUser={this.getCurrentUser()}/> */}
     {/* <RecipeDetails />  */}
