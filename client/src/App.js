@@ -269,8 +269,11 @@ class App extends React.Component {
 
   render = () => (
   <div>
-<Header/>
-<ReviewRecipeForm />
+
+ <Router>
+<Home />
+ </Router>
+{/* <ReviewRecipeForm /> */}
   </div>
   )
 }
