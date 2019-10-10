@@ -18,6 +18,15 @@ fetch('/api/inglist/'+ingId+'/',
         body: JSON.stringify(updatedIngItem)
     }
 ).then(res => res.json())
+const updateInstructionsOnServer = (instId, updatedInst) =>
+//console.log(ingId, updatedIngItem)
+fetch('/api/instruction/'+instId+'/',
+    {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedInst)
+    }
+).then(res => res.json())
 class ReviewRecipeForm extends React.Component {
   state = {
     recipe: {},
@@ -50,6 +59,7 @@ class ReviewRecipeForm extends React.Component {
     updateRecipeOnServer(updatedRecipe.recipe.id, updatedRecipe.recipe)
       .then(savedRecipe =>{
         this.updateIngList(updatedRecipe.recipe)
+        this.updateInstructions(updatedRecipe.recipe)
         //console.log(updatedRecipe)
       })
   }
@@ -59,6 +69,15 @@ class ReviewRecipeForm extends React.Component {
       let currentIngredient = ingItem
       //console.log(currentIngredient)
       updateIngListOnServer(currentIngredient.id, currentIngredient)
+      //console.log(savedRecipe.ingList)
+    })
+  }
+  updateInstructions = (savedRecipe) => {
+    //console.log(savedRecipe.ingList)
+    savedRecipe.instructions.forEach(function(instruction){
+      let currentInstruction = instruction
+      //console.log(currentInstruction)
+      updateInstructionsOnServer(currentInstruction.id, currentInstruction)
       //console.log(savedRecipe.ingList)
     })
   }
