@@ -42,7 +42,7 @@ class ReviewRecipeForm extends React.Component {
 
   }
   componentDidMount = () => {
-    fetch('/api/recipe/4/')
+    fetch('/api/recipe/6/')
     .then(res => res.json())
     .then(currentRecipe => {
       console.log('logging of user from RecipeDetails', currentRecipe)
@@ -61,10 +61,7 @@ class ReviewRecipeForm extends React.Component {
     //this.props.addNewRecipe(this.state)
     this.updateRecipe(this.state)
   }
-  handleDelete = (evnt) => {
-    evnt.preventDefault();
-    this.deleteRecipe(this.state)
-  }
+
   updateRecipe = (updatedRecipe) => {
 
     //console.log( 'api/recipe/'+updatedRecipe.recipe.id)
@@ -93,9 +90,12 @@ class ReviewRecipeForm extends React.Component {
       //console.log(savedRecipe.ingList)
     })
   }
-
+  handleDelete = (evnt) => {
+    evnt.preventDefault();
+    this.deleteRecipe(this.state)
+  }
   deleteRecipe = (recipeToDelete) => {
-    //console.log(recipeToDelete)
+    //console.log(recipeToDelete.recipe.id)
     DeleteRecipeFromServer(recipeToDelete.recipe.id, recipeToDelete.recipe)
   }
   handleInstructionInput = (evnt) => {
