@@ -27,13 +27,22 @@ fetch('/api/instruction/'+instId+'/',
         body: JSON.stringify(updatedInst)
     }
 ).then(res => res.json())
+const DeleteRecipeFromServer = (recipeId, deletedRecipe) =>
+  //console.log(recipeId, deletedRecipe)    
+fetch('/api/recipe/'+recipeId+'/',
+        {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(deletedRecipe)
+        }
+    )
 class ReviewRecipeForm extends React.Component {
   state = {
     recipe: {},
 
   }
   componentDidMount = () => {
-    fetch('/api/recipe/4/')
+    fetch('/api/recipe/5/')
     .then(res => res.json())
     .then(currentRecipe => {
       console.log('logging of user from RecipeDetails', currentRecipe)
@@ -52,7 +61,10 @@ class ReviewRecipeForm extends React.Component {
     //this.props.addNewRecipe(this.state)
     this.updateRecipe(this.state)
   }
-
+  handleDelete = (evnt) => {
+    evnt.preventDefault();
+    this.deleteRecipe(this.state)
+  }
   updateRecipe = (updatedRecipe) => {
 
     //console.log( 'api/recipe/'+updatedRecipe.recipe.id)
@@ -80,6 +92,11 @@ class ReviewRecipeForm extends React.Component {
       updateInstructionsOnServer(currentInstruction.id, currentInstruction)
       //console.log(savedRecipe.ingList)
     })
+  }
+
+  deleteRecipe = (recipeToDelete) => {
+    //console.log(recipeToDelete)
+    DeleteRecipeFromServer(recipeToDelete.recipe.id, recipeToDelete.recipe)
   }
   handleInstructionInput = (evnt) => {
     let newInstructions = {...this.state.recipe.instructions}
@@ -123,6 +140,22 @@ class ReviewRecipeForm extends React.Component {
       {/* <button>Delete Step</button> */}
     </li>
   )
+
+
+
+//initial code for adding a list item to ingredients
+  // addIngredientItem = () => (
+  //   <li>
+  //     <div class="control">
+  //       <input 
+  //       type="text"
+  //       class="input"
+  //       name="indDesc"
+  //       onChange={this.handleInstructionInput}
+  //       value={this.ingList.ingDesc} />
+  //     </div>
+  //   </li>
+  // )
   
   render = () => (
       <div>
@@ -211,7 +244,7 @@ class ReviewRecipeForm extends React.Component {
             </div>
             <div class="control">
             {/* deletes recipe from database*/}
-            <button class="button is-primary">Delete Recipe</button>
+            <button class="button is-primary" onClick={this.handleDelete}>Delete Recipe</button>
             </div>
           </div>
         </form>
