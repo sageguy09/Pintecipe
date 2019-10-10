@@ -1,5 +1,22 @@
 import React from 'react';
 import "bulma/css/bulma.css";
+
+const updateRecipeOnServer = (recipeId, updatedRecipe) =>
+    fetch('/api/recipe/'+recipeId+'/',
+        {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedRecipe)
+        }
+    ).then(res => res.json())
+// const updateIngListOnServer = (recipeId, updatedRecipe) =>
+// fetch('/api/recipe/'+recipeId+'/',
+//     {
+//         method: "PUT",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(updatedRecipe)
+//     }
+// ).then(res => res.json())
 class ReviewRecipeForm extends React.Component {
   state = {
     recipe: {},
@@ -22,9 +39,18 @@ class ReviewRecipeForm extends React.Component {
 
   handleSubmit = (evnt) => {
     evnt.preventDefault();
-    this.props.addNewRecipe(this.state)
+    //this.props.addNewRecipe(this.state)
+    this.updateRecipe(this.state)
   }
 
+  updateRecipe = (updatedRecipe) => {
+
+    //console.log( 'api/recipe/'+updatedRecipe.recipe.id)
+    updateRecipeOnServer(updatedRecipe.recipe.id, updatedRecipe.recipe)
+      .then(updatedRecipe =>{
+        console.log(updatedRecipe)
+      })
+  }
   handleInstructionInput = (evnt) => {
     let newInstructions = {...this.state.recipe.instructions}
     newInstructions[evnt.target.id] = evnt.target.value;
@@ -71,7 +97,7 @@ class ReviewRecipeForm extends React.Component {
   render = () => (
       <div>
         <h2>Review and Edit Recipe</h2>
-        <form id="editRecipe"> 
+        <form id="editRecipe" onSubmit={this.handleSubmit}> 
           <div class="field">
             <label class="label">Recipe Name: </label>
                 <div class="control">
