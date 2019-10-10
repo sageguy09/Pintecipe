@@ -42,7 +42,7 @@ class ReviewRecipeForm extends React.Component {
 
   }
   componentDidMount = () => {
-    fetch('/api/recipe/5/')
+    fetch('/api/recipe/4/')
     .then(res => res.json())
     .then(currentRecipe => {
       console.log('logging of user from RecipeDetails', currentRecipe)
@@ -240,7 +240,7 @@ class ReviewRecipeForm extends React.Component {
               </div>
             <div class="control">
             {/* reset's recipe data to match what is in the database from intial add/last saved edit*/}
-            <button class="button is-primary">Start Over</button>
+            <button class="button is-primary" onClick={this.componentDidMount}>Start Over</button>
             </div>
             <div class="control">
             {/* deletes recipe from database*/}
