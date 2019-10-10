@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "bulma/css/bulma.css"
 
 class NewUserForm extends React.Component {
     state = 
@@ -28,7 +28,8 @@ class NewUserForm extends React.Component {
       location: ""})
     }
 
- 
+
+  
     // addNewUser = (newUserInfo) => {
     //   saveUserToServer(newUserInfo)
     //     .then(newUser => {
@@ -43,21 +44,43 @@ class NewUserForm extends React.Component {
     //   })
     // }
     render = () => (
-      <form onSubmit={this.handleSubmit}>
-        <label for="username" >Username</label>
-        <input type="text"   name="username" onChange={this.handleInput} value={this.state.username} placeholder="User Name"/>
+      <div>
+      <form id="newUserForm" onSubmit={this.handleSubmit}>
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control">
+            <input type="text"   class="input"  name="username" onChange={this.handleInput} value={this.state.username} placeholder="User Name"/>
+          </div>
+        </div>
         <br />
-        <label for="email" >Email</label>
-        <input type="email"  name="email"    onChange={this.handleInput} value={this.state.email}    placeholder="Email"/>
+        <div class="field">
+        <label class="label" >Email</label>
+          <div class="control">
+            <input type="email" class="input" name="email"    onChange={this.handleInput} value={this.state.email}    placeholder="Email"/>
+          </div>
+         </div>
         <br />
-        <label for="firstName" >Email</label>
-        <input type="text"  name="firstName"    onChange={this.handleInput} value={this.state.firstName}    placeholder="Enter your first name"/>
+        <div class="field">
+          <label class="label" >First Name</label>
+            <div class="control">
+              <input type="text" class="input" name="firstName"    onChange={this.handleInput} value={this.state.firstName}    placeholder="Enter your first name"/>
+            </div>
+        </div>
         <br />
-        <label for="location" >Email</label>
-        <input type="text"  name="location"    onChange={this.handleInput} value={this.state.location}    placeholder="ie: Atlanta, GA"/>
+        <div class="field">
+          <label class="label" >Location</label>
+            <div class="control">
+              <input type="text"  class="input" name="location"    onChange={this.handleInput} value={this.state.location}    placeholder="ie: Atlanta, GA"/>
+            </div>
+        </div>
         <br />
-        <input type="submit"                 value="New User" />
+        <div class="field">
+          <div class="control">
+            <input class="button is-primary"type="submit" value="Create New User" />
+          </div>
+        </div>
       </form>
+      </div>
     )
   }
 

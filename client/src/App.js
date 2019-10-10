@@ -5,6 +5,7 @@ import ReviewRecipeForm from './components/ReviewRecipeForm'
 import NewUserForm from './components/NewUserForm'
 import NewRecipeForm from './components/NewRecipeForm'
 import Convert from './components/convert'
+import TestBulmaForm from './components/testbulmaform'
 const usersListItems = (user) => (
   <li>{user.id} - {user.username} - {user.email}</li>
 )
@@ -267,18 +268,19 @@ class App extends React.Component {
   <div>
     <aside>
       <h1>New User Form and List of All Users</h1>
-      {/* <NewUserForm addNewUser={this.addNewUser}/>
-      {userList(this.getAllUsers())} */}
+       <NewUserForm addNewUser={this.addNewUser}/>
+      {/*{userList(this.getAllUsers())} */}
       ____________________________________________________________________________________
     </aside>
     <article>
     {/* <Convert /> */}
     {/* <NewRecipeForm  /> */}
-    <ReviewRecipeForm /> 
+    {/* <ReviewRecipeForm />  */}
     {/* <UserHomePage currentUser={this.getCurrentUser()}/> */}
     {/* <RecipeDetails />  */}
     {/* {userRecipeListing(this.getCurrentUser())} */}
     {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
+    {/* <TestBulmaForm /> */}
     </article>
   </div>
   )
