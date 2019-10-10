@@ -19,6 +19,7 @@ class ReviewRecipeForm extends React.Component {
     currentRecipe[evnt.target.name] = evnt.target.value;
     this.setState({recipe: currentRecipe})
   }
+
   handleSubmit = (evnt) => {
     evnt.preventDefault();
     this.props.addNewRecipe(this.state)
@@ -29,18 +30,23 @@ class ReviewRecipeForm extends React.Component {
     newInstructions[evnt.target.id] = evnt.target.value;
     this.setState({instructions: newInstructions})
   }
-  handleIngredientInput = (evnt) => {
-    let newIngredients = {...this.state.recipe.ingredients}
-    newIngredients[evnt.target.id] = evnt.target.value;
-    this.setState({ingredients: newIngredients})
+
+  handleIngredientInput = (i) => (evnt) => {
+    let newIngredients = {...this.state.recipe.ingList}
+    newIngredients[i].ingDesc = evnt.target.value;
+    this.setState({ingList: newIngredients})
   }
 
-  editRecipeItems = (ingItems) => (
+  editRecipeItems = (ingItem, i) => (
     <li>
       <div class="control">
         <input 
-        type="text" class="input" name="ingDesc" id={ingItems.id} 
-        onChange={this.handleIngredientInput} value={ingItems.ingDesc}
+          type="text" 
+          class="input" 
+          name="ingDesc" 
+          //onChange={(evnt) => this.handleIngredientInput(i, evnt)} 
+          onChange={this.handleIngredientInput(i)}
+          value={ingItem.ingDesc}
         />
       </div>
       {/* <button>Delete Ingredient</button> */}

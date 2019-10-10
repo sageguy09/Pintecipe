@@ -270,7 +270,7 @@ class App extends React.Component {
   render = () => (
   <div>
 <Header/>
-<UserHomePage currentUser={this.getCurrentUser()}/>
+<ReviewRecipeForm />
   </div>
   )
 }
@@ -283,7 +283,7 @@ export default App;
 {/* <h1>New User Form and List of All Users</h1> */}
  {/* <NewUserForm addNewUser={this.addNewUser}/> */}
 {/*{userList(this.getAllUsers())} */}
-
+{/* <UserHomePage currentUser={this.getCurrentUser()}/> */}
 // </aside>
 {/* <Convert /> */}
 {/* <NewRecipeForm  /> */}
