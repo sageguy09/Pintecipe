@@ -198,7 +198,7 @@ class NewRecipeForm extends React.Component {
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Link to Original Recipe</label>
+                    <label class="label">Link to Recipe Site</label>
                     <div class="control">
                         <input type="url" class="input" name="recipeLink" onChange={this.handleInput} value={this.state.recipe.recipeLink} placeholder="" />
                     </div>
