@@ -8,6 +8,7 @@ import NewUserForm from './components/NewUserForm'
 import NewRecipeForm from './components/NewRecipeForm'
 import Convert from './components/convert'
 import TestBulmaForm from './components/testbulmaform'
+import Header from './components/Header'
 const usersListItems = (user) => (
   <li>{user.id} - {user.username} - {user.email}</li>
 )
@@ -18,48 +19,48 @@ const userList = (users) => (
   </ul>
 )
 
-// const userRecipes = (recipe) => (
-//   <li>{recipe.recipeName}</li>
-// )
-// const userRecipeListing = (user) => (
-//   <div>
-//   <h2>{user.username} Available Recipes</h2>
-//   <ul>{user.recipes.map(userRecipes)}</ul>
-//   </div>
-// )
+const userRecipes = (recipe) => (
+  <li>{recipe.recipeName}</li>
+)
+const userRecipeListing = (user) => (
+  <div>
+  <h2>{user.username} Available Recipes</h2>
+  <ul>{user.recipes.map(userRecipes)}</ul>
+  </div>
+)
 
-// const recipeItems = (ingItems) => (
-//   // if (ingItems.unit != false){
-//   //   unitType = ingItems.unit}
-//   // else {
-//   //   unitType = ingItems.other
-//   // }
-//   <li>{ingItems.qty} {ingItems.unit} {ingItems.other} {ingItems.name}, {ingItems.comment}</li>
-// )
+const recipeItems = (ingItems) => (
+  // if (ingItems.unit != false){
+  //   unitType = ingItems.unit}
+  // else {
+  //   unitType = ingItems.other
+  // }
+  <li>{ingItems.qty} {ingItems.unit} {ingItems.other} {ingItems.name}, {ingItems.comment}</li>
+)
 
-// const instructionSteps = (instructionSteps) => (
-//   <li>{instructionSteps}</li>
-// )
+const instructionSteps = (instructionSteps) => (
+  <li>{instructionSteps}</li>
+)
 
-// const recipeDetails = (recipe) => (
-//   <div> 
-//     <h3>{recipe.recipeName}</h3>
-//     <h3>Ingredients</h3>
-//     <ul>
-//       {recipe.ingredients.map(recipeItems)}
-//     </ul> 
-//     <h3>Instructions</h3>
-//     <ol>
-//       {recipe.instructions.map(instructionSteps)}
-//     </ol>
-//     <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
-//     <h3>Recipe Summary</h3>
-//     <p>{recipe.summary}</p>
-//     <h3>Cuisine Type: {recipe.cuisineType}</h3> 
-//     <h3>Link to recipe:</h3>
-//     <a href='https://damndelicious.net/2014/03/01/potstickers/'> {recipe.name}</a>
-//   </div>
-// )
+const recipeDetails = (recipe) => (
+  <div> 
+    <h3>{recipe.recipeName}</h3>
+    <h3>Ingredients</h3>
+    <ul>
+      {recipe.ingredients.map(recipeItems)}
+    </ul> 
+    <h3>Instructions</h3>
+    <ol>
+      {recipe.instructions.map(instructionSteps)}
+    </ol>
+    <img src={recipe.recipeImg} alt={recipe.name} width="500" height="400"/>
+    <h3>Recipe Summary</h3>
+    <p>{recipe.summary}</p>
+    <h3>Cuisine Type: {recipe.cuisineType}</h3> 
+    <h3>Link to recipe:</h3>
+    <a href='https://damndelicious.net/2014/03/01/potstickers/'> {recipe.name}</a>
+  </div>
+)
 
 const testRecipe = {
     id: 1,
@@ -268,11 +269,8 @@ class App extends React.Component {
 
   render = () => (
   <div>
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-      </Switch>
-    </Router>
+<Header/>
+<UserHomePage currentUser={this.getCurrentUser()}/>
   </div>
   )
 }
@@ -280,19 +278,22 @@ class App extends React.Component {
 export default App;
 
 
-// <aside>
-// {/* <h1>New User Form and List of All Users</h1> */}
-//  {/* <NewUserForm addNewUser={this.addNewUser}/> */}
-// {/*{userList(this.getAllUsers())} */}
-// ____________________________________________________________________________________
+
+{/* <aside> */}
+{/* <h1>New User Form and List of All Users</h1> */}
+ {/* <NewUserForm addNewUser={this.addNewUser}/> */}
+{/*{userList(this.getAllUsers())} */}
+
 // </aside>
-// <article>
-// {/* <Convert /> */}
-// {/* <NewRecipeForm  /> */}
-// {/* <ReviewRecipeForm />  */}
-// <UserHomePage currentUser={this.getCurrentUser()}/>
-// {/* <RecipeDetails />  */}
-// {/* {userRecipeListing(this.getCurrentUser())} */}
-// {/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
-// {/* <TestBulmaForm /> */}
-// </article>
+{/* <Convert /> */}
+{/* <NewRecipeForm  /> */}
+{/* <ReviewRecipeForm />  */}
+
+{/* <RecipeDetails />  */}
+{/* {userRecipeListing(this.getCurrentUser())} */}
+{/* {recipeDetails(this.getCurrentUser().recipes[0])} */}
+{/* <TestBulmaForm /> */}
+// <Router>
+// <Home />
+// </Router>
+

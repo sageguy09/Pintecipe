@@ -1,9 +1,8 @@
 import React from 'react';
 import "bulma/css/bulma.css"
 
-class Home extends React.Component {
+class Header extends React.Component {
 render = () => (
-    <div>
 <section class="hero is-dark is-small">
   <div class="hero-head">
     <nav class="navbar">
@@ -48,9 +47,7 @@ render = () => (
     </div>
   </div>
 </section>
-
-    </div>
 )
 }
 
-export default Home
+export default Header;

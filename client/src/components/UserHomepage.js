@@ -10,7 +10,7 @@ class UserHomePage extends React.Component {
       fetch('/api/user/1')
         .then(res => res.json())
         .then(user => {
-          console.log("logging of users: ", user)
+          console.log("logging of user: ", user)
           this.setState({ user })
         })
     }
