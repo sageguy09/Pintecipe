@@ -40,7 +40,7 @@ render = () => (
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
             <a class="navbar-item">
-              <Link to="/user/2">Home</Link>
+              <Link to="/user/">Home</Link>
             </a>
             <a class="navbar-item">
               <Link to="/addUser">Add User</Link>
