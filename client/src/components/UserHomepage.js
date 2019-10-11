@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 import "bulma/css/bulma.css"
 class UserHomePage extends React.Component {
     state = {
+      
       user: {},
       //recipes: {...this.props.userRecipes}
     }
   
 
+
+    componentDidMount = () => {
+      this.getUser();
+    }
+  
     getUser = () => {
-      fetch(`/api/user/${this.props.match.params.id}/`)
+      fetch(`/api/user/${this.props.currentUser.id}/`)
       .then(res => res.json())
       .then(user => {
         console.log("logging of user: ", user)
@@ -17,11 +23,6 @@ class UserHomePage extends React.Component {
       })
     }
 
-    componentDidMount = () => {
-      this.getUser();
-    }
-  
-  
     userRecipes = (recipe) => (
       <li>{recipe.recipeName}</li>
     )

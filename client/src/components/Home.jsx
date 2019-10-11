@@ -160,12 +160,12 @@ class Home extends React.Component {
 
 
   render() {
-    // let UserPage = () => {
-    //     return (
-    //         <UserHomePage currentUser={this.getCurrentUser()}
-    //         />
-    //     )
-    // }
+    let UserPage = () => {
+        return (
+            <UserHomePage currentUser={this.getCurrentUser() || {}}
+            />
+        )
+    }
     // let NavHeader = () => {
     //   return (
     //     <Header currentUser={this.getCurrentUser()} />
@@ -178,7 +178,7 @@ class Home extends React.Component {
         {userList(this.getAllUsers(), this.state.currentUser, this.setCurrentUser)}
         <Switch>
           {/* <Route exact path="/" component={Home}/> */}
-          <Route path="/user/:id" component={UserHomePage} />
+          <Route path="/user/" render={UserPage} />
           <Route path="/addUser" component={NewUserForm} />
           <Route path="/addRecipe" component={NewRecipeForm} />
           <Route path="/reviewRecipe" component={ReviewRecipeForm} />
