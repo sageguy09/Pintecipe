@@ -30,7 +30,7 @@ render = () => (
             </a>
             <span class="navbar-item">
               <a class="button is-info is-inverted">
-                <span class="icon">
+                <span class="icon is-primary">
                   <i class="fas fa-user"></i>
                 </span>
                 <span>Current User</span>

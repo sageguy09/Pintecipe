@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom'
+import Header from './Header'
 import UserHomePage from './UserHomepage'
 import RecipeDetails from './RecipeDetails'
 import ReviewRecipeForm from './ReviewRecipeForm'
@@ -7,6 +8,15 @@ import NewUserForm from './NewUserForm'
 import NewRecipeForm from './NewRecipeForm'
 import "bulma/css/bulma.css"
 
+const usersListItems = (user) => (
+  <option value={user.id}>{user.username}</option>
+)
+
+const userList = (users, currentUserId, onChange) => (
+  <select value={currentUserId} onChange={(evnt) => onChange(evnt.target.value)}>
+    {users.map(usersListItems)}
+  </select>
+)
 const testRecipe = {
     id: 1,
     recipeName: 'Pot Stickers',
@@ -138,72 +148,39 @@ class Home extends React.Component {
       }
       getCurrentUser = () =>
       this.state.users[this.state.currentUser]
-render() { 
-    let UserPage = () => {
-        return (
-            <UserHomePage currentUser={this.getCurrentUser()} />
-        )
-    }
+      
+      getAllUsers = () =>
+      Object.values(this.state.users)
 
-return (
-<div>
+      setCurrentUser = (currentUser) => {
+        this.setState({ currentUser })
+      }
 
-<section class="hero is-dark is-small">
-  <div class="hero-head">
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item">
-            <h1 class="title"> Pintecipe</h1>
-          </a>
-          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroA" class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item is-active">
-              Home
-            </a>
-            <a class="navbar-item">
-              Add User
-            </a>
-            <a class="navbar-item">
-              Add Recipe
-            </a>
-            <span class="navbar-item">
-              <a class="button is-info is-inverted">
-                <span class="icon">
-                  <i class="fas fa-user"></i>
-                </span>
-                <span>Current User</span>
-              </a>
-            </span>
-          </div>
-        </div>
+
+  render() { 
+    // let UserPage = () => {
+    //     return (
+    //         <UserHomePage currentUser={this.getCurrentUser()}
+    //         />
+    //     )
+    // }
+
+    return (
+      <div>
+        <Header />
+        {userList(this.getAllUsers(), this.state.currentUser, this.setCurrentUser)}
+        <Switch>
+            {/* <Route exact path="/" component={Home}/> */}
+            <Route path="/user/:id" component={UserHomePage}/>
+            <Route path="/addUser" component={NewUserForm}/>
+            <Route path="/addRecipe" component={NewRecipeForm}/>
+            <Route path="/reviewRecipe" component={ReviewRecipeForm}/>
+            <Route path="/recipeDetails" component={RecipeDetails}/>
+            
+        </Switch>
       </div>
-    </nav>
-  </div>
-
-  <div class="hero-body">
-    <div class="container has-text-centered">
-    </div>
-  </div>
-</section>
-<Switch>
-    {/* <Route exact path="/" component={Home}/> */}
-    <Route path="/user" render={UserPage}/>
-    <Route path="/addUser" component={NewUserForm}/>
-    <Route path="/addRecipe" component={NewRecipeForm}/>
-    <Route path="/reviewRecipe" component={ReviewRecipeForm}/>
-    <Route path="/recipeDetails" component={RecipeDetails}/>
-    
-</Switch>
-    </div>
-)
-}
+    )
+  }
 }
 
 export default Home

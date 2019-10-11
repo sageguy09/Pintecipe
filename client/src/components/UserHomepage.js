@@ -6,13 +6,18 @@ class UserHomePage extends React.Component {
       //recipes: {...this.props.userRecipes}
     }
   
+
+    getUser = () => {
+      fetch(`/api/user/${this.props.match.params.id}/`)
+      .then(res => res.json())
+      .then(user => {
+        console.log("logging of user: ", user)
+        this.setState({ user })
+      })
+    }
+
     componentDidMount = () => {
-      fetch('/api/user/1')
-        .then(res => res.json())
-        .then(user => {
-          console.log("logging of user: ", user)
-          this.setState({ user })
-        })
+      this.getUser();
     }
   
   
@@ -31,9 +36,9 @@ class UserHomePage extends React.Component {
       <div>
       <h2>{this.state.user.username} Home Page</h2>
       <h3>Saved Recipes</h3>
-      <ul>{this.state.user.recipes.map(this.userRecipes)}</ul>
+      <ul>{this.state.user.recipes!== undefined ? this.state.user.recipes.map(this.userRecipes) : null}</ul>
       </div>
     )
   }
-
+  // {this.state.recipe.instructions !== undefined ? this.state.recipe.instructions.map(this.editInstructionSteps) : null}
   export default UserHomePage
