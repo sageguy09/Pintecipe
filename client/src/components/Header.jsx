@@ -1,9 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "bulma/css/bulma.css"
+// $('.navbar-burger').click(function() {
+//   $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
+// });
+// toggleMenu = () => {
+
+// }
 
 class Header extends React.Component {
+  state = {
+    currentUsername: "None",
+    user: {}
+  }
+  
+
+  componentDidMount = () => {
+    this.setUser()
+  }
+  setUser = () => {
+    let activeUser = this.props.currentUser
+    this.setState({user: activeUser})
+  }
 render = () => (
-<section class="hero is-dark is-small">
+<section class="hero is-dark is-small is-flex-desktop-only">
   <div class="hero-head">
     <nav class="navbar">
       <div class="container">
@@ -19,21 +39,21 @@ render = () => (
         </div>
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
-            <a class="navbar-item is-active">
-              Home
+            <a class="navbar-item">
+              <Link to="/user/2">Home</Link>
             </a>
             <a class="navbar-item">
-              Add User
+              <Link to="/addUser">Add User</Link>
             </a>
             <a class="navbar-item">
-              Add Recipe
+              <Link to="/addRecipe">Add Recipe</Link>
             </a>
             <span class="navbar-item">
-              <a class="button is-info is-inverted">
+              <a class="button is-info is-inverted" onClick={this.setUser}>
                 <span class="icon is-primary">
                   <i class="fas fa-user"></i>
                 </span>
-                <span>Current User</span>
+                <span>{this.state.user.username}</span>
               </a>
             </span>
           </div>

@@ -164,10 +164,15 @@ class Home extends React.Component {
     //         />
     //     )
     // }
+    // let NavHeader = () => {
+    //   return (
+    //     <Header currentUser={this.getCurrentUser()} />
+    //   )
+    // }
 
     return (
       <div>
-        <Header />
+        <Header users={this.state.users[this.state.currentUser]} currentUser={this.getCurrentUser()} />
         {userList(this.getAllUsers(), this.state.currentUser, this.setCurrentUser)}
         <Switch>
             {/* <Route exact path="/" component={Home}/> */}

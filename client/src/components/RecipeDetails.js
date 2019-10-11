@@ -5,7 +5,7 @@ class RecipeDetails extends React.Component {
       recipe: {},
     } 
     componentDidMount = () => {
-      fetch('/api/recipe/4/')
+      fetch('/api/recipe/6/')
       .then(res => res.json())
       .then(currentRecipe => {
         console.log('logging of user from RecipeDetails', currentRecipe)
@@ -18,10 +18,14 @@ class RecipeDetails extends React.Component {
     instructionSteps = (instructionSteps) => (
       <li>{instructionSteps.stepDesc}</li>
     )
+
+
     render = () => (
-      <div> 
+      <div class="container"> 
+      <div class="content">
       <h3>{this.state.recipe.recipeName}</h3>
        <h3>Ingredients</h3>
+       <img class="is-pulled-right" src={this.state.recipe.recipeImg} alt={this.state.recipe.recipeName} width="500" height="400"/>
        <ul> 
        {this.state.recipe.ingList !== undefined ? this.state.recipe.ingList.map(this.recipeItems) : null }
       </ul> 
@@ -29,12 +33,13 @@ class RecipeDetails extends React.Component {
       <ol>
         {this.state.recipe.instructions != undefined ? this.state.recipe.instructions.map(this.instructionSteps) : null }
       </ol>
-      <img src={this.state.recipe.recipeImg} alt={this.state.recipe.recipeName} width="500" height="400"/>
       <h3>Recipe Summary</h3>
       <p>{this.state.recipe.summary}</p>
       <h3>Cuisine Type: {this.state.recipe.cuisineType}</h3> 
       <h3>Link to recipe:</h3>
       <a href={this.state.recipe.recipeLink}>{this.state.recipe.recipeLink}</a> 
+      </div>
+
     </div>
     )
   }

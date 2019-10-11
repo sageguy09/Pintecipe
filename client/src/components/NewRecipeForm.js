@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 import "bulma/css/bulma.css";
 
 const saveRecipeToServer = (newRecipe) =>
@@ -46,7 +47,8 @@ class NewRecipeForm extends React.Component {
             ingDesc: "",
             ings: [],
             recipe:""
-            }
+            },
+            redirect: false
     }
 
     handleInput = (evnt) => {
@@ -76,27 +78,29 @@ class NewRecipeForm extends React.Component {
         this.addNewRecipe(this.state)
         //this.addNewInstructions(this.state.instructions)
         this.setState({
-            recipe: {
-                recipeName: "",
-                summary: "",
-                notes: "",
-                recipeImg: "",
-                cuisineType: "",
-                recipeLink: "",
-                user: 1
-                },
+            // recipe: {
+            //     recipeName: "",
+            //     summary: "",
+            //     notes: "",
+            //     recipeImg: "",
+            //     cuisineType: "",
+            //     recipeLink: "",
+            //     user: 1
+            //     },
 
-            instructions : {
-                stepsDesc: "",
-                steps: [],
-                recipe: ""
-                },
-            ingList : {
-                ingDesc: "",
-                ings: [],
-                recipe:""
-            }
+            // instructions : {
+            //     stepsDesc: "",
+            //     steps: [],
+            //     recipe: ""
+            //     },
+            // ingList : {
+            //     ingDesc: "",
+            //     ings: [],
+            //     recipe:""
+            // },
+            redirect: true
         })
+
     }
 
 
@@ -146,7 +150,11 @@ class NewRecipeForm extends React.Component {
         })
     }
 
-    render = () => (
+    render() {
+        if (this.state.redirect) {
+            return(<Redirect to="/user/2"/>)
+        }
+        return (
         <div>
             <h2> Add a recipe </h2>
             <form id="newRecipe" onSubmit={this.handleSubmit}>
@@ -213,5 +221,6 @@ class NewRecipeForm extends React.Component {
         </div>
     )
     }
+}
 
     export default NewRecipeForm
