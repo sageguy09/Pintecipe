@@ -53,7 +53,7 @@ render = () => (
                 <span class="icon is-primary">
                   <i class="fas fa-user"></i>
                 </span>
-                <span>{this.state.user.username}</span>
+                <span>{this.props.currentUser.username}</span>
               </a>
             </span>
           </div>

@@ -5,7 +5,7 @@ class RecipeDetails extends React.Component {
       recipe: {},
     } 
     componentDidMount = () => {
-      fetch('/api/recipe/6/')
+      fetch('/api/recipe/1/')
       .then(res => res.json())
       .then(currentRecipe => {
         console.log('logging of user from RecipeDetails', currentRecipe)
