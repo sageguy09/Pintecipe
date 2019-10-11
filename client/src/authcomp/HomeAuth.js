@@ -10,7 +10,8 @@ class HomeAuth extends Component {
     this.state = {
       displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
-      username: ''
+      username: '',
+      user: ''
     };
   }
 
@@ -43,7 +44,8 @@ class HomeAuth extends Component {
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: json.user.username
+          username: json.user.username,
+          user: json.user
         });
       });
   };
@@ -63,8 +65,9 @@ class HomeAuth extends Component {
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: json.username
-        });
+          username: json.user.username,
+          user: json.user
+        })
       });
   };
 
