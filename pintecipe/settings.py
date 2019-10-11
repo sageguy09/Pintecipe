@@ -143,4 +143,8 @@ STATICFILES_DIRS = [
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'pintecipe.utils.my_jwt_response_handler'
+}
 #django_heroku.settings(locals())
