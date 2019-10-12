@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './components/Home'
+import HomeAuth from './authcomp/HomeAuth'
 import UserHomePage from './components/UserHomepage'
 import RecipeDetails from './components/RecipeDetails'
 import ReviewRecipeForm from './components/ReviewRecipeForm'
@@ -271,7 +272,7 @@ class App extends React.Component {
   <div>
 
  <Router>
-<Home />
+<HomeAuth />
  </Router>
 {/* <ReviewRecipeForm /> */}
   </div>
