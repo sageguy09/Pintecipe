@@ -3,25 +3,36 @@ import { Link } from 'react-router-dom';
 import "bulma/css/bulma.css"
 class UserHomePage extends React.Component {
     state = {
-      
-      user: {},
+      logged_in: localStorage.getItem('token') ? true : false,
+      user: this.props.currentUser ,
       //recipes: {...this.props.userRecipes}
     }
   
 
 
-    componentDidMount = () => {
-      this.getUser();
-    }
+    // componentDidMount = () => {
+    //   if (this.state.logged_in) {
+    //     fetch('http://localhost:8000/api/current_user/', {
+    //       headers: {
+    //         Authorization: `JWT ${localStorage.getItem('token')}`
+    //       }
+    //     })
+    //       .then(res => res.json())
+    //       .then(json => {
+    //         this.setState({ user: json.user });
+    //       });
+    //   }
+    //  // this.getUser();
+    // }
   
-    getUser = () => {
-      fetch(`/api/user/${this.props.currentUser.id}/`)
-      .then(res => res.json())
-      .then(user => {
-        console.log("logging of user: ", user)
-        this.setState({ user })
-      })
-    }
+    // getUser = () => {
+    //   fetch(`/api/user/${this.props.currentUser.id}/`)
+    //   .then(res => res.json())
+    //   .then(user => {
+    //     console.log("logging of user: ", user)
+    //     this.setState({ user })
+    //   })
+    // }
 
     userRecipes = (recipe) => (
       <li>{recipe.recipeName}</li>

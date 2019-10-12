@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom'
 import Nav from './Nav';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
+import Header from '../components/Header'
+import UserHomePage from '../components/UserHomepage'
+import RecipeDetails from '../components/RecipeDetails'
+import ReviewRecipeForm from '../components/ReviewRecipeForm'
+import NewUserForm from '../components/NewUserForm'
+import NewRecipeForm from '../components/NewRecipeForm'
 import '../App.css';
 
 class HomeAuth extends Component {
@@ -11,13 +18,19 @@ class HomeAuth extends Component {
       displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
       username: '',
-      user: ''
+      currentUser: 1,
+      user: {
+              id: 1,
+              username: "ali",
+              email: "afreeman_2010@yahoo.com",
+              recipes: []
+            }
     };
   }
 
   componentDidMount() {
     if (this.state.logged_in) {
-      fetch('http://localhost:8000/core/current_user/', {
+      fetch('http://localhost:8000/api/current_user/', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -45,6 +58,7 @@ class HomeAuth extends Component {
           logged_in: true,
           displayed_form: '',
           username: json.user.username,
+          currentUser: json.user.id,
           user: json.user
         });
       });
@@ -52,7 +66,7 @@ class HomeAuth extends Component {
 
   handle_signup = (e, data) => {
     e.preventDefault();
-    fetch('http://localhost:8000/core/users/', {
+    fetch('http://localhost:8000/api/users/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -81,6 +95,8 @@ class HomeAuth extends Component {
       displayed_form: form
     });
   };
+  getCurrentUser = () =>
+    this.state.user.find(user => user.id === parseInt(this.state.currentUser))
 
   render() {
     let form;
@@ -94,6 +110,12 @@ class HomeAuth extends Component {
       default:
         form = null;
     }
+    let UserPage = () => {
+      return (
+          <UserHomePage currentUser={this.state.user}
+          />
+      )
+  }
 
     return (
       <div className="App">
@@ -108,7 +130,18 @@ class HomeAuth extends Component {
             ? `Hello, ${this.state.username}`
             : 'Please Log In'}
         </h3>
+        <Header currentUser={this.state.user} />
+       <Switch>
+       <Route path="/user/" render={UserPage} />
+          <Route path="/addUser" component={NewUserForm} />
+          <Route path="/addRecipe" component={NewRecipeForm} />
+          {/* <Route path="/reviewRecipe" component={ReviewRecipeForm} /> */}
+          <Route path="/reviewRecipe/:recipeid/" component={ReviewRecipeForm} />
+          <Route path="/recipeDetails/:id" component={RecipeDetails} />
+          <Route path="/recipeDetails" component={RecipeDetails} />
+       </Switch>
       </div>
+      
     );
   }
 }

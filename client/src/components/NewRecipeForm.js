@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types';
 import "bulma/css/bulma.css";
 
 const saveRecipeToServer = (newRecipe) =>
@@ -36,7 +37,7 @@ class NewRecipeForm extends React.Component {
             recipeImg: "",
             cuisineType: "",
             recipeLink: "",
-            user: 2
+            user: this.props.currentUser
             },
         instructions : {
             stepsDesc: "",
