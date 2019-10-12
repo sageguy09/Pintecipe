@@ -1,14 +1,15 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 class RecipeDetails extends React.Component {
     state = {
       recipe: {},
     } 
     componentDidMount = () => {
+      console.log(this.props.match.params)
       fetch(`/api/recipe/${this.props.match.params.id}`)
       .then(res => res.json())
       .then(currentRecipe => {
-        console.log('logging of user from RecipeDetails', currentRecipe)
+        //console.log('logging of user from RecipeDetails', currentRecipe)
         this.setState({ recipe: currentRecipe })
       })
     }
@@ -39,7 +40,7 @@ class RecipeDetails extends React.Component {
       <h3>Link to recipe:</h3>
       <a href={this.state.recipe.recipeLink}>{this.state.recipe.recipeLink}</a> 
       <div>
-        <a class="button is-primary" href={`/reviewRecipe/${this.state.recipe.id}`}>Edit Recipe</a>
+        <button class="button is-primary"><Link to={`/reviewRecipe/${this.state.recipe.id}/`}>Edit Recipe</Link></button>
       </div>
       </div>
       

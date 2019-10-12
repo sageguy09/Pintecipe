@@ -19,7 +19,7 @@ fetch('/api/inglist/'+ingId+'/',
     }
 ).then(res => res.json())
 const updateInstructionsOnServer = (instId, updatedInst) =>
-//console.log(ingId, updatedIngItem)
+// console.log(instId, updatedInst)
 fetch('/api/instruction/'+instId+'/',
     {
         method: "PUT",
@@ -41,11 +41,11 @@ class ReviewRecipeForm extends React.Component {
     recipe: {},
 
   }
-  componentDidMount = () => {
-    fetch('/api/recipe/1/')
+    componentDidMount = () => {
+    fetch(`/api/recipe/${this.props.match.params.recipeid}/`)
     .then(res => res.json())
     .then(currentRecipe => {
-      console.log('logging of user from RecipeDetails', currentRecipe)
+      
       this.setState({ recipe: currentRecipe })
     })
   }

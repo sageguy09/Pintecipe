@@ -181,8 +181,8 @@ class Home extends React.Component {
           <Route path="/user/" render={UserPage} />
           <Route path="/addUser" component={NewUserForm} />
           <Route path="/addRecipe" component={NewRecipeForm} />
-          <Route path="/reviewRecipe" component={ReviewRecipeForm} />
-          <Route path="/reviewRecipe/:id" component={ReviewRecipeForm} />
+          {/* <Route path="/reviewRecipe" component={ReviewRecipeForm} /> */}
+          <Route path="/reviewRecipe/:recipeid/" component={ReviewRecipeForm} />
           <Route path="/recipeDetails/:id" component={RecipeDetails} />
           <Route path="/recipeDetails" component={RecipeDetails} />
 
