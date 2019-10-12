@@ -38,8 +38,11 @@ class RecipeDetails extends React.Component {
       <h3>Cuisine Type: {this.state.recipe.cuisineType}</h3> 
       <h3>Link to recipe:</h3>
       <a href={this.state.recipe.recipeLink}>{this.state.recipe.recipeLink}</a> 
+      <div>
+        <a class="button is-primary" href={`/reviewRecipe/${this.state.recipe.id}`}>Edit Recipe</a>
       </div>
-
+      </div>
+      
     </div>
     )
   }
