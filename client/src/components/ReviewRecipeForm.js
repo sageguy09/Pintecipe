@@ -5,7 +5,7 @@ const updateRecipeOnServer = (recipeId, updatedRecipe) =>
     fetch('/api/recipe/'+recipeId+'/',
         {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", Authorization: `JWT ${localStorage.getItem('token')}` },
             body: JSON.stringify(updatedRecipe)
         }
     ).then(res => res.json())
@@ -14,7 +14,7 @@ const updateIngListOnServer = (ingId, updatedIngItem) =>
 fetch('/api/inglist/'+ingId+'/',
     {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `JWT ${localStorage.getItem('token')}` },
         body: JSON.stringify(updatedIngItem)
     }
 ).then(res => res.json())
@@ -23,7 +23,7 @@ const updateInstructionsOnServer = (instId, updatedInst) =>
 fetch('/api/instruction/'+instId+'/',
     {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" , Authorization: `JWT ${localStorage.getItem('token')}`},
         body: JSON.stringify(updatedInst)
     }
 ).then(res => res.json())
@@ -32,7 +32,7 @@ const DeleteRecipeFromServer = (recipeId, deletedRecipe) =>
 fetch('/api/recipe/'+recipeId+'/',
         {
             method: "DELETE",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", Authorization: `JWT ${localStorage.getItem('token')}` },
             body: JSON.stringify(deletedRecipe)
         }
     )
@@ -42,7 +42,11 @@ class ReviewRecipeForm extends React.Component {
 
   }
     componentDidMount = () => {
-    fetch(`/api/recipe/${this.props.match.params.recipeid}/`)
+    fetch(`/api/recipe/${this.props.match.params.recipeid}/`, {
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(currentRecipe => {
       

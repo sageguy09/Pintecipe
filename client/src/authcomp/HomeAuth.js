@@ -121,7 +121,7 @@ class HomeAuth extends Component {
 
   let NewRecipePage = () => {
     return (
-      <NewRecipeForm currentUser={this.getCurrentUserObj() || {}}
+      <NewRecipeForm currentUser={this.getCurrentUser() || {}}
         />
       
     )

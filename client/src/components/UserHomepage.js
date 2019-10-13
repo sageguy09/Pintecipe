@@ -10,20 +10,21 @@ class UserHomePage extends React.Component {
   
 
 
-    // componentDidMount = () => {
-    //   if (this.state.logged_in) {
-    //     fetch('http://localhost:8000/api/current_user/', {
-    //       headers: {
-    //         Authorization: `JWT ${localStorage.getItem('token')}`
-    //       }
-    //     })
-    //       .then(res => res.json())
-    //       .then(json => {
-    //         this.setState({ user: json.user });
-    //       });
-    //   }
-    //  // this.getUser();
-    // }
+    componentDidMount = () => {
+      if (this.state.logged_in) {
+        fetch('http://localhost:8000/api/current_user/', {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+          }
+        })
+          .then(res => res.json())
+          .then(user => {
+            this.setState({ user: user });
+            //console.log(json)
+          });
+      }
+     // this.getUser();
+    }
   
     // getUser = () => {
     //   fetch(`/api/user/${this.props.currentUser.id}/`)

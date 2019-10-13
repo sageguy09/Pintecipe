@@ -27,7 +27,8 @@ class RecipeDetails extends React.Component {
 
     render = () => (
       <div class="container"> 
-      <div class="content">
+
+<div class="content">
       <h3>{this.state.recipe.recipeName}</h3>
        <h3>Ingredients</h3>
        <img class="is-pulled-right" src={this.state.recipe.recipeImg} alt={this.state.recipe.recipeName} width="500" height="400"/>
@@ -43,12 +44,12 @@ class RecipeDetails extends React.Component {
       <h3>Cuisine Type: {this.state.recipe.cuisineType}</h3> 
       <h3>Link to recipe:</h3>
       <a href={this.state.recipe.recipeLink}>{this.state.recipe.recipeLink}</a> 
+      </div>
       <div>
         <button class="button is-primary"><Link to={`/reviewRecipe/${this.state.recipe.id}/`}>Edit Recipe</Link></button>
       </div>
       </div>
-      
-    </div>
+    
     )
   }
 
