@@ -6,7 +6,11 @@ class RecipeDetails extends React.Component {
     } 
     componentDidMount = () => {
       console.log(this.props.match.params)
-      fetch(`/api/recipe/${this.props.match.params.id}`)
+      fetch(`/api/recipe/${this.props.match.params.id}`, {
+        headers: {
+          Authorization: `JWT ${localStorage.getItem('token')}`
+        }
+      })
       .then(res => res.json())
       .then(currentRecipe => {
         //console.log('logging of user from RecipeDetails', currentRecipe)
