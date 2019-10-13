@@ -56,21 +56,21 @@ class RecipeSerializer(serializers.ModelSerializer):
             'user'
             ]
 class UserSerializer(serializers.ModelSerializer):
-    recipes = RecipeSerializer(many=True, read_only=True)
+    
     class Meta:
         model = User
         fields = [
             'id', 
             'username', 
             'email',
-            'first_name',
-            'recipes'
+            'first_name'
             ]
 
 class UserSerializerWithToken(serializers.ModelSerializer):
-
+    recipes = RecipeSerializer(many=True, read_only=True)
     token = serializers.SerializerMethodField()
     password = serializers.CharField(write_only=True)
+
 
     def get_token(self, obj):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -90,4 +90,4 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('token', 'username', 'password')
+        fields = ('token', 'username', 'password', 'recipes')

@@ -7,7 +7,7 @@ const saveRecipeToServer = (newRecipe) =>
     fetch('/api/recipe/',
         {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" , Authorization: `JWT ${localStorage.getItem('token')}`},
             body: JSON.stringify(newRecipe)
         }
     ).then(res => res.json())
@@ -15,7 +15,7 @@ const saveInstructionsToServer = (newInstructions) =>
     fetch('/api/instruction/',
         {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" , Authorization: `JWT ${localStorage.getItem('token')}`},
             body: JSON.stringify(newInstructions)
         }
     ).then(res => res.json())
@@ -23,7 +23,7 @@ const saveIngredientsToServer = (newIngredients) =>
 fetch('/api/inglist/',
     {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" , Authorization: `JWT ${localStorage.getItem('token')}`},
         body: JSON.stringify(newIngredients)
     }
 ).then(res => res.json())

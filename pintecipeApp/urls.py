@@ -9,7 +9,8 @@ router.register('recipe', views.RecipeViewSet)
 #router.register('ingredient', views.IngredientViewSet)
 router.register('instruction', views.InstructionViewSet)
 router.register('inglist' , views.IngredientListViewSet)
-
+#router.register('current_user', current_user)
+#router.register('users', UserList.as_view)
 
 
 urlpatterns = [
