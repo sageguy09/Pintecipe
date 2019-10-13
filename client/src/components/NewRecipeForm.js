@@ -49,9 +49,16 @@ class NewRecipeForm extends React.Component {
             ings: [],
             recipe:""
             },
-            redirect: false
+            redirect: false,
     }
 
+    // componentDidMount = () => {
+    //     this.setUser()
+    // }
+    // setUser = () => {
+    //     let activeUser = this.props.currentUser
+    //     this.setState({ = activeUser})
+    //   }
     handleInput = (evnt) => {
         let newRecipe = {...this.state.recipe};
         newRecipe[evnt.target.name] = evnt.target.value;

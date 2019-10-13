@@ -166,6 +166,14 @@ class Home extends React.Component {
             />
         )
     }
+
+    let NewRecipePage = () => {
+      return (
+        <NewRecipeForm currentUser={this.getCurrentUser() || {}}
+          />
+        
+      )
+    }
     // let NavHeader = () => {
     //   return (
     //     <Header currentUser={this.getCurrentUser()} />
@@ -180,6 +188,7 @@ class Home extends React.Component {
           {/* <Route exact path="/" component={Home}/> */}
           <Route path="/user/" render={UserPage} />
           <Route path="/addUser" component={NewUserForm} />
+          <Route path="/newRecipe" renderk={NewRecipePage} />
           <Route path="/addRecipe" component={NewRecipeForm} />
           {/* <Route path="/reviewRecipe" component={ReviewRecipeForm} /> */}
           <Route path="/reviewRecipe/:recipeid/" component={ReviewRecipeForm} />

@@ -20,7 +20,7 @@ class HomeAuth extends Component {
       username: '',
       currentUser: 1,
       user: {
-              id: 1,
+              id: 5,
               username: "ali",
               email: "afreeman_2010@yahoo.com",
               recipes: []
@@ -96,7 +96,9 @@ class HomeAuth extends Component {
     });
   };
   getCurrentUser = () =>
-    this.state.user.find(user => user.id === parseInt(this.state.currentUser))
+    this.state.user.id
+    getCurrentUserObj = () =>
+    this.state.users.find(user => user.id === parseInt(this.state.currentUser))
 
   render() {
     let form;
@@ -117,6 +119,15 @@ class HomeAuth extends Component {
       )
   }
 
+  let NewRecipePage = () => {
+    return (
+      <NewRecipeForm currentUser={this.getCurrentUserObj() || {}}
+        />
+      
+    )
+  }
+  // let Nav
+
     return (
       <div className="App">
         <Nav
@@ -134,7 +145,8 @@ class HomeAuth extends Component {
        <Switch>
        <Route path="/user/" render={UserPage} />
           <Route path="/addUser" component={NewUserForm} />
-          <Route path="/addRecipe" component={NewRecipeForm} />
+          <Route path="/addRecipe" render={NewRecipePage} />
+          {/* <Route path="/newRecipe" render={NewRecipePage} /> */}
           {/* <Route path="/reviewRecipe" component={ReviewRecipeForm} /> */}
           <Route path="/reviewRecipe/:recipeid/" component={ReviewRecipeForm} />
           <Route path="/recipeDetails/:id" component={RecipeDetails} />
