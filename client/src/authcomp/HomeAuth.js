@@ -89,7 +89,7 @@ class HomeAuth extends Component {
 
   handle_logout = () => {
     localStorage.removeItem('token');
-    this.setState({ logged_in: false, username: '' });
+    this.setState({ logged_in: false, username: '', redirect: true });
   };
 
   display_form = form => {
@@ -133,18 +133,6 @@ class HomeAuth extends Component {
       
     )
   }
-  // let NavBar = () => {
-  //   return (
-  //   <Header currentUser={this.getCurrentUserName() || {}}
-  //   logged_in={this.state.logged_in}
-  //   display_form={this.display_form}
-  //   handle_logout={this.handle_logout} 
-  //   state={this.state}
-  //   handle_login={this.handle_login}
-  //   handle_signup={this.handle_signup}/>
-  //   )
-  // }
-  // let Nav
 
     return (
       <div className="App">

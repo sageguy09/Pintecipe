@@ -160,7 +160,7 @@ class NewRecipeForm extends React.Component {
 
     render() {
         if (this.state.redirect) {
-            return(<Redirect to="/user/2"/>)
+            return(<Redirect to="/user/"/>)
         }
         return (
         <div>

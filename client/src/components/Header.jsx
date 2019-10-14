@@ -24,7 +24,7 @@ class Header extends React.Component {
   }
   setUser = () => {
     let activeUser = this.props.currentUser
-    console.log(activeUser)
+    //console.log(activeUser)
     this.setState({ user: activeUser })
   }
   logged_out_nav = (
@@ -118,7 +118,7 @@ class Header extends React.Component {
                       <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                           <span onClick={this.profileclick}>{this.props.logged_in
-                            ? `${this.props.currentUser.username != undefined ? this.props.currentUser.username : null}`
+                            ? `${this.props.state.username != undefined ? this.props.state.username : null}`
                             : 'Log In'}</span>
                           <span class="icon is-small">
                           </span>
@@ -127,19 +127,19 @@ class Header extends React.Component {
                       <div class="dropdown-menu" id="dropdown-menu" role="menu">
                         <div class="dropdown-content">
 
-                          <a href="#" class="dropdown-item">
+                          <a class="dropdown-item">
                             {this.props.logged_in
-                              ? `${this.props.currentUser.username != undefined ? this.props.currentUser.username : null}`
+                              ? `${this.props.state.username != undefined ? this.props.state.username : null}`
                               : null}
                           </a>
                           <hr class="dropdown-divider" />
                           {/* <a href="#" class="dropdown-item">
       {this.props.logged_in ? this.logged_in_nav : this.logged_out_nav}
       </a> */}
-                          <a href="#" class="dropdown-item" >
+                          <a  class="dropdown-item" >
                             {this.props.logged_in ? this.logged_in_nav : this.logged_out_login}
                           </a>
-                          <a href="#" class="dropdown-item" >
+                          <a  class="dropdown-item" >
                             {this.props.logged_in ? null : this.logged_out_signup}
                           </a>
                         </div>
