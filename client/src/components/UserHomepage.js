@@ -3,25 +3,37 @@ import { Link } from 'react-router-dom';
 import "bulma/css/bulma.css"
 class UserHomePage extends React.Component {
     state = {
-      
-      user: {},
+      logged_in: localStorage.getItem('token') ? true : false,
+      user: this.props.currentUser ,
       //recipes: {...this.props.userRecipes}
     }
   
 
 
     componentDidMount = () => {
-      this.getUser();
+      if (this.state.logged_in) {
+        fetch('http://localhost:8000/api/current_user/', {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+          }
+        })
+          .then(res => res.json())
+          .then(user => {
+            this.setState({ user: user });
+            //console.log(json)
+          });
+      }
+     // this.getUser();
     }
   
-    getUser = () => {
-      fetch(`/api/user/${this.props.currentUser.id}/`)
-      .then(res => res.json())
-      .then(user => {
-        console.log("logging of user: ", user)
-        this.setState({ user })
-      })
-    }
+    // getUser = () => {
+    //   fetch(`/api/user/${this.props.currentUser.id}/`)
+    //   .then(res => res.json())
+    //   .then(user => {
+    //     console.log("logging of user: ", user)
+    //     this.setState({ user })
+    //   })
+    // }
 
     userRecipes = (recipe) => (
       <li>{recipe.recipeName}</li>
@@ -50,8 +62,9 @@ class UserHomePage extends React.Component {
     )
     render = () => (
       <div class="container">
-        <h2>{this.state.user.username} Home Page</h2>
-        <h3>Saved Recipes</h3>
+
+        <h2 class="title">{this.state.user.username} Home Page</h2>
+        <h3 class="title is-4">Saved Recipes</h3>
           {/* <ul>{this.state.user.recipes!== undefined ? this.state.user.recipes.map(this.userRecipes) : null}</ul> */}
         <div class="tile is-ancestor is-flex">
           <div class="tile ">

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types';
 import "bulma/css/bulma.css";
 
 const saveRecipeToServer = (newRecipe) =>
     fetch('/api/recipe/',
         {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" , Authorization: `JWT ${localStorage.getItem('token')}`},
             body: JSON.stringify(newRecipe)
         }
     ).then(res => res.json())
@@ -14,7 +15,7 @@ const saveInstructionsToServer = (newInstructions) =>
     fetch('/api/instruction/',
         {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" , Authorization: `JWT ${localStorage.getItem('token')}`},
             body: JSON.stringify(newInstructions)
         }
     ).then(res => res.json())
@@ -22,7 +23,7 @@ const saveIngredientsToServer = (newIngredients) =>
 fetch('/api/inglist/',
     {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" , Authorization: `JWT ${localStorage.getItem('token')}`},
         body: JSON.stringify(newIngredients)
     }
 ).then(res => res.json())
@@ -36,7 +37,7 @@ class NewRecipeForm extends React.Component {
             recipeImg: "",
             cuisineType: "",
             recipeLink: "",
-            user: 2
+            user: this.props.currentUser
             },
         instructions : {
             stepsDesc: "",
@@ -48,9 +49,16 @@ class NewRecipeForm extends React.Component {
             ings: [],
             recipe:""
             },
-            redirect: false
+            redirect: false,
     }
 
+    // componentDidMount = () => {
+    //     this.setUser()
+    // }
+    // setUser = () => {
+    //     let activeUser = this.props.currentUser
+    //     this.setState({ = activeUser})
+    //   }
     handleInput = (evnt) => {
         let newRecipe = {...this.state.recipe};
         newRecipe[evnt.target.name] = evnt.target.value;
@@ -152,7 +160,7 @@ class NewRecipeForm extends React.Component {
 
     render() {
         if (this.state.redirect) {
-            return(<Redirect to="/user/2"/>)
+            return(<Redirect to="/user/"/>)
         }
         return (
         <div>
