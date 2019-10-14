@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom'
 
 class SignupForm extends React.Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    redirect: false
   };
 
   handle_change = e => {
@@ -18,6 +20,7 @@ class SignupForm extends React.Component {
   };
 
   render() {
+
     return (
       <form onSubmit={e => this.props.handle_signup(e, this.state)}>
         <h4>Sign Up</h4>

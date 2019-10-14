@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Nav from './Nav';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
@@ -24,7 +24,8 @@ class HomeAuth extends Component {
               username: "ali",
               email: "afreeman_2010@yahoo.com",
               recipes: []
-            }
+            },
+      redirect: false
     };
   }
 
@@ -80,7 +81,8 @@ class HomeAuth extends Component {
           logged_in: true,
           displayed_form: '',
           username: json.user.username,
-          user: json.user
+          user: json.user,
+          redirect: true
         })
       });
   };
@@ -97,10 +99,15 @@ class HomeAuth extends Component {
   };
   getCurrentUser = () =>
     this.state.user.id
+    getCurrentUserName = () =>
+    this.state.user
     getCurrentUserObj = () =>
     this.state.users.find(user => user.id === parseInt(this.state.currentUser))
 
   render() {
+    if (this.state.redirect) {
+      return (<Redirect to="/user/"/>)
+    }
     let form;
     switch (this.state.displayed_form) {
       case 'login':
@@ -126,27 +133,28 @@ class HomeAuth extends Component {
       
     )
   }
+  // let NavBar = () => {
+  //   return (
+  //   <Header currentUser={this.getCurrentUserName() || {}}
+  //   logged_in={this.state.logged_in}
+  //   display_form={this.display_form}
+  //   handle_logout={this.handle_logout} 
+  //   state={this.state}
+  //   handle_login={this.handle_login}
+  //   handle_signup={this.handle_signup}/>
+  //   )
+  // }
   // let Nav
 
     return (
       <div className="App">
-        {/* <Nav
-          logged_in={this.state.logged_in}
-          display_form={this.display_form}
-          handle_logout={this.handle_logout}
-        />
-        {form}
-        <h3>
-          {this.state.logged_in
-            ? `Hello, ${this.props.currentUser.username}`
-            : 'Please Log In'}
-        </h3> */}
         <Header currentUser={this.state.user}
         logged_in={this.state.logged_in}
         display_form={this.display_form}
         handle_logout={this.handle_logout} 
         state={this.state}
-        handle_login={this.handle_login}/>
+        handle_login={this.handle_login}
+        handle_signup={this.handle_signup}/>
 
        <Switch>
        <Route path="/user/" render={UserPage} />
@@ -165,3 +173,5 @@ class HomeAuth extends Component {
 }
 
 export default HomeAuth;
+
+//{this.state.recipe.instructions != undefined ? this.state.recipe.instructions.map(this.instructionSteps) : null }

@@ -14,7 +14,8 @@ import SignupForm from '../authcomp/SignupForm';
 class Header extends React.Component {
   state = {
     currentUsername: "",
-    user: {}
+    user: {},
+    redirect: false
   }
 
 
@@ -23,6 +24,7 @@ class Header extends React.Component {
   }
   setUser = () => {
     let activeUser = this.props.currentUser
+    console.log(activeUser)
     this.setState({ user: activeUser })
   }
   logged_out_nav = (
@@ -116,7 +118,7 @@ class Header extends React.Component {
                       <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                           <span onClick={this.profileclick}>{this.props.logged_in
-                            ? `${this.props.currentUser.username}`
+                            ? `${this.props.currentUser.username != undefined ? this.props.currentUser.username : null}`
                             : 'Log In'}</span>
                           <span class="icon is-small">
                           </span>
@@ -127,7 +129,7 @@ class Header extends React.Component {
 
                           <a href="#" class="dropdown-item">
                             {this.props.logged_in
-                              ? `${this.props.currentUser.username}`
+                              ? `${this.props.currentUser.username != undefined ? this.props.currentUser.username : null}`
                               : null}
                           </a>
                           <hr class="dropdown-divider" />
