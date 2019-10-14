@@ -30,7 +30,7 @@ This web app is ideal for users looking for a simple solution to managing their 
 
 ### ERD and Wireframing
 
-![Initial ERD Diagram](https://imgur.com/cfw6fAn.jpg)
+![Initial ERD Diagram](https://imgur.com/vGOArIW.jpg)
 ![Initial Component Tree](https://imgur.com/cfw6fAn.jpg)
 ![Mockup User Home Page  Wireframe](https://imgur.com/qugbY4V.jpg)
 ![Mockup Add Recipe Wireframe](https://imgur.com/U12AyVK.jpg)
