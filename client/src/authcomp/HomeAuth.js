@@ -5,6 +5,7 @@ import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import Header from '../components/Header'
 import UserHomePage from '../components/UserHomepage'
+import Landing from '../components/Landing'
 import RecipeDetails from '../components/RecipeDetails'
 import ReviewRecipeForm from '../components/ReviewRecipeForm'
 import NewUserForm from '../components/NewUserForm'
@@ -145,6 +146,7 @@ class HomeAuth extends Component {
         handle_signup={this.handle_signup}/>
 
        <Switch>
+         <Route exact path="/" component={Landing}/>
        <Route path="/user/" render={UserPage} />
           <Route path="/addUser" component={NewUserForm} />
           <Route path="/addRecipe" render={NewRecipePage} />
