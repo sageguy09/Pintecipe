@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "bulma/css/bulma.css"
+import PropTypes from 'prop-types';
+import LoginForm from '../authcomp/LoginForm';
+import SignupForm from '../authcomp/SignupForm';
 // $('.navbar-burger').click(function() {
 //   $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
 // });
@@ -10,7 +13,7 @@ import "bulma/css/bulma.css"
 
 class Header extends React.Component {
   state = {
-    currentUsername: "None",
+    currentUsername: "",
     user: {}
   }
   
@@ -22,7 +25,42 @@ class Header extends React.Component {
     let activeUser = this.props.currentUser
     this.setState({user: activeUser})
   }
-render = () => (
+logged_out_nav = (
+    <ul>
+      <li onClick={() => this.props.display_form('login')}>login</li>
+      <li onClick={() => this.props.display_form('signup')}>signup</li>
+    </ul>
+  );
+
+logged_in_nav = (
+    <ul>
+      <li onClick={this.props.handle_logout}>logout</li>
+    </ul>
+  );
+
+
+  navbarclick = e => {
+    e.preventDefault();
+    let hambar = document.querySelector('.navbar-burger')
+    let items = document.querySelector('#navbarMenuHeroA')
+   
+    items.classList.toggle('is-active')
+    hambar.classList.toggle('is-active')
+
+  }
+render () {
+  let form;
+    switch (this.props.state.displayed_form) {
+      case 'login':
+        form = <LoginForm handle_login={this.props.handle_login} />;
+        break;
+      case 'signup':
+        form = <SignupForm handle_signup={this.props.handle_signup} />;
+        break;
+      default:
+        form = null;
+    }
+    return (
 <section class="hero is-dark is-small is-flex-desktop-only">
   <div class="hero-head">
     <nav class="navbar">
@@ -31,7 +69,7 @@ render = () => (
           <a class="navbar-item">
             <h1 class="title"> Pintecipe</h1>
           </a>
-          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+          <span class="navbar-burger burger" data-target="navbarMenuHeroA" onClick={this.navbarclick}>
             <span></span>
             <span></span>
             <span></span>
@@ -49,13 +87,17 @@ render = () => (
               <Link to="/addRecipe">Add Recipe</Link>
             </a>
             <span class="navbar-item">
-              <a class="button is-info is-inverted" onClick={this.setUser}>
+              <a class="button is-info is-inverted" onClick={this.navbarclick}>
                 <span class="icon is-primary">
                   <i class="fas fa-user"></i>
                 </span>
-                <span>{this.props.currentUser.username}</span>
+                <span>{this.props.logged_in
+            ? `${this.props.currentUser.username}`
+            : 'Log In'}</span>
               </a>
             </span>
+            <div clas="navbar-item">{this.props.logged_in ? this.logged_in_nav : this.logged_out_nav}</div>
+            {form}
           </div>
         </div>
       </div>
@@ -69,5 +111,12 @@ render = () => (
 </section>
 )
 }
+}
 
 export default Header;
+
+Header.propTypes = {
+  logged_in: PropTypes.bool.isRequired,
+  display_form: PropTypes.func.isRequired,
+  handle_logout: PropTypes.func.isRequired
+};

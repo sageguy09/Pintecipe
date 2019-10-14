@@ -137,11 +137,15 @@ class HomeAuth extends Component {
         />
         {form}
         <h3>
-          {this.state.logged_in
-            ? `Hello, ${this.state.username}`
-            : 'Please Log In'}
+          
         </h3>
-        <Header currentUser={this.state.user} />
+        <Header currentUser={this.state.user}
+        logged_in={this.state.logged_in}
+        display_form={this.display_form}
+        handle_logout={this.handle_logout} 
+        state={this.state}
+        handle_login={this.handle_login}/>
+
        <Switch>
        <Route path="/user/" render={UserPage} />
           <Route path="/addUser" component={NewUserForm} />

@@ -26,19 +26,25 @@ class RecipeDetails extends React.Component {
 
 
     render = () => (
-      <div class="container"> 
+      <div class="section"> 
 
-<div class="content">
-      <h3>{this.state.recipe.recipeName}</h3>
-       <h3>Ingredients</h3>
+<div class="container">
+      <h1 class="title is-1">{this.state.recipe.recipeName}</h1>
+       
        <img class="is-pulled-right" src={this.state.recipe.recipeImg} alt={this.state.recipe.recipeName} width="500" height="400"/>
+       <div class="block">
        <ul> 
+       <h3 class="title is-3">Ingredients</h3>
        {this.state.recipe.ingList !== undefined ? this.state.recipe.ingList.map(this.recipeItems) : null }
       </ul> 
-      <h3>Instructions</h3>
-      <ol>
+      </div>
+      
+      <div class="content">
+      <h3 class="title is-3">Instructions</h3>
+      <ol >
         {this.state.recipe.instructions != undefined ? this.state.recipe.instructions.map(this.instructionSteps) : null }
       </ol>
+      </div>
       <h3>Recipe Summary</h3>
       <p>{this.state.recipe.summary}</p>
       <h3>Cuisine Type: {this.state.recipe.cuisineType}</h3> 
