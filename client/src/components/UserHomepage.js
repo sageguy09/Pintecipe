@@ -62,6 +62,7 @@ class UserHomePage extends React.Component {
     )
     render = () => (
       <div class="container">
+
         <h2 class="title">{this.state.user.username} Home Page</h2>
         <h3 class="title is-4">Saved Recipes</h3>
           {/* <ul>{this.state.user.recipes!== undefined ? this.state.user.recipes.map(this.userRecipes) : null}</ul> */}

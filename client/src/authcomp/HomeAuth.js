@@ -130,15 +130,17 @@ class HomeAuth extends Component {
 
     return (
       <div className="App">
-        <Nav
+        {/* <Nav
           logged_in={this.state.logged_in}
           display_form={this.display_form}
           handle_logout={this.handle_logout}
         />
         {form}
         <h3>
-          
-        </h3>
+          {this.state.logged_in
+            ? `Hello, ${this.props.currentUser.username}`
+            : 'Please Log In'}
+        </h3> */}
         <Header currentUser={this.state.user}
         logged_in={this.state.logged_in}
         display_form={this.display_form}
