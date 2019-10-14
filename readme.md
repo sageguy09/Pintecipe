@@ -37,4 +37,4 @@ This web app is ideal for users looking for a simple solution to managing their 
 
 
 ### credits
-JWT guide and basic react nav bar (Dakota Lillie's Medium Post)[https://medium.com/@dakota.lillie/django-react-jwt-authentication-5015ee00ef9a]
+JWT guide and basic react nav bar [Dakota Lillie's Medium Post](https://medium.com/@dakota.lillie/django-react-jwt-authentication-5015ee00ef9a)
