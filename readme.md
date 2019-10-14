@@ -23,17 +23,17 @@ Pintecipe is a one stop shop for importing recipes and building an online recipe
 This web app is ideal for users looking for a simple solution to managing their recipes from physical-form to bookmarked sites and allows users the ability to store these recipes in their own online collection. 
 
 #### Upcoming features
-Users will be able to repost their added recipes back to sites such as Pinterest
-A custome built site parser for importing recipes from submitted urls and pinterest boards. 
-User created recipe books formed from the users recipe collection
+- Users will be able to repost their added recipes back to sites such as Pinterest
+- A custome built site parser for importing recipes from submitted urls and pinterest boards. 
+- User created recipe books formed from the users recipe collection
 
 
 ### ERD and Wireframing
 
 ![Initial ERD Diagram](https://imgur.com/cfw6fAn.jpg)
 ![Initial Component Tree](https://imgur.com/cfw6fAn.jpg)
-![Mockup User Home Page  Wireframe](https://imgur.com/cfw6fAn.jpg)
-![Mockup Add Recipe Wireframe](https://imgur.com/cfw6fAn.jpg)
+![Mockup User Home Page  Wireframe](https://imgur.com/qugbY4V.jpg)
+![Mockup Add Recipe Wireframe](https://imgur.com/U12AyVK.jpg)
 
 
 ### credits
