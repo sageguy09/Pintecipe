@@ -11,6 +11,7 @@
 ### Technologies Used
 - Django
 - Django Rest Framework
+- Django Rest Framework JWT
 - React.js
 - React Router
 - Bulma
