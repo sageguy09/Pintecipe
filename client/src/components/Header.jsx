@@ -108,9 +108,6 @@ class Header extends React.Component {
                     <Link to="/user/">Home</Link>
                   </a>
                   <a class="navbar-item">
-                    <Link to="/addUser">Add User</Link>
-                  </a>
-                  <a class="navbar-item">
                     <Link to="/addRecipe">Add Recipe</Link>
                   </a>
                   <span class="navbar-item">
