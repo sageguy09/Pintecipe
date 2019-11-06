@@ -35,7 +35,7 @@ class UserHomePage extends React.Component {
     userRecipeTiles = (recipe) => (
       <div class="tile is-parent is-3">
       <article class="tile is-child notification is-info">
-      <p class="title"><Link to={`/recipeDetails/${recipe.id}`}>{recipe.recipeName}</Link></p>
+      <p class="title"><Link to={`/RecipeDetails/${recipe.id}`}>{recipe.recipeName}</Link></p>
         <p class="subtitle">{recipe.summary}</p>
         <figure class="image is-4by3">
           <img alt="recipe " src={recipe.recipeImg}/>
