@@ -35,7 +35,8 @@ class HomeAuth extends Component {
       fetch('/api/current_user/', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
-        }
+        },
+        credentials: 'include',
       })
         .then(res => res.json())
         .then(json => {
@@ -51,6 +52,7 @@ class HomeAuth extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify(data)
     })
       .then(res => res.json())
@@ -73,6 +75,7 @@ class HomeAuth extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify(data)
     })
       .then(res => res.json())

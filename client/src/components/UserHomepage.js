@@ -4,7 +4,7 @@ import "bulma/css/bulma.css"
 class UserHomePage extends React.Component {
     state = {
       logged_in: localStorage.getItem('token') ? true : false,
-      user: this.props.currentUser ,
+      user: {} ,
       //recipes: {...this.props.userRecipes}
     }
   
@@ -12,10 +12,11 @@ class UserHomePage extends React.Component {
 
     componentDidMount = () => {
       if (this.state.logged_in) {
-        fetch('http://localhost:8000/api/current_user/', {
+        fetch('/api/current_user/', {
           headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`
-          }
+          },
+          credentials: 'include'
         })
           .then(res => res.json())
           .then(user => {
@@ -63,7 +64,7 @@ class UserHomePage extends React.Component {
     render = () => (
       <div class="container">
 
-        <h2 class="title">{this.state.user.username} Home Page</h2>
+        <h2 class="title">{this.state.user.username!== undefined ? this.state.user.username: null} Home Page</h2>
         <h3 class="title is-4">Saved Recipes</h3>
           {/* <ul>{this.state.user.recipes!== undefined ? this.state.user.recipes.map(this.userRecipes) : null}</ul> */}
         <div class="tile is-ancestor is-flex">
