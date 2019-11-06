@@ -105,7 +105,7 @@ class Header extends React.Component {
                       <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                           <span onClick={this.profileclick}>{this.props.logged_in
-                            ? `${this.props.state.username != undefined ? this.props.state.username : null}`
+                            ? `${this.props.state.username != undefined ? this.props.state.username : 'Login'}`
                             : 'Log In'}</span>
                           <span class="icon is-small">
                           </span>

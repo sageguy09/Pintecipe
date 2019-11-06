@@ -131,7 +131,7 @@ class HomeAuth extends Component {
         form = <SignupForm handle_signup={this.handle_signup} />;
         break;
       default:
-        form = null;
+        form = 'null';
     }
     let UserPage = () => {
       return (
