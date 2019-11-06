@@ -85,29 +85,29 @@ class NewRecipeForm extends React.Component {
         evnt.preventDefault();
         this.addNewRecipe(this.state)
         //this.addNewInstructions(this.state.instructions)
-        this.setState({
-            // recipe: {
-            //     recipeName: "",
-            //     summary: "",
-            //     notes: "",
-            //     recipeImg: "",
-            //     cuisineType: "",
-            //     recipeLink: "",
-            //     user: 1
-            //     },
+        // this.setState({
+        //     // recipe: {
+        //     //     recipeName: "",
+        //     //     summary: "",
+        //     //     notes: "",
+        //     //     recipeImg: "",
+        //     //     cuisineType: "",
+        //     //     recipeLink: "",
+        //     //     user: 1
+        //     //     },
 
-            // instructions : {
-            //     stepsDesc: "",
-            //     steps: [],
-            //     recipe: ""
-            //     },
-            // ingList : {
-            //     ingDesc: "",
-            //     ings: [],
-            //     recipe:""
-            // },
-            redirect: true
-        })
+        //     // instructions : {
+        //     //     stepsDesc: "",
+        //     //     steps: [],
+        //     //     recipe: ""
+        //     //     },
+        //     // ingList : {
+        //     //     ingDesc: "",
+        //     //     ings: [],
+        //     //     recipe:""
+        //     // },
+        //     redirect: true
+        // })
 
     }
 

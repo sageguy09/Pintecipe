@@ -6,16 +6,19 @@ class RecipeDetails extends React.Component {
     } 
     componentDidMount = () => {
       console.log(this.props.match.params)
-      fetch(`/api/recipe/${this.props.match.params.id}`, {
+      fetch(`/api/recipe/${this.props.match.params.id}/`, {
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
-        }
+        },
       })
       .then(res => res.json())
+      .catch(console.log)
       .then(currentRecipe => {
         //console.log('logging of user from RecipeDetails', currentRecipe)
         this.setState({ recipe: currentRecipe })
       })
+      .catch(console.log)
+
     }
     recipeItems = (ingItems) => (
         <li>{ingItems.ingDesc}</li>
@@ -23,8 +26,6 @@ class RecipeDetails extends React.Component {
     instructionSteps = (instructionSteps) => (
       <li>{instructionSteps.stepDesc}</li>
     )
-
-
     render = () => (
       <div class="section"> 
 

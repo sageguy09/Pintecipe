@@ -133,7 +133,6 @@ class HomeAuth extends Component {
     return (
       <NewRecipeForm currentUser={this.getCurrentUser() || {}}
         />
-      
     )
   }
 
@@ -149,7 +148,7 @@ class HomeAuth extends Component {
 
        <Switch>
          <Route exact path="/" component={Landing}/>
-       <Route path="/user/" render={UserPage} />
+          <Route path="/user/" render={UserPage} />
           <Route path="/addUser" component={NewUserForm} />
           <Route path="/addRecipe" render={NewRecipePage} />
           {/* <Route path="/newRecipe" render={NewRecipePage} /> */}
