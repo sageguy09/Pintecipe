@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
-import PropTypes from 'prop-types';
 import "bulma/css/bulma.css";
 
 const saveRecipeToServer = (newRecipe) =>

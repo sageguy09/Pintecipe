@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom'
-
 class SignupForm extends React.Component {
   state = {
     username: '',

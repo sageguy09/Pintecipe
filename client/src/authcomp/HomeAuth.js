@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
-import Nav from './Nav';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import Header from '../components/Header'

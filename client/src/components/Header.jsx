@@ -4,12 +4,6 @@ import "bulma/css/bulma.css"
 import PropTypes from 'prop-types';
 import LoginForm from '../authcomp/LoginForm';
 import SignupForm from '../authcomp/SignupForm';
-// $('.navbar-burger').click(function() {
-//   $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
-// });
-// toggleMenu = () => {
-
-// }
 
 class Header extends React.Component {
   state = {
@@ -17,7 +11,6 @@ class Header extends React.Component {
     user: {},
     redirect: false
   }
-
 
   componentDidMount = () => {
     this.setUser()
@@ -46,7 +39,6 @@ class Header extends React.Component {
     <a class="dropdown-item" onClick={() => this.props.display_form('signup')}>
       signup
  </a>
-
   );
 
   logged_in_nav = (
@@ -55,7 +47,6 @@ class Header extends React.Component {
     </ul>
   );
 
-
   navbarclick = e => {
     e.preventDefault();
     let hambar = document.querySelector('.navbar-burger')
@@ -63,7 +54,6 @@ class Header extends React.Component {
 
     items.classList.toggle('is-active')
     hambar.classList.toggle('is-active')
-
   }
   onMouseLeave = e => {
     e.preventDefault();
@@ -130,9 +120,6 @@ class Header extends React.Component {
                               : null}
                           </a>
                           <hr class="dropdown-divider" />
-                          {/* <a href="#" class="dropdown-item">
-      {this.props.logged_in ? this.logged_in_nav : this.logged_out_nav}
-      </a> */}
                           <a  class="dropdown-item" >
                             {this.props.logged_in ? this.logged_in_nav : this.logged_out_login}
                           </a>
@@ -169,11 +156,3 @@ Header.propTypes = {
   handle_logout: PropTypes.func.isRequired
 };
 
-// <a class="button is-info is-inverted" onClick={this.navbarclick}>
-// <span class="icon is-primary">
-{/* <i class="fas fa-user"></i> */ }
-// </span>
-// <span>{this.props.logged_in
-// ? `${this.props.currentUser.username}`
-// : 'Log In'}</span>
-// </a>

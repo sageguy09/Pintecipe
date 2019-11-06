@@ -42,7 +42,7 @@ class RecipeDetails extends React.Component {
       <div class="content">
       <h3 class="title is-3">Instructions</h3>
       <ol >
-        {this.state.recipe.instructions != undefined ? this.state.recipe.instructions.map(this.instructionSteps) : null }
+        {this.state.recipe.instructions !== undefined ? this.state.recipe.instructions.map(this.instructionSteps) : null }
       </ol>
       </div>
       <h3>Recipe Summary</h3>
