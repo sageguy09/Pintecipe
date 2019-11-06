@@ -142,6 +142,7 @@ STATICFILES_DIRS = [
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'https://powerful-sands-51097.herokuapp.com'
 )
 
 JWT_AUTH = {
