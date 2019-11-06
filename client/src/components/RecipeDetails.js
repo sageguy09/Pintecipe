@@ -9,13 +9,14 @@ class RecipeDetails extends React.Component {
       fetch(`/api/recipe/${this.props.match.params.id}`, {
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
-        }
+        },
+        credentials: 'include'
       })
       .then(res => res.json())
       .then(currentRecipe => {
-        //console.log('logging of user from RecipeDetails', currentRecipe)
+      console.log('logging of user from RecipeDetails', currentRecipe)
         this.setState({ recipe: currentRecipe })
-      })
+      });
     }
     recipeItems = (ingItems) => (
         <li>{ingItems.ingDesc}</li>
