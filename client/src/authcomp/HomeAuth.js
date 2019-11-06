@@ -111,7 +111,7 @@ class HomeAuth extends Component {
 
   handle_logout = () => {
     localStorage.removeItem('token');
-    this.setState({ logged_in: false, username: '', redirect: true });
+    this.setState({ logged_in: false, username: ''});
   };
 
   display_form = form => {
@@ -128,7 +128,7 @@ class HomeAuth extends Component {
 
   render() {
     if (this.state.redirect) {
-      return (<Redirect to="/user/"/>)
+      return (<Redirect to="/"/>)
     }
     let form;
     switch (this.state.displayed_form) {

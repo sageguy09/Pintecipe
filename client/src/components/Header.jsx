@@ -84,7 +84,7 @@ class Header extends React.Component {
             <div class="container">
               <div class="navbar-brand">
                 <a class="navbar-item">
-                  <h1 class="title"> Pintecipe</h1>
+                  <Link class="title" to="/"> Pintecipe</Link>
                 </a>
                 <span class="navbar-burger burger" data-target="navbarMenuHeroA" onClick={this.navbarclick}>
                   <span></span>
