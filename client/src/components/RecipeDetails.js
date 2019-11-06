@@ -9,14 +9,13 @@ class RecipeDetails extends React.Component {
       fetch(`/api/recipe/${this.props.match.params.id}`, {
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
-        },
-        credentials: 'include'
+        }
       })
       .then(res => res.json())
       .then(currentRecipe => {
-      console.log('logging of user from RecipeDetails', currentRecipe)
+        //console.log('logging of user from RecipeDetails', currentRecipe)
         this.setState({ recipe: currentRecipe })
-      });
+      })
     }
     recipeItems = (ingItems) => (
         <li>{ingItems.ingDesc}</li>
@@ -43,7 +42,7 @@ class RecipeDetails extends React.Component {
       <div class="content">
       <h3 class="title is-3">Instructions</h3>
       <ol >
-        {this.state.recipe.instructions !== undefined ? this.state.recipe.instructions.map(this.instructionSteps) : null }
+        {this.state.recipe.instructions != undefined ? this.state.recipe.instructions.map(this.instructionSteps) : null }
       </ol>
       </div>
       <h3>Recipe Summary</h3>
@@ -56,7 +55,6 @@ class RecipeDetails extends React.Component {
         <button class="button is-primary"><Link to={`/reviewRecipe/${this.state.recipe.id}/`}>Edit Recipe</Link></button>
       </div>
       </div>
-    
     )
   }
 
