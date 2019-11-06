@@ -80,14 +80,33 @@ class HomeAuth extends Component {
       .then(res => res.json())
       .then(json => {
         console.log(json)
-        localStorage.setItem('token', json.token);
-        this.setState({
-          logged_in: true,
-          displayed_form: '',
-          username: json.username,
-          user: json.user,
+        localStorage.setItem('token', json.token)})
+      .then(usr => {
+        fetch('/api/current_user/', {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+          },
+          credentials: 'include'
         })
-      });
+          .then(res => res.json())
+          .then(user => {
+            this.setState({ 
+              logged_in: true,
+              displayed_form: '',
+              username: user.username,
+              currentUser: user.id,
+              user: user
+             });
+          });
+      })
+        // this.setState({
+        //   logged_in: true,
+        //   displayed_form: '',
+        //   username: json.username,
+        //   user: json.user,
+
+        // })
+      //});
   };
 
   handle_logout = () => {
@@ -131,7 +150,7 @@ class HomeAuth extends Component {
 
   let NewRecipePage = () => {
     return (
-      <NewRecipeForm currentUser={this.getCurrentUser() || {}}
+      <NewRecipeForm currentUser={this.state.user.id}
         />
     )
   }
