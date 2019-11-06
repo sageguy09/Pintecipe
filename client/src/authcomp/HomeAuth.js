@@ -17,7 +17,7 @@ class HomeAuth extends Component {
     this.state = {
       displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
-      username: '',
+      username: 'Login',
       currentUser: 1,
       user: {
               id: 5,
@@ -99,14 +99,6 @@ class HomeAuth extends Component {
              });
           });
       })
-        // this.setState({
-        //   logged_in: true,
-        //   displayed_form: '',
-        //   username: json.username,
-        //   user: json.user,
-
-        // })
-      //});
   };
 
   handle_logout = () => {
@@ -170,8 +162,6 @@ class HomeAuth extends Component {
           <Route path="/user/" render={UserPage} />
           <Route path="/addUser" component={NewUserForm} />
           <Route path="/addRecipe" render={NewRecipePage} />
-          {/* <Route path="/newRecipe" render={NewRecipePage} /> */}
-          {/* <Route path="/reviewRecipe" component={ReviewRecipeForm} /> */}
           <Route path="/reviewRecipe/:recipeid/" component={ReviewRecipeForm} />
           <Route path="/recipeDetails/:id" component={RecipeDetails} />
           <Route path="/recipeDetails" component={RecipeDetails} />
@@ -183,5 +173,3 @@ class HomeAuth extends Component {
 }
 
 export default HomeAuth;
-
-//{this.state.recipe.instructions != undefined ? this.state.recipe.instructions.map(this.instructionSteps) : null }

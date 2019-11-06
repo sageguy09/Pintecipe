@@ -130,7 +130,6 @@ class Header extends React.Component {
                       </div>
                     </div>
                   </span>
-
                   {form}
                 </div>
               </div>

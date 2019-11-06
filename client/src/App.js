@@ -6,10 +6,9 @@ import HomeAuth from './authcomp/HomeAuth'
 class App extends React.Component {
   render = () => (
   <div>
- <Router>
-<HomeAuth />
- </Router>
-{/* <ReviewRecipeForm /> */}
+    <Router>
+      <HomeAuth />
+    </Router>
   </div>
   )
 }

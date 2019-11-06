@@ -84,30 +84,28 @@ class NewRecipeForm extends React.Component {
     handleSubmit = (evnt) => {
         evnt.preventDefault();
         this.addNewRecipe(this.state)
-        //this.addNewInstructions(this.state.instructions)
-        // this.setState({
-        //     // recipe: {
-        //     //     recipeName: "",
-        //     //     summary: "",
-        //     //     notes: "",
-        //     //     recipeImg: "",
-        //     //     cuisineType: "",
-        //     //     recipeLink: "",
-        //     //     user: 1
-        //     //     },
-
-        //     // instructions : {
-        //     //     stepsDesc: "",
-        //     //     steps: [],
-        //     //     recipe: ""
-        //     //     },
-        //     // ingList : {
-        //     //     ingDesc: "",
-        //     //     ings: [],
-        //     //     recipe:""
-        //     // },
-        //     redirect: true
-        // })
+        this.setState({
+            recipe: {
+                recipeName: "",
+                summary: "",
+                notes: "",
+                recipeImg: "",
+                cuisineType: "",
+                recipeLink: "",
+                user: this.props.currentUser
+                },
+            instructions : {
+                stepsDesc: "",
+                steps: [],
+                recipe: ""
+                },
+            ingList : {
+                ingDesc: "",
+                ings: [],
+                recipe:""
+            },
+            //redirect: true
+        })
 
     }
 
@@ -117,7 +115,6 @@ class NewRecipeForm extends React.Component {
             .then(newRecipe => {
                 this.addNewInstructions(newRecipe.id, newRecipeInfo.instructions)
                 this.addNewIngredients(newRecipe.id, newRecipeInfo.ingList)
-                console.log(newRecipe.id, newRecipeInfo.instructions)
             })
     }
 

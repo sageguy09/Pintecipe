@@ -14,7 +14,6 @@ class RecipeDetails extends React.Component {
       .then(res => res.json())
       .catch(console.log)
       .then(currentRecipe => {
-        //console.log('logging of user from RecipeDetails', currentRecipe)
         this.setState({ recipe: currentRecipe })
       })
       .catch(console.log)
@@ -39,7 +38,6 @@ class RecipeDetails extends React.Component {
        {this.state.recipe.ingList !== undefined ? this.state.recipe.ingList.map(this.recipeItems) : null }
       </ul> 
       </div>
-      
       <div class="content">
       <h3 class="title is-3">Instructions</h3>
       <ol >
