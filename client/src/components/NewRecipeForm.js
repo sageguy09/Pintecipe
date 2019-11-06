@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types';
 import "bulma/css/bulma.css";
 
 const saveRecipeToServer = (newRecipe) =>
@@ -105,7 +106,7 @@ class NewRecipeForm extends React.Component {
             //     ings: [],
             //     recipe:""
             // },
-            
+            redirect: true
         })
 
     }
