@@ -80,13 +80,13 @@ class HomeAuth extends Component {
     })
       .then(res => res.json())
       .then(json => {
+        console.log(json)
         localStorage.setItem('token', json.token);
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: json.user.username,
+          username: json.username,
           user: json.user,
-          redirect: true
         })
       });
   };
