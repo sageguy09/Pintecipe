@@ -105,7 +105,7 @@ class NewRecipeForm extends React.Component {
             //     ings: [],
             //     recipe:""
             // },
-            redirect: true
+            
         })
 
     }
